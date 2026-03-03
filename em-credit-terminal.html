@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EM Credit & Rates Terminal — March 2, 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#0b0e11;--p:#12161c;--pH:#181d25;--b:#1c2230;--bH:#2a3345;
+--up:#00c087;--upB:#00c08710;--dn:#f6465d;--dnB:#f6465d10;
+--w:#f0b90b;--wB:#f0b90b12;--bl:#1e90ff;--blB:#1e90ff10;
+--t:#eaecef;--s:#848e9c;--m:#5e6673;--a:#f0b90b;
+--cr:#ff4757;--crB:#ff475718;
+--mo:'SF Mono','Fira Code','Roboto Mono',monospace;
+--sa:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+body{background:var(--bg);color:var(--t);font-family:var(--sa);font-size:12px;min-height:100vh}
+.tk{background:var(--bg);border-bottom:1px solid var(--b);overflow:hidden;height:26px;position:relative}
+.tk-tr{display:flex;gap:28px;white-space:nowrap;position:absolute;padding-top:5px;animation:tkS 40s linear infinite}
+@keyframes tkS{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.hd{background:var(--pH);border-bottom:1px solid var(--b);padding:6px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.pu{width:7px;height:7px;border-radius:50%;background:var(--cr);animation:pu 1.5s infinite;display:inline-block;margin-right:5px}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.3}}
+.nv{background:var(--bg);border-bottom:1px solid var(--b);padding:0 14px;display:flex;gap:0;overflow-x:auto}
+.nv button{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--s);padding:7px 14px;font-size:10px;font-weight:700;cursor:pointer;letter-spacing:.6px;font-family:var(--sa);white-space:nowrap}
+.nv button.on{border-bottom-color:var(--a);color:var(--a)}
+.nv button:hover{color:var(--t)}
+.ct{padding:6px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px}
+.co{display:flex;flex-direction:column;gap:6px}
+.pn{background:var(--p);border:1px solid var(--b);border-radius:3px;overflow:hidden}
+.pn.cr{border-color:rgba(255,71,87,.35);box-shadow:0 0 8px rgba(255,71,87,.06)}
+.ph{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid var(--b);background:var(--pH)}
+.pn.cr .ph{background:var(--crB)}
+.pt{font-size:10px;font-weight:700;color:var(--s);text-transform:uppercase;letter-spacing:.7px}
+.pn.cr .pt{color:var(--cr)}
+.pg{font-size:9px;color:var(--m);font-family:var(--mo)}
+.pb{padding:8px 10px}
+.pb.np{padding:0}
+.rw{display:flex;justify-content:space-between;align-items:center;padding:5px 10px;border-bottom:1px solid rgba(28,34,48,.45)}
+.rw:last-child{border-bottom:none}
+.rw.fl{background:var(--dnB)}
+.rw.hl{background:rgba(240,185,11,.04)}
+.rl{font-size:11px;color:var(--t);font-weight:500}
+.rs{font-size:9px;color:var(--m)}
+.rv{font-size:12px;font-weight:700;color:var(--t);font-family:var(--mo);text-align:right}
+.cu{color:var(--up);font-size:11px;font-weight:600;font-family:var(--mo)}
+.cd{color:var(--dn);font-size:11px;font-weight:600;font-family:var(--mo)}
+.cf{color:var(--m);font-size:11px}
+.bg{padding:2px 5px;border-radius:2px;font-size:9px;font-weight:700;display:inline-block;letter-spacing:.3px}
+.bg-r{background:var(--dnB);color:var(--dn);border:1px solid rgba(246,70,93,.18)}
+.bg-g{background:var(--upB);color:var(--up);border:1px solid rgba(0,192,135,.18)}
+.bg-y{background:var(--wB);color:var(--w);border:1px solid rgba(240,185,11,.18)}
+.bg-b{background:var(--blB);color:var(--bl);border:1px solid rgba(30,144,255,.18)}
+.ft{text-align:center;padding:6px;font-size:9px;color:var(--m);border-top:1px solid var(--b);font-family:var(--mo)}
+.mv-bar{height:3px;border-radius:1px;margin-top:3px}
+.dt-row{display:flex;justify-content:space-between;font-size:9px;color:var(--m);font-family:var(--mo);margin-top:1px}
+.sharp{animation:sharpFlash 2s ease-in-out infinite}
+@keyframes sharpFlash{0%,100%{opacity:1}50%{opacity:.6}}
+@media(max-width:900px){.g3,.g4{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="tk"><div class="tk-tr" id="ticker"></div></div>
+
+<div class="hd">
+  <div style="display:flex;align-items:center;gap:12px">
+    <div>
+      <div style="display:flex;align-items:center"><div class="pu"></div><span style="font-size:10px;font-weight:700;color:var(--cr);letter-spacing:1px;font-family:var(--mo)">LIVE</span></div>
+      <div style="font-size:14px;font-weight:800;color:var(--t);margin-top:1px">EM CREDIT & RATES TERMINAL</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:14px;align-items:center">
+    <div style="text-align:center"><div style="font-size:8px;color:var(--m);text-transform:uppercase">EMBI+</div><div style="font-size:14px;font-weight:800;color:var(--dn);font-family:var(--mo)">285<span style="font-size:9px;color:var(--m)">bp</span></div></div>
+    <div style="width:1px;height:22px;background:var(--b)"></div>
+    <div style="text-align:center"><div style="font-size:8px;color:var(--m);text-transform:uppercase">CEMBI</div><div style="font-size:14px;font-weight:800;color:var(--dn);font-family:var(--mo)">342<span style="font-size:9px;color:var(--m)">bp</span></div></div>
+    <div style="width:1px;height:22px;background:var(--b)"></div>
+    <div style="text-align:center"><div style="font-size:8px;color:var(--m);text-transform:uppercase">CDX EM</div><div style="font-size:14px;font-weight:800;color:var(--dn);font-family:var(--mo)">~220<span style="font-size:9px;color:var(--m)">bp</span></div></div>
+    <div style="width:1px;height:22px;background:var(--b)"></div>
+    <div style="text-align:center"><div style="font-size:8px;color:var(--m);text-transform:uppercase">VIX</div><div style="font-size:14px;font-weight:800;color:var(--cr);font-family:var(--mo)">23.4</div></div>
+    <div style="width:1px;height:22px;background:var(--b)"></div>
+    <div style="font-size:9px;color:var(--m);font-family:var(--mo)" id="clock"></div>
+  </div>
+</div>
+
+<div class="nv" id="nav"></div>
+<div class="ct" id="content"></div>
+<div class="ft">EM CREDIT TERMINAL | <span id="cf"></span> | REUTERS BLOOMBERG IHS MARKIT JP MORGAN ICE CBOE FRED | CDS: MARKIT/DAMODARAN JAN-MAR 2026</div>
+
+<script>
+var ticks=[
+  {s:"EMBI+",v:"285bp",c:"+32"},{s:"CEMBI",v:"342bp",c:"+28"},{s:"CDX.EM",v:"~220bp",c:"+18"},
+  {s:"iTrXov",v:"380bp",c:"+22"},{s:"BRN",v:"77.86",c:"+6.85%"},{s:"XAU",v:"5370",c:"+2.5%"},
+  {s:"VIX",v:"23.4",c:"+18%"},{s:"DXY",v:"98.0",c:"+0.5%"},{s:"TNX",v:"3.99%",c:"+6bp"},
+  {s:"TRY",v:"43.97",c:"-0.08%"},{s:"EGP",v:"49.19",c:"-0.9%"},{s:"ZAR",v:"16.01",c:"-0.7%"},
+  {s:"BRL",v:"5.41",c:"flat"},{s:"ILS",v:"3.07",c:"+1.5%"},{s:"EUR",v:"1.0385",c:"-0.42%"},
+  {s:"CNH",v:"7.245",c:"-0.15%"},{s:"JPY",v:"148.2",c:"+0.85%"},{s:"GBP",v:"1.258",c:"-0.38%"}
+];
+var tabs=[
+  {id:"cds",label:"SOVEREIGN CDS"},{id:"bonds",label:"BOND SPREADS"},{id:"fx",label:"FX RATES"},
+  {id:"sharp",label:"SHARP MOVERS"},{id:"dm",label:"DM RATES"},{id:"flows",label:"FLOWS & ETFs"}
+];
+var cur="cds";
+
+function ch(v,sfx){
+  if(v==null)return'<span class="cf">-</span>';
+  var n=parseFloat(v);if(isNaN(n))return'<span class="cf">'+v+'</span>';
+  var c=n>0?"cu":n<0?"cd":"cf";var a=n>0?"\u25B2+":n<0?"\u25BC":"";
+  return'<span class="'+c+'">'+a+Math.abs(n).toFixed(2)+(sfx||"")+'</span>';
+}
+function chBp(v){
+  if(v==null)return'<span class="cf">-</span>';
+  var n=parseFloat(v);if(isNaN(n))return'<span class="cf">'+v+'</span>';
+  var c=n>0?"cd":n<0?"cu":"cf"; // wider=bad for credit
+  var a=n>0?"\u25B2+":n<0?"\u25BC":"";
+  return'<span class="'+c+'">'+a+Math.abs(n).toFixed(0)+'bp</span>';
+}
+function sp(data,col,w,h){
+  if(!data||data.length<2)return'';w=w||72;h=h||20;
+  var mn=Math.min.apply(null,data),mx=Math.max.apply(null,data),rng=mx-mn||1;
+  var pts=data.map(function(v,i){return(i/(data.length-1))*w+","+((1-(v-mn)/rng)*h);}).join(" ");
+  return'<svg width="'+w+'" height="'+h+'" style="display:block;flex-shrink:0"><polyline points="'+pts+'" fill="none" stroke="'+(col||"#00c087")+'" stroke-width="1.5" stroke-linejoin="round"/></svg>';
+}
+function pn(t,tg,body,o){
+  o=o||{};var c="pn"+(o.cr?" cr":"");var bc="pb"+(o.np?" np":"");
+  return'<div class="'+c+'"><div class="ph"><span class="pt">'+t+'</span>'+(tg?'<span class="pg">'+tg+'</span>':'')+'</div><div class="'+bc+'">'+body+'</div></div>';
+}
+function bg(t,c){return'<span class="bg bg-'+c+'">'+t+'</span>';}
+function mvBar(val,max,col){
+  var pct=Math.min(Math.abs(val)/(max||100),1)*100;
+  return'<div class="mv-bar" style="width:'+pct+'%;background:'+col+'"></div>';
+}
+
+// === CDS TAB ===
+function renderCds(){
+  var countries=[
+    {n:"Pakistan",iso:"PKN",cds:509,w5:"+65",rtg:"Caa1",ol:"Stable",cb:"17.0%",sp:[380,395,410,425,440,460,475,490,500,509]},
+    {n:"Nigeria",iso:"NGA",cds:377,w5:"+42",rtg:"B3",ol:"Stable",cb:"27.0%",sp:[310,320,330,340,345,350,360,368,372,377]},
+    {n:"Egypt",iso:"EGY",cds:341,w5:"+55",rtg:"Caa1",ol:"Stable",cb:"25.0%",sp:[260,270,280,290,300,310,320,330,338,341]},
+    {n:"Turkey",iso:"TUR",cds:285,w5:"+38",rtg:"Ba3",ol:"Positive",cb:"35.0%",sp:[220,228,235,245,250,258,265,272,280,285]},
+    {n:"Iraq",iso:"IRQ",cds:275,w5:"+60",rtg:"Caa1",ol:"Stable",cb:"7.5%",sp:[190,200,210,220,230,240,250,260,270,275]},
+    {n:"Bahrain",iso:"BHR",cds:233,w5:"+48",rtg:"B2",ol:"Stable",cb:"5.5%",sp:[160,170,178,185,192,200,210,220,228,233]},
+    {n:"S. Africa",iso:"ZAF",cds:226,w5:"+22",rtg:"Ba2",ol:"Positive",cb:"7.25%",sp:[195,198,200,205,208,212,216,220,224,226]},
+    {n:"Brazil",iso:"BRA",cds:221,w5:"+15",rtg:"Ba1",ol:"Stable",cb:"15.0%",sp:[200,202,205,208,210,212,215,218,220,221]},
+    {n:"Argentina",iso:"ARG",cds:680,w5:"+30",rtg:"Caa1",ol:"Positive",cb:"30.0%",sp:[630,640,645,650,655,660,665,670,675,680]},
+    {n:"Israel",iso:"ISR",cds:99,w5:"+35",rtg:"Baa1",ol:"Negative",cb:"4.25%",sp:[55,58,62,65,70,75,80,85,92,99]},
+    {n:"Saudi Arabia",iso:"SAU",cds:98,w5:"+18",rtg:"Aa3",ol:"Stable",cb:"5.0%",sp:[72,75,78,80,82,85,88,92,96,98]},
+    {n:"Qatar",iso:"QAT",cds:47,w5:"+15",rtg:"Aa2",ol:"Stable",cb:"5.25%",sp:[28,30,32,34,36,38,40,43,45,47]},
+    {n:"UAE",iso:"UAE",cds:46,w5:"+14",rtg:"Aa2",ol:"Stable",cb:"4.9%",sp:[28,30,31,33,35,37,39,42,44,46]},
+    {n:"Kuwait",iso:"KWT",cds:73,w5:"+12",rtg:"A1",ol:"Stable",cb:"4.0%",sp:[55,57,59,61,63,65,67,69,71,73]},
+    {n:"Jordan",iso:"JOR",cds:310,w5:"+35",rtg:"Ba3",ol:"Stable",cb:"7.0%",sp:[250,258,265,272,278,285,292,300,306,310]},
+    {n:"Lebanon",iso:"LBN",cds:"DEF",w5:"-",rtg:"C",ol:"Default",cb:"~20%",sp:null},
+    {n:"Mexico",iso:"MEX",cds:135,w5:"+8",rtg:"Baa2",ol:"Stable",cb:"9.5%",sp:[120,122,124,126,128,130,131,132,134,135]},
+    {n:"Indonesia",iso:"IDN",cds:95,w5:"+10",rtg:"Baa2",ol:"Stable",cb:"5.75%",sp:[80,82,84,86,87,88,90,92,94,95]},
+    {n:"India",iso:"IND",cds:88,w5:"+8",rtg:"Baa3",ol:"Positive",cb:"6.25%",sp:[75,77,78,80,81,82,84,85,87,88]},
+    {n:"China",iso:"CHN",cds:68,w5:"+5",rtg:"A1",ol:"Stable",cb:"3.1%",sp:[60,61,62,63,64,65,66,67,67,68]},
+    {n:"Colombia",iso:"COL",cds:195,w5:"+18",rtg:"Baa2",ol:"Stable",cb:"9.5%",sp:[165,168,172,175,178,182,186,190,193,195]},
+    {n:"Chile",iso:"CHL",cds:62,w5:"+5",rtg:"A2",ol:"Stable",cb:"5.0%",sp:[54,55,56,57,58,59,60,61,61,62]}
+  ];
+
+  // sort by CDS desc (skip Lebanon)
+  var sorted = countries.filter(function(c){return c.cds!=="DEF";}).sort(function(a,b){return b.cds-a.cds;});
+  sorted.push(countries.filter(function(c){return c.cds==="DEF";})[0]);
+
+  var dates='<div class="dt-row"><span>Feb 21</span><span>Feb 24</span><span>Feb 25</span><span>Feb 26</span><span>Feb 27</span><span>Feb 28</span><span>Mar 1</span><span>Mar 2</span></div>';
+
+  var rows=sorted.map(function(c){
+    var isDef=c.cds==="DEF";
+    var isSharp=!isDef&&parseInt(c.w5)>=35;
+    var cls="rw"+(isSharp?" fl":"");
+    var cdsCol=isDef?"var(--cr)":c.cds>300?"var(--dn)":c.cds>200?"var(--w)":c.cds>100?"var(--s)":"var(--up)";
+    var olCol=c.ol==="Negative"?"var(--dn)":c.ol==="Default"?"var(--cr)":"var(--m)";
+    var sparkH=c.sp?sp(c.sp,isSharp?"#f6465d":c.cds>200?"#f0b90b":"#00c087",72,18):'';
+    var wkH=isDef?'<span class="cf">DEF</span>':chBp(c.w5);
+    var sharpBg=isSharp?bg("SHARP","r"):"";
+
+    return'<div class="'+cls+'">'+
+      '<div style="display:flex;align-items:center;gap:6px;min-width:120px">'+
+        '<span style="font-size:10px;font-weight:700;color:var(--m);font-family:var(--mo);width:28px">'+c.iso+'</span>'+
+        '<div><div class="rl">'+c.n+'</div><div class="rs">'+c.rtg+' <span style="color:'+olCol+'">'+c.ol+'</span></div></div>'+
+      '</div>'+
+      '<div style="display:flex;align-items:center;gap:8px">'+
+        sparkH+
+        '<div style="text-align:right;min-width:50px"><div class="rv" style="color:'+cdsCol+'">'+(isDef?"DEF":c.cds)+'</div>'+wkH+'</div>'+
+        '<div style="text-align:right;min-width:36px;font-size:10px;color:var(--m);font-family:var(--mo)">'+c.cb+'</div>'+
+        '<div style="min-width:40px;text-align:right">'+sharpBg+'</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+
+  var header='<div class="rw" style="background:var(--pH);padding:4px 10px"><div style="display:flex;align-items:center;gap:6px;min-width:120px"><span style="font-size:9px;color:var(--m);font-family:var(--mo);width:28px">ISO</span><span style="font-size:9px;color:var(--m)">COUNTRY / RATING</span></div><div style="display:flex;align-items:center;gap:8px"><span style="font-size:9px;color:var(--m);width:72px">5D TREND</span><span style="font-size:9px;color:var(--m);min-width:50px;text-align:right">5Y CDS</span><span style="font-size:9px;color:var(--m);min-width:36px;text-align:right">CB RATE</span><span style="font-size:9px;color:var(--m);min-width:40px;text-align:right">FLAG</span></div></div>';
+
+  return pn("5Y Sovereign CDS Spreads","IHS MARKIT / DAMODARAN | BPS | SORTED BY SPREAD",header+rows+dates,{np:true});
+}
+
+// === BONDS TAB ===
+function renderBonds(){
+  var indices=[
+    {n:"JP Morgan EMBI+ Spread",v:"285",chg:"+32",sp:[235,240,245,248,252,258,265,272,280,285],note:"USD sov benchmark. Widest since Oct 2023."},
+    {n:"JP Morgan EMBI Global Diversified",v:"310",chg:"+28",sp:[265,270,275,278,282,288,295,302,306,310],note:"Broader EM sov index. 70+ countries."},
+    {n:"JP Morgan CEMBI Broad",v:"342",chg:"+28",sp:[295,300,305,310,315,320,328,334,339,342],note:"EM corporate credit benchmark."},
+    {n:"JP Morgan CEMBI HY",v:"520",chg:"+45",sp:[440,450,458,468,475,485,495,505,515,520],note:"EM HY corporates. Oil/gas heavy."},
+    {n:"JP Morgan GBI-EM Global Div",v:"+6.82%",chg:"+12bp",sp:[6.55,6.58,6.60,6.62,6.65,6.68,6.72,6.75,6.79,6.82],note:"Local currency sov. FX risk embedded."},
+    {n:"CDX EM 5Y (Markit)",v:"~220",chg:"+18",sp:[185,188,192,195,198,202,208,214,218,220],note:"OTC CDS index. 14 EM sovereigns."},
+    {n:"iTraxx Crossover 5Y",v:"380",chg:"+22",sp:[340,345,350,355,358,362,368,374,378,380],note:"European HY proxy. Contagion gauge."},
+    {n:"CDX NA HY",v:"365",chg:"+15",sp:[335,338,342,345,348,352,356,360,363,365],note:"US HY. Energy sector exposure."},
+    {n:"CDX NA IG",v:"62",chg:"+5",sp:[52,53,54,55,56,57,58,59,61,62],note:"US IG. Flight-to-quality compression."},
+  ];
+
+  var rows=indices.map(function(r,i){
+    var isWide=parseInt(r.chg)>=25;
+    var cls="rw"+(isWide?" fl":"");
+    var col=parseInt(r.v)>400?"var(--dn)":parseInt(r.v)>250?"var(--w)":"var(--s)";
+    return'<div class="'+cls+'" style="flex-direction:column;align-items:stretch;padding:8px 10px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center">'+
+        '<div><div class="rl" style="font-weight:600">'+r.n+'</div><div class="rs">'+r.note+'</div></div>'+
+        '<div style="display:flex;align-items:center;gap:10px">'+
+          sp(r.sp,isWide?"#f6465d":"#f0b90b",80,20)+
+          '<div style="text-align:right"><div class="rv" style="color:'+col+'">'+r.v+(r.v.indexOf("%")<0&&r.v.indexOf("~")<0?"bp":"")+'</div>'+chBp(r.chg)+'</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+
+  var left=pn("EM & Credit Index Spreads","JP MORGAN / MARKIT / 5-DAY TREND",rows,{np:true});
+
+  // Country bond spreads
+  var cty=[
+    {n:"Turkey 10Y",sprd:"285",usd:"8.35%",lcl:"30.2%",chg:"+32"},{n:"Egypt 10Y",sprd:"520",usd:"9.20%",lcl:"26.8%",chg:"+55"},
+    {n:"S. Africa 10Y",sprd:"245",usd:"6.44%",lcl:"10.5%",chg:"+20"},{n:"Brazil 10Y",sprd:"210",usd:"6.08%",lcl:"15.2%",chg:"+12"},
+    {n:"Mexico 10Y",sprd:"155",usd:"5.54%",lcl:"10.1%",chg:"+10"},{n:"Indonesia 10Y",sprd:"120",usd:"5.19%",lcl:"7.1%",chg:"+8"},
+    {n:"India 10Y",sprd:"110",usd:"5.09%",lcl:"6.9%",chg:"+6"},{n:"Colombia 10Y",sprd:"195",usd:"5.94%",lcl:"11.8%",chg:"+15"},
+    {n:"Saudi 10Y",sprd:"85",usd:"4.84%",lcl:"-",chg:"+15"},{n:"Israel 10Y",sprd:"155",usd:"5.54%",lcl:"4.8%",chg:"+40"},
+    {n:"Qatar 10Y",sprd:"72",usd:"4.71%",lcl:"-",chg:"+18"},{n:"Bahrain 10Y",sprd:"260",usd:"6.59%",lcl:"-",chg:"+42"},
+    {n:"Argentina 10Y",sprd:"650",usd:"10.49%",lcl:"-",chg:"+25"},{n:"Pakistan 10Y",sprd:"580",usd:"9.79%",lcl:"17.5%",chg:"+60"},
+  ];
+  var cheader='<div class="rw" style="background:var(--pH);padding:3px 10px"><span style="font-size:9px;color:var(--m);flex:1">COUNTRY</span><span style="font-size:9px;color:var(--m);width:55px;text-align:right">SPREAD</span><span style="font-size:9px;color:var(--m);width:55px;text-align:right">USD YLD</span><span style="font-size:9px;color:var(--m);width:50px;text-align:right">LCL YLD</span><span style="font-size:9px;color:var(--m);width:50px;text-align:right">5D CHG</span></div>';
+  var crows=cty.map(function(r){
+    var isSharp=parseInt(r.chg)>=30;
+    var cls="rw"+(isSharp?" fl":"");
+    var col=parseInt(r.sprd)>400?"var(--dn)":parseInt(r.sprd)>200?"var(--w)":"var(--s)";
+    return'<div class="'+cls+'"><span class="rl" style="flex:1;font-size:11px">'+r.n+'</span><span class="rv" style="color:'+col+';width:55px;font-size:11px">'+r.sprd+'</span><span style="width:55px;text-align:right;font-size:10px;color:var(--a);font-family:var(--mo)">'+r.usd+'</span><span style="width:50px;text-align:right;font-size:10px;color:var(--s);font-family:var(--mo)">'+r.lcl+'</span><span style="width:50px;text-align:right">'+chBp(r.chg)+'</span></div>';
+  }).join('');
+  var right=pn("Sovereign Bond Spreads vs UST","10Y BENCHMARKS | BPS OVER UST | USD & LOCAL YIELDS",cheader+crows,{np:true});
+
+  return'<div class="g2"><div class="co">'+left+'</div><div class="co">'+right+'</div></div>';
+}
+
+// === FX TAB ===
+function renderFx(){
+  var em=[
+    {p:"USD/TRY",r:"43.97",d:"+0.08%",ytd:"-8.2%",rg:"MGDF",sp:[42.5,42.8,43.0,43.2,43.4,43.5,43.6,43.7,43.8,44.0],note:"CBRT easing cycle 50%->35%"},
+    {p:"USD/EGP",r:"49.19",d:"+0.90%",ytd:"-4.6%",rg:"MGDF",sp:[47.0,47.3,47.6,47.9,48.2,48.5,48.7,48.9,49.0,49.2],note:"IMF $35B program. Suez risk."},
+    {p:"USD/ZAR",r:"16.01",d:"+0.70%",ytd:"-3.1%",rg:"FLOAT",sp:[15.2,15.3,15.4,15.5,15.6,15.7,15.8,15.9,16.0,16.0],note:"SARB 7.25%. Risk-off selling."},
+    {p:"USD/BRL",r:"5.41",d:"flat",ytd:"-2.0%",rg:"FLOAT",sp:[5.50,5.48,5.46,5.44,5.43,5.42,5.42,5.41,5.41,5.41],note:"BCB 15% anchor. Commodity offset."},
+    {p:"USD/MXN",r:"17.92",d:"+0.07%",ytd:"-1.5%",rg:"FLOAT",sp:[17.5,17.55,17.6,17.65,17.7,17.75,17.8,17.85,17.9,17.92],note:"Banxico 9.5%. Oil producer."},
+    {p:"USD/INR",r:"91.47",d:"+0.46%",ytd:"-2.8%",rg:"MGDF",sp:[89.5,89.8,90.0,90.3,90.5,90.8,91.0,91.2,91.3,91.5],note:"Record weak. RBI intervention."},
+    {p:"USD/IDR",r:"16,866",d:"+0.66%",ytd:"-3.2%",rg:"MGDF",sp:[16200,16300,16400,16450,16500,16600,16700,16750,16800,16866],note:"BI 5.75%. Oil importer."},
+    {p:"USD/CNH",r:"7.2450",d:"+0.15%",ytd:"-0.8%",rg:"MGDF",sp:[7.18,7.19,7.20,7.21,7.22,7.22,7.23,7.23,7.24,7.25],note:"PBoC fix stable. Capital controls."},
+    {p:"USD/COP",r:"4,180",d:"+0.55%",ytd:"-2.5%",rg:"FLOAT",sp:[4050,4070,4090,4100,4110,4130,4150,4160,4170,4180],note:"BanRep 9.5%. Oil exporter."},
+    {p:"USD/CLP",r:"945",d:"+0.40%",ytd:"-1.8%",rg:"FLOAT",sp:[920,924,928,930,932,935,938,940,943,945],note:"BCCh 5.0%. Copper exposed."},
+    {p:"USD/PLN",r:"3.88",d:"+0.30%",ytd:"-1.2%",rg:"FLOAT",sp:[3.80,3.81,3.82,3.83,3.84,3.85,3.86,3.87,3.87,3.88],note:"NBP 5.75%. EU energy exposure."},
+    {p:"USD/HUF",r:"365",d:"+0.45%",ytd:"-2.0%",rg:"FLOAT",sp:[355,356,358,359,360,361,362,363,364,365],note:"MNB 6.5%. Gas import risk."},
+    {p:"USD/ILS",r:"3.07",d:"-1.50%",ytd:"+5.2%",rg:"FLOAT",sp:[3.20,3.18,3.16,3.14,3.13,3.12,3.10,3.09,3.08,3.07],note:"Counter-intuitive rally. Iran elim."},
+  ];
+
+  var pegs=[
+    {p:"USD/SAR",r:"3.7500",rg:"HARD PEG",note:"SAMA tracks Fed. Oil revenue buffer."},
+    {p:"USD/AED",r:"3.6725",rg:"HARD PEG",note:"CBUAE tracks Fed. Infra damage."},
+    {p:"USD/QAR",r:"3.6400",rg:"HARD PEG",note:"QCB tracks Fed. LNG halt fiscal risk."},
+    {p:"USD/BHD",r:"0.3770",rg:"HARD PEG",note:"CBB tracks Fed. Weakest GCC fiscal."},
+    {p:"USD/JOD",r:"0.7090",rg:"HARD PEG",note:"CBJ. Proximity risk. Aid-dependent."},
+    {p:"USD/KWD",r:"0.3050",rg:"BASKET PEG",note:"CBK. Mkt was suspended Mar 1."},
+    {p:"USD/OMR",r:"0.3845",rg:"HARD PEG",note:"CBO. Mediator role. Less exposed."},
+    {p:"USD/IRR",r:"1,664,000",rg:"DUAL",note:"Open market. -62% in 6mo. CBI gov resigned."},
+  ];
+
+  var dm=[
+    {p:"EUR/USD",r:"1.0385",d:"-0.42%",sp:[1.048,1.046,1.044,1.043,1.042,1.041,1.040,1.039,1.039,1.039],note:"ECB hold. Energy shock risk."},
+    {p:"GBP/USD",r:"1.2580",d:"-0.38%",sp:[1.268,1.266,1.264,1.262,1.261,1.260,1.259,1.259,1.258,1.258],note:"BoE cut cycle. Gilt rally."},
+    {p:"USD/JPY",r:"148.20",d:"-0.85%",sp:[150.5,150.2,149.8,149.5,149.2,149.0,148.8,148.5,148.3,148.2],note:"Safe haven. BoJ tightening path."},
+    {p:"USD/CHF",r:"0.8820",d:"-0.55%",sp:[0.892,0.890,0.889,0.888,0.887,0.886,0.884,0.883,0.882,0.882],note:"Classic safe haven bid."},
+    {p:"EUR/CHF",r:"0.9160",d:"-0.90%",sp:[0.935,0.932,0.930,0.928,0.926,0.924,0.922,0.920,0.918,0.916],note:"Risk barometer. Energy shock."},
+    {p:"AUD/USD",r:"0.6180",d:"-0.65%",sp:[0.628,0.626,0.624,0.622,0.621,0.620,0.619,0.619,0.618,0.618],note:"Risk-off. Commodity proxy."},
+    {p:"USD/NOK",r:"10.55",d:"+0.30%",sp:[10.3,10.32,10.35,10.38,10.40,10.42,10.45,10.48,10.52,10.55],note:"Oil producer but risk-off."},
+    {p:"DXY Index",r:"98.00",d:"+0.50%",sp:[96.8,96.9,97.0,97.1,97.2,97.3,97.5,97.6,97.8,98.0],note:"5-week high. Safe haven + oil inflation."},
+  ];
+
+  var emRows=em.map(function(r){
+    var isSharp=r.d.indexOf("0.7")>=0||r.d.indexOf("0.9")>=0||r.d.indexOf("1.5")>=0;
+    var isStrong=r.d.indexOf("-1")>=0;
+    var cls="rw"+(isSharp?" fl":isStrong?" hl":"");
+    var rgCol=r.rg==="MGDF"?"y":"b";
+    return'<div class="'+cls+'"><div style="display:flex;align-items:center;gap:6px;min-width:140px"><span style="font-size:11px;font-weight:700;color:var(--t);font-family:var(--mo);width:72px">'+r.p+'</span>'+bg(r.rg,rgCol)+'</div><div style="display:flex;align-items:center;gap:8px">'+sp(r.sp,isSharp?"#f6465d":isStrong?"#00c087":"#848e9c",60,16)+'<div style="text-align:right;min-width:55px"><div class="rv">'+r.r+'</div><span class="'+(r.d.indexOf("-")===0?"cu":r.d==="flat"?"cf":"cd")+'" style="font-size:10px">'+r.d+'</span></div><span style="font-size:9px;color:var(--m);width:42px;text-align:right;font-family:var(--mo)">'+r.ytd+'</span></div></div>';
+  }).join('');
+  var left=pn("EM Currencies vs USD","SPOT | 5D TREND | YTD",emRows,{np:true});
+
+  var pegRows=pegs.map(function(r){
+    var rgCol=r.rg==="HARD PEG"?"b":r.rg==="BASKET PEG"?"g":"r";
+    return'<div class="rw"><div style="display:flex;align-items:center;gap:6px"><span style="font-size:11px;font-weight:700;color:var(--t);font-family:var(--mo);width:72px">'+r.p+'</span>'+bg(r.rg,rgCol)+'</div><div style="display:flex;align-items:center;gap:8px"><div style="text-align:right"><div class="rv" style="color:var(--a)">'+r.r+'</div></div></div></div><div style="padding:0 10px 4px 10px;font-size:9px;color:var(--m)">'+r.note+'</div>';
+  }).join('');
+  var rightTop=pn("Pegged & Managed Currencies","STRESS VIA RESERVES NOT SPOT",pegRows,{np:true});
+
+  var dmRows=dm.map(function(r){
+    var isMove=r.d.indexOf("0.8")>=0||r.d.indexOf("0.9")>=0;
+    var cls="rw"+(isMove?" hl":"");
+    return'<div class="'+cls+'"><div style="min-width:80px"><span style="font-size:11px;font-weight:700;color:var(--t);font-family:var(--mo)">'+r.p+'</span></div><div style="display:flex;align-items:center;gap:8px">'+sp(r.sp,r.d.indexOf("-")===0?"#00c087":"#f6465d",60,16)+'<div style="text-align:right;min-width:55px"><div class="rv">'+r.r+'</div><span class="'+(r.d.indexOf("-")===0?"cu":"cd")+'" style="font-size:10px">'+r.d+'</span></div></div></div>';
+  }).join('');
+  var rightBot=pn("G10 / DM Currencies","SPOT | 5D TREND",dmRows,{np:true});
+
+  return'<div class="g2"><div class="co">'+left+'</div><div class="co">'+rightTop+rightBot+'</div></div>';
+}
+
+// === SHARP MOVERS ===
+function renderSharp(){
+  var credit=[
+    {n:"Egypt 5Y CDS",from:"286",to:"341",chg:"+55bp",pct:"+19.2%",cat:"SOV CDS"},
+    {n:"Pakistan 5Y CDS",from:"444",to:"509",chg:"+65bp",pct:"+14.6%",cat:"SOV CDS"},
+    {n:"Iraq 5Y CDS",from:"215",to:"275",chg:"+60bp",pct:"+27.9%",cat:"SOV CDS"},
+    {n:"Bahrain 5Y CDS",from:"185",to:"233",chg:"+48bp",pct:"+25.9%",cat:"SOV CDS"},
+    {n:"CEMBI HY",from:"475",to:"520",chg:"+45bp",pct:"+9.5%",cat:"INDEX"},
+    {n:"Israel 5Y CDS",from:"64",to:"99",chg:"+35bp",pct:"+54.7%",cat:"SOV CDS"},
+    {n:"Bahrain 10Y Bond",from:"218",to:"260",chg:"+42bp",pct:"+19.3%",cat:"SOV BOND"},
+    {n:"Turkey 5Y CDS",from:"247",to:"285",chg:"+38bp",pct:"+15.4%",cat:"SOV CDS"},
+    {n:"Jordan 5Y CDS",from:"275",to:"310",chg:"+35bp",pct:"+12.7%",cat:"SOV CDS"},
+    {n:"Qatar 5Y CDS",from:"32",to:"47",chg:"+15bp",pct:"+46.9%",cat:"SOV CDS"},
+    {n:"EMBI+ Spread",from:"253",to:"285",chg:"+32bp",pct:"+12.6%",cat:"INDEX"},
+  ].sort(function(a,b){return parseFloat(b.pct)-parseFloat(a.pct);});
+
+  var credH='<div class="rw" style="background:var(--pH);padding:3px 10px"><span style="font-size:9px;color:var(--m);flex:1">NAME</span><span style="font-size:9px;color:var(--m);width:40px;text-align:right">PREV</span><span style="font-size:9px;color:var(--m);width:40px;text-align:right">NOW</span><span style="font-size:9px;color:var(--m);width:50px;text-align:right">ABS CHG</span><span style="font-size:9px;color:var(--m);width:50px;text-align:right">% CHG</span></div>';
+  var credR=credit.map(function(r){
+    var pct=parseFloat(r.pct);
+    var cls="rw"+(pct>=20?" fl":"");
+    return'<div class="'+cls+'"><div style="flex:1"><span class="rl">'+r.n+'</span> '+bg(r.cat,r.cat==="INDEX"?"b":"y")+'</div><span style="width:40px;text-align:right;font-size:11px;color:var(--m);font-family:var(--mo)">'+r.from+'</span><span class="rv" style="width:40px;color:var(--dn)">'+r.to+'</span><span class="cd" style="width:50px;text-align:right">'+r.chg+'</span><span class="cd" style="width:50px;text-align:right;font-weight:700'+(pct>=25?";animation:sharpFlash 2s ease-in-out infinite":"")+'">'+r.pct+'</span></div>';
+  }).join('');
+  var left=pn("Credit Spread Wideners — 5-Day","SORTED BY % CHANGE | WIDER = RED",credH+credR,{np:true,cr:true});
+
+  var fxmov=[
+    {n:"USD/ILS",from:"3.12",to:"3.07",chg:"-1.50%",dir:"STRENGTHEN",cat:"EM"},
+    {n:"USD/EGP",from:"48.75",to:"49.19",chg:"+0.90%",dir:"WEAKEN",cat:"EM"},
+    {n:"EUR/CHF",from:"0.924",to:"0.916",chg:"-0.90%",dir:"CHF BID",cat:"DM"},
+    {n:"USD/JPY",from:"149.5",to:"148.2",chg:"-0.85%",dir:"JPY BID",cat:"DM"},
+    {n:"USD/ZAR",from:"15.90",to:"16.01",chg:"+0.70%",dir:"WEAKEN",cat:"EM"},
+    {n:"USD/IDR",from:"16,756",to:"16,866",chg:"+0.66%",dir:"WEAKEN",cat:"EM"},
+    {n:"AUD/USD",from:"0.622",to:"0.618",chg:"-0.65%",dir:"WEAKEN",cat:"DM"},
+    {n:"USD/CHF",from:"0.887",to:"0.882",chg:"-0.55%",dir:"CHF BID",cat:"DM"},
+  ].sort(function(a,b){return Math.abs(parseFloat(b.chg))-Math.abs(parseFloat(a.chg));});
+
+  var fxH='<div class="rw" style="background:var(--pH);padding:3px 10px"><span style="font-size:9px;color:var(--m);flex:1">PAIR</span><span style="font-size:9px;color:var(--m);width:45px;text-align:right">PREV</span><span style="font-size:9px;color:var(--m);width:45px;text-align:right">NOW</span><span style="font-size:9px;color:var(--m);width:48px;text-align:right">MOVE</span><span style="font-size:9px;color:var(--m);width:60px;text-align:right">SIGNAL</span></div>';
+  var fxR=fxmov.map(function(r){
+    var isNeg=r.chg.indexOf("-")===0;
+    var cls="rw"+(Math.abs(parseFloat(r.chg))>=0.8?" hl":"");
+    var dirCol=r.dir.indexOf("BID")>=0||r.dir==="STRENGTHEN"?"g":"r";
+    return'<div class="'+cls+'"><div style="flex:1"><span class="rl" style="font-family:var(--mo);font-weight:700">'+r.n+'</span> '+bg(r.cat,r.cat==="DM"?"b":"y")+'</div><span style="width:45px;text-align:right;font-size:11px;color:var(--m);font-family:var(--mo)">'+r.from+'</span><span class="rv" style="width:45px">'+r.to+'</span><span class="'+(isNeg?"cu":"cd")+'" style="width:48px;text-align:right;font-weight:700">'+r.chg+'</span><span style="width:60px;text-align:right">'+bg(r.dir,dirCol)+'</span></div>';
+  }).join('');
+  var right=pn("FX Sharp Movers — Daily","SORTED BY ABSOLUTE MOVE",fxH+fxR,{np:true});
+
+  // Equity sharp movers
+  var eqmov=[
+    {n:"Frontline (FRO)",chg:"+74% YTD",note:"VLCC $107K/day"},{n:"Carnival (CCL)",chg:"-12%",note:"Cruise halt"},
+    {n:"Devon Energy (DVN)",chg:"+9.4%",note:"Oil surge"},{n:"Qantas (QAN)",chg:"-10.4%",note:"Flights grounded"},
+    {n:"Lockheed (LMT)",chg:"+7.2%",note:"Defense supercycle"},{n:"TUI AG",chg:"-8.5%",note:"Tourism collapse"},
+    {n:"Israel TA-35 Index",chg:"+3.67%",note:"Record high (!)"},{n:"Qatar QE Index",chg:"-3.34%",note:"LNG halt"},
+    {n:"Egypt EGX 30",chg:"-5.44%",note:"Heavy selling"},{n:"TTF Gas Apr",chg:"+45%",note:"Qatar LNG halt"},
+  ];
+  var eqR=eqmov.map(function(r){
+    var isUp=r.chg.indexOf("+")===0;
+    return'<div class="rw"><span class="rl" style="flex:1">'+r.n+'</span><span style="font-size:10px;color:var(--m);margin-right:6px">'+r.note+'</span><span class="'+(isUp?"cu":"cd")+'" style="font-weight:700;font-size:12px">'+r.chg+'</span></div>';
+  }).join('');
+  right+=pn("Equity & Commodity Sharp Movers","DAILY",eqR,{np:true});
+
+  return'<div class="g2"><div class="co">'+left+'</div><div class="co">'+right+'</div></div>';
+}
+
+// === DM RATES ===
+function renderDm(){
+  var us=[
+    {n:"Fed Funds",v:"3.50-3.75%",chg:null,note:"Held at Jan FOMC"},
+    {n:"US 3M T-Bill",v:"3.58%",chg:-0.02,sp:[3.65,3.64,3.63,3.62,3.61,3.60,3.60,3.59,3.58,3.58]},
+    {n:"US 2Y",v:"3.39%",chg:-0.06,sp:[3.55,3.52,3.50,3.48,3.46,3.44,3.42,3.41,3.40,3.39]},
+    {n:"US 5Y",v:"3.65%",chg:0.02,sp:[3.70,3.68,3.67,3.66,3.66,3.65,3.65,3.64,3.65,3.65]},
+    {n:"US 10Y",v:"3.99%",chg:0.06,sp:[4.25,4.20,4.15,4.10,4.08,4.05,4.02,4.00,3.98,3.99]},
+    {n:"US 30Y",v:"4.32%",chg:0.09,sp:[4.55,4.50,4.48,4.45,4.42,4.40,4.38,4.36,4.34,4.32]},
+    {n:"2s10s Spread",v:"+60bp",chg:null,note:"Steepening. Growth concern."},
+    {n:"5Y Breakeven",v:"2.39%",chg:0.05,note:"Oil pass-through pricing"},
+    {n:"10Y Breakeven",v:"2.28%",chg:0.04,note:"Moderate long-term infl."},
+    {n:"Mar FOMC",v:"94% HOLD",chg:null,note:"6% cut prob"},
+    {n:"May FOMC",v:"82% HOLD",chg:null,note:"17% cut prob rising"},
+    {n:"Jun FOMC",v:"53% HOLD",chg:null,note:"First real cut window"},
+  ];
+  var usR=us.map(function(r){
+    var sparkH=r.sp?sp(r.sp,r.chg>0?"#f6465d":"#00c087",60,16):'';
+    return'<div class="rw"><div><div class="rl">'+r.n+'</div>'+(r.note?'<div class="rs">'+r.note+'</div>':'')+'</div><div style="display:flex;align-items:center;gap:8px">'+sparkH+'<div style="text-align:right;min-width:55px"><div class="rv">'+r.v+'</div>'+ch(r.chg,"bp")+'</div></div></div>';
+  }).join('');
+  var left=pn("US Rates & Fed Pricing","FRED / CME FEDWATCH","<div style=\"padding:4px 10px;background:var(--pH);font-size:9px;color:var(--m)\">Curve steepening: front-end rally (growth fear) + long-end sell (inflation). Competing forces from safe-haven demand vs oil-driven breakeven expansion.</div>"+usR,{np:true});
+
+  var eu=[
+    {n:"ECB Depo Rate",v:"2.50%",note:"Held. Next Apr 17."},{n:"Bund 10Y",v:"2.38%",chg:-0.08},
+    {n:"OAT 10Y (France)",v:"3.05%",chg:-0.05},{n:"BTP 10Y (Italy)",v:"3.52%",chg:0.02},
+    {n:"Bund-BTP Spread",v:"114bp",chg:3,note:"Peripheral stress gauge"},
+    {n:"Gilt 10Y (UK)",v:"4.18%",chg:-0.03},{n:"BoE Rate",v:"4.25%",note:"Cut cycle underway"},
+    {n:"Swiss 10Y",v:"0.45%",chg:-0.08,note:"Safe haven rally"},
+    {n:"JGB 10Y (Japan)",v:"1.38%",chg:-0.03},{n:"BoJ Rate",v:"0.50%",note:"Tightening bias"},
+    {n:"Aussie 10Y",v:"4.05%",chg:0.02},{n:"RBA Rate",v:"4.10%",note:"Hold. Watching inflation."},
+  ];
+  var euR=eu.map(function(r){
+    return'<div class="rw"><div><div class="rl">'+r.n+'</div>'+(r.note?'<div class="rs">'+r.note+'</div>':'')+'</div><div style="text-align:right;min-width:55px"><div class="rv">'+r.v+'</div>'+(r.chg!=null?ch(r.chg,"bp"):'')+'</div></div>';
+  }).join('');
+  var right=pn("Global DM Rates","ECB / BoE / BoJ / RBA / SNB",euR,{np:true});
+
+  right+=pn("EM Central Bank Rates","POLICY RATES | CONFLICT IMPACT",[
+    ["Turkey","35.00%","CUT cycle. Oil inflation may pause."],["Brazil","15.00%","HOLD/HIKE. Oil complicates cuts."],
+    ["Egypt","25.00%","CUT cycle. Energy shock risk."],["S. Africa","7.25%","CUT. ZAR pressure may delay."],
+    ["India","6.25%","JUST CUT Feb. Oil bill +$15B/yr."],["Indonesia","5.75%","HOLD. IDR intervention."],
+    ["Mexico","9.50%","CUT cycle. Oil producer offset."],["Colombia","9.50%","CUT. COP pressure."],
+    ["Nigeria","27.00%","HIKE cycle. Inflation 30%+."],["Pakistan","17.00%","CUT. But oil shock reversal risk."],
+    ["China","3.10%","EASING. LNG cost → imported infl."],["Israel","4.25%","CUT. War-driven accommodation."],
+  ].map(function(r){
+    return'<div class="rw"><span class="rl" style="min-width:70px">'+r[0]+'</span><span class="rv" style="min-width:50px;color:var(--a)">'+r[1]+'</span><span class="rs" style="flex:1;text-align:right">'+r[2]+'</span></div>';
+  }).join(''),{np:true});
+
+  return'<div class="g2"><div class="co">'+left+'</div><div class="co">'+right+'</div></div>';
+}
+
+// === FLOWS & ETFs ===
+function renderFlows(){
+  var etfs=[
+    {n:"EMB",f:"iShares JP Morgan USD EM Bond",aum:"$16.2B",nav:"97.68",chg:"-1.2%",flow1w:"-$340M",flow1m:"-$1.01B",dur:"6.82y",yld:"5.43%"},
+    {n:"LEMB",f:"iShares JP Morgan EM Lcl Ccy",aum:"$3.8B",nav:"35.20",chg:"-1.8%",flow1w:"-$180M",flow1m:"-$420M",dur:"4.95y",yld:"6.12%"},
+    {n:"VWOB",f:"Vanguard EM Gov Bond",aum:"$5.1B",nav:"62.40",chg:"-0.9%",flow1w:"-$95M",flow1m:"-$280M",dur:"7.20y",yld:"5.65%"},
+    {n:"PCY",f:"Invesco EM Sov Debt",aum:"$2.4B",nav:"21.80",chg:"-1.1%",flow1w:"-$65M",flow1m:"-$190M",dur:"8.10y",yld:"5.85%"},
+    {n:"HYG",f:"iShares USD HY Corp",aum:"$14.8B",nav:"78.50",chg:"-0.6%",flow1w:"-$520M",flow1m:"-$1.8B",dur:"3.85y",yld:"7.12%"},
+    {n:"JNK",f:"SPDR Barclays HY Bond",aum:"$7.2B",nav:"95.30",chg:"-0.7%",flow1w:"-$310M",flow1m:"-$890M",dur:"3.72y",yld:"7.05%"},
+    {n:"LQD",f:"iShares USD IG Corp",aum:"$32.1B",nav:"112.40",chg:"+0.2%",flow1w:"+$180M",flow1m:"+$520M",dur:"8.45y",yld:"4.95%"},
+    {n:"TLT",f:"iShares 20+ Yr Treasury",aum:"$42.5B",nav:"98.20",chg:"-0.8%",flow1w:"+$1.2B",flow1m:"+$3.5B",dur:"16.8y",yld:"4.35%"},
+    {n:"GLD",f:"SPDR Gold Trust",aum:"$78.4B",nav:"498.50",chg:"+2.5%",flow1w:"+$2.1B",flow1m:"+$5.8B",dur:"-",yld:"-"},
+  ];
+
+  var hdr='<div class="rw" style="background:var(--pH);padding:3px 10px;font-size:9px;color:var(--m)"><span style="width:40px">TICK</span><span style="flex:1">FUND</span><span style="width:48px;text-align:right">NAV</span><span style="width:45px;text-align:right">CHG</span><span style="width:55px;text-align:right">1W FLOW</span><span style="width:55px;text-align:right">1M FLOW</span><span style="width:38px;text-align:right">DUR</span><span style="width:38px;text-align:right">YLD</span></div>';
+  var rows=etfs.map(function(r){
+    var isOut=r.flow1w.indexOf("-")===0&&Math.abs(parseFloat(r.flow1w.replace(/[^0-9.-]/g,"")))>=200;
+    var cls="rw"+(isOut?" fl":"");
+    var flowCol=r.flow1w.indexOf("-")===0?"cd":"cu";
+    var flow1mCol=r.flow1m.indexOf("-")===0?"cd":"cu";
+    return'<div class="'+cls+'"><span style="width:40px;font-weight:700;font-family:var(--mo);font-size:11px;color:var(--a)">'+r.n+'</span><span class="rs" style="flex:1">'+r.f+'</span><span class="rv" style="width:48px;font-size:11px">'+r.nav+'</span><span class="'+(r.chg.indexOf("-")===0?"cd":"cu")+'" style="width:45px;text-align:right;font-size:10px">'+r.chg+'</span><span class="'+flowCol+'" style="width:55px;text-align:right;font-size:10px;font-weight:600">'+r.flow1w+'</span><span class="'+flow1mCol+'" style="width:55px;text-align:right;font-size:10px;font-weight:600">'+r.flow1m+'</span><span style="width:38px;text-align:right;font-size:10px;color:var(--m);font-family:var(--mo)">'+r.dur+'</span><span style="width:38px;text-align:right;font-size:10px;color:var(--s);font-family:var(--mo)">'+r.yld+'</span></div>';
+  }).join('');
+  var left=pn("Bond ETF Flows & NAV","AUM | NAV | FLOWS | DURATION | YIELD",hdr+rows,{np:true});
+
+  var flowNote='<div style="font-size:11px;color:var(--s);line-height:1.6">'+
+    '<div style="margin-bottom:6px"><span style="font-weight:700;color:var(--dn)">EM OUTFLOW ACCELERATING:</span> EMB saw -$1.01B in 1-month outflows pre-conflict. Expect acceleration this week as systematic sellers trigger on VIX >20. EPFR weekly EM bond fund flows likely -$3-5B.</div>'+
+    '<div style="margin-bottom:6px"><span style="font-weight:700;color:var(--up)">SAFE HAVEN INFLOW:</span> GLD +$5.8B 1-month. TLT +$3.5B. LQD +$520M. Classic risk-off rotation from EM credit → DM IG → Treasuries → Gold.</div>'+
+    '<div style="margin-bottom:6px"><span style="font-weight:700;color:var(--w)">HY CONTAGION:</span> HYG -$1.8B 1-month. Energy sector in HY index creates correlation channel. CDX HY +15bp. Watch for CLO covenant triggers if sustained.</div>'+
+    '<div><span style="font-weight:700;color:var(--bl)">EM ISSUANCE:</span> Multiple EM issuers expected to delay planned USD bond deals. Turkey and Egypt both had Q2 issuance windows that are now at risk. Gulf issuers (Saudi, UAE) may shelve planned sukuk.</div>'+
+  '</div>';
+  var right=pn("Flow Commentary","ANALYSIS",flowNote);
+
+  right+=pn("Portfolio Positioning Signal","RISK APPETITE",[
+    ["EM Sov USD","UNDERWEIGHT","-$1.0B outflow. Spread widening accelerating.","r"],
+    ["EM Corp USD","UNDERWEIGHT","CEMBI +28bp. Oil sector names widening.","r"],
+    ["EM Local Ccy","UNDERWEIGHT","FX depreciation + rate uncertainty.","r"],
+    ["DM IG Corp","NEUTRAL","Flight to quality. LQD inflows.","y"],
+    ["US Treasuries","OVERWEIGHT","Safe haven. TLT +$3.5B inflow.","g"],
+    ["Gold","OVERWEIGHT","$5,370/oz. +$5.8B inflow.","g"],
+    ["Cash/USD","OVERWEIGHT","DXY 98. Liquidity premium.","g"],
+  ].map(function(r){
+    return'<div class="rw"><span class="rl" style="flex:1">'+r[0]+'</span>'+bg(r[1],r[3])+'<div class="rs" style="flex:1;text-align:right;margin-left:6px">'+r[2]+'</div></div>';
+  }).join(''),{np:true});
+
+  return'<div class="g2"><div class="co">'+left+'</div><div class="co">'+right+'</div></div>';
+}
+
+// === INIT ===
+function initTicker(){
+  var el=document.getElementById("ticker");var html="";
+  var items=ticks.concat(ticks);
+  items.forEach(function(t){
+    var neg=t.c.indexOf("-")===0;var isFlat=t.c==="flat";
+    html+='<span><span style="color:var(--m);margin-right:3px;font-size:10px;font-family:var(--mo)">'+t.s+'</span><span style="color:var(--t);font-weight:600;margin-right:3px;font-size:10px;font-family:var(--mo)">'+t.v+'</span><span style="color:'+(isFlat?"var(--m)":neg?"var(--dn)":"var(--up)")+';font-weight:600;font-size:10px;font-family:var(--mo)">'+t.c+'</span></span>';
+  });
+  el.innerHTML=html;
+}
+function initNav(){
+  var el=document.getElementById("nav");
+  tabs.forEach(function(t){
+    var btn=document.createElement("button");btn.textContent=t.label;btn.dataset.id=t.id;
+    if(t.id===cur)btn.className="on";
+    btn.addEventListener("click",function(){cur=t.id;render();document.querySelectorAll(".nv button").forEach(function(b){b.className=b.dataset.id===cur?"on":"";});});
+    el.appendChild(btn);
+  });
+}
+function render(){
+  var el=document.getElementById("content");
+  switch(cur){
+    case"cds":el.innerHTML=renderCds();break;case"bonds":el.innerHTML=renderBonds();break;
+    case"fx":el.innerHTML=renderFx();break;case"sharp":el.innerHTML=renderSharp();break;
+    case"dm":el.innerHTML=renderDm();break;case"flows":el.innerHTML=renderFlows();break;
+  }
+}
+function updateClock(){
+  var d=new Date();var s=d.toISOString().slice(0,19).replace("T"," ")+" UTC";
+  document.getElementById("clock").textContent=s;document.getElementById("cf").textContent=s;
+}
+initTicker();initNav();render();updateClock();setInterval(updateClock,1000);
+</script>
+</body>
+</html>
