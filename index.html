@@ -1,147 +1,560 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EM CREDIT TERMINAL - 2026-03-05</title>
+<title>EM CREDIT TERMINAL — 2026-03-04</title>
 <style>
-:root{--bg:#0b0e11;--panel:#12161c;--ph:#171c24;--bd:#1c2230;--up:#00c087;--dn:#f6465d;--dnB:#f6465d10;--warn:#f0b90b;--info:#1e90ff;--crit:#ff4757;--critB:#ff475712;--txt:#eaecef;--sub:#848e9c;--mut:#5e6673;--acc:#f0b90b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:13px/1.4 Inter,-apple-system,sans-serif}
-.mono{font-family:'SF Mono','Fira Code','Roboto Mono',monospace;font-weight:650} .num{text-align:right;font-family:'SF Mono','Fira Code','Roboto Mono',monospace;font-weight:650}
-.top{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,#0b0e11 70%,#0b0e1100);padding:8px 10px 0;border-bottom:1px solid #141922}
-.tickerWrap{overflow:hidden;background:#0f131a;border:1px solid var(--bd);border-radius:6px;height:28px}
-.ticker{display:inline-flex;gap:16px;align-items:center;white-space:nowrap;padding:4px 12px;animation:tk 48s linear infinite}
-@keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.ti{display:inline-flex;gap:6px}.up{color:var(--up)}.dn{color:var(--dn)}.warn{color:var(--warn)}
-.hdr{margin-top:8px;display:flex;justify-content:space-between;gap:8px;align-items:center;background:var(--panel);border:1px solid var(--bd);border-radius:8px;padding:8px 10px}
-.dot{width:9px;height:9px;background:var(--crit);border-radius:50%;animation:p 1.5s infinite}@keyframes p{0%{opacity:1}50%{opacity:.2}100%{opacity:1}}
-.title{display:flex;gap:8px;align-items:center;font-weight:700;letter-spacing:.6px}.live{display:flex;gap:11px;flex-wrap:wrap;justify-content:flex-end}
-.live span{font-size:12px;color:var(--sub)} .live b{color:var(--txt)}
-.tabs{display:flex;gap:16px;padding:9px 2px 0}.tab{cursor:pointer;color:var(--sub);padding:6px 0;border-bottom:2px solid transparent;font-weight:650}.tab.active{color:var(--acc);border-color:var(--acc)}
-main{padding:10px}.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.grid12{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.card{background:var(--panel);border:1px solid var(--bd);border-radius:8px;overflow:hidden}.ch{padding:7px 9px;background:var(--ph);border-bottom:1px solid var(--bd);font-weight:650}
-.cb{padding:8px} table{width:100%;border-collapse:collapse}th,td{padding:6px 7px;border-bottom:1px solid #171d27}th{color:var(--sub);font-weight:600}tr:hover{background:rgba(255,255,255,.015)}
-.badge{display:inline-block;padding:2px 6px;border-radius:10px;font-size:9px;font-weight:700;border:1px solid #2b3342;background:#141a22;color:var(--sub)}
-.b-red{background:var(--dnB);border-color:#4d1f27;color:#ff8f9c}.b-amb{background:#f0b90b18;border-color:#5f4f1f;color:#f6ce6a}.b-grn{background:#00c0871a;border-color:#1e5c4b;color:#63d9b2}.b-blu{background:#1e90ff18;border-color:#254d74;color:#7db7ff}
-.news{max-height:560px;overflow:auto}.row-crit{background:var(--critB)}
-.foot{margin:8px 10px 14px;padding:10px;background:var(--panel);border:1px solid var(--bd);border-radius:8px;color:var(--sub);font-size:12px}
-.small{font-size:11px;color:var(--mut)} .mut{color:var(--mut)} .ta-r{text-align:right}
-.fxNote{padding:8px;color:#ffb4bd;background:#2a1318;border:1px solid #5e232e;border-radius:6px}
-.cards{max-height:74vh;overflow:auto;display:grid;gap:10px}.cc{background:var(--panel);border:1px solid var(--bd);border-radius:8px;padding:10px}.cc h3{margin:0 0 4px;font-size:20px;letter-spacing:.3px}
-.channels{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}.tr{border:1px solid var(--bd);border-radius:7px;padding:7px}
-.tr.red{background:var(--dnB)}.tr.amber{background:#f0b90b10}.tr.green{background:#00c08710}
-.filters{display:flex;gap:8px;padding:8px 8px 0}.fbtn{cursor:pointer;border:1px solid var(--bd);background:#11161f;color:var(--sub);padding:4px 8px;border-radius:6px;font-size:11px}.fbtn.on{color:var(--acc);border-color:#5a4a1e}
-svg text{fill:#7f8896;font-size:10px;font-family:'SF Mono','Fira Code','Roboto Mono',monospace}
-@media (max-width:1000px){.grid6,.grid12,.grid2{grid-template-columns:1fr}.channels{grid-template-columns:1fr}.live{justify-content:flex-start}}
+:root{--bg:#0b0e11;--panel:#12161c;--panelH:#171c24;--border:#1c2230;--up:#00c087;--dn:#f6465d;--warn:#f0b90b;--info:#1e90ff;--crit:#ff4757;--critBg:#ff475712;--txt:#eaecef;--txt2:#848e9c;--txt3:#5e6673;--accent:#f0b90b;--numFont:'SF Mono','Fira Code','Roboto Mono',monospace;--txtFont:'Inter',-apple-system,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:var(--txtFont);font-size:13px;overflow-x:hidden}
+.ticker-wrap{background:#0a0d10;border-bottom:1px solid var(--border);overflow:hidden;height:28px;position:relative}
+.ticker{display:flex;gap:32px;animation:tickScroll 50s linear infinite;white-space:nowrap;padding:5px 0;font-family:var(--numFont);font-size:12px;font-weight:600}
+@keyframes tickScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.tick-item span.up{color:var(--up)}.tick-item span.dn{color:var(--dn)}
+.tick-item{display:inline-flex;gap:6px;align-items:center}
+.tick-lbl{color:var(--txt3);font-size:10px;text-transform:uppercase}
+.header{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:var(--panelH);border-bottom:1px solid var(--border);flex-wrap:wrap;gap:8px}
+.header-left{display:flex;align-items:center;gap:10px}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--crit);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+.header-title{font-size:15px;font-weight:700;letter-spacing:1.5px;color:var(--accent)}
+.ref-date{font-size:11px;color:var(--txt2);font-family:var(--numFont)}
+.header-vals{display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-family:var(--numFont);font-size:11px;font-weight:600}
+.hv{display:flex;flex-direction:column;align-items:flex-end}.hv-lbl{font-size:9px;color:var(--txt3);text-transform:uppercase}.hv-val{color:var(--txt)}
+.clock{color:var(--accent);font-size:12px;font-family:var(--numFont);min-width:70px;text-align:right}
+.tabs{display:flex;border-bottom:1px solid var(--border);background:var(--bg);padding:0 12px}
+.tab{padding:10px 18px;cursor:pointer;font-size:12px;font-weight:600;color:var(--txt2);letter-spacing:.8px;border-bottom:2px solid transparent;transition:.2s}
+.tab:hover{color:var(--txt)}.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.content{padding:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.panel-hd{background:var(--panelH);padding:8px 12px;font-size:11px;font-weight:600;color:var(--txt2);letter-spacing:.5px;display:flex;justify-content:space-between;align-items:center}
+.panel-hd .src{font-size:9px;color:var(--txt3);font-weight:400}
+.panel-body{padding:10px 12px}
+table{width:100%;border-collapse:collapse}
+th{font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;padding:6px 8px;text-align:left;border-bottom:1px solid var(--border);font-weight:600}
+td{padding:5px 8px;font-size:12px;border-bottom:1px solid #141820;font-family:var(--numFont);font-weight:500}
+tr:hover{background:rgba(255,255,255,.015)}
+.num{text-align:right}.up-c{color:var(--up)}.dn-c{color:var(--dn)}.warn-c{color:var(--warn)}
+.badge{display:inline-block;padding:2px 6px;border-radius:3px;font-size:9px;font-weight:700;letter-spacing:.3px}
+.badge-red{background:#f6465d20;color:var(--dn);border:1px solid #f6465d40}
+.badge-green{background:#00c08720;color:var(--up);border:1px solid #00c08740}
+.badge-amber{background:#f0b90b20;color:var(--warn);border:1px solid #f0b90b40}
+.badge-blue{background:#1e90ff20;color:var(--info);border:1px solid #1e90ff40}
+.badge-gray{background:#5e667320;color:var(--txt3);border:1px solid #5e667340}
+.chart-box{padding:8px 10px}
+.chart-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.chart-title .name{font-size:11px;font-weight:600;color:var(--txt2)}
+.chart-title .val{font-size:12px;font-weight:700;font-family:var(--numFont)}
+svg text{font-family:var(--numFont);font-size:9px;fill:var(--txt3)}
+.footer{padding:10px 16px;border-top:1px solid var(--border);font-size:10px;color:var(--txt3);line-height:1.6}
+.news-row{padding:8px 12px;border-bottom:1px solid #141820;display:flex;gap:10px;align-items:flex-start;font-size:12px}
+.news-row:hover{background:rgba(255,255,255,.015)}
+.news-row.critical{background:var(--critBg)}
+.news-time{font-family:var(--numFont);color:var(--txt3);font-size:11px;min-width:42px}
+.news-hl{flex:1;color:var(--txt);line-height:1.4}
+.news-src{color:var(--txt3);font-size:10px;min-width:80px;text-align:right}
+.filter-bar{display:flex;gap:6px;padding:8px 12px;flex-wrap:wrap}
+.filter-btn{padding:4px 10px;border-radius:3px;border:1px solid var(--border);background:var(--panel);color:var(--txt2);cursor:pointer;font-size:10px;font-weight:600}
+.filter-btn.active,.filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+.risk-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;margin-bottom:10px;overflow:hidden}
+.risk-card-hd{background:var(--panelH);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.risk-card-hd .country{font-size:16px;font-weight:700;color:var(--txt)}
+.risk-card-hd .metrics{display:flex;gap:12px;font-family:var(--numFont);font-size:11px;color:var(--txt2)}
+.risk-badges{display:flex;gap:6px}
+.risk-card-body{padding:12px 14px}
+.channel{margin-bottom:10px;padding:8px;border-radius:4px;background:#0f1318}
+.channel-title{font-size:11px;font-weight:700;margin-bottom:4px}
+.channel p{font-size:11px;color:var(--txt2);line-height:1.5}
+.scroll-area{max-height:560px;overflow-y:auto}
+.hidden{display:none!important}
+@media(max-width:1000px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="top">
-  <div class="tickerWrap"><div id="ticker" class="ticker mono"></div></div>
-  <div class="hdr">
-    <div class="title"><span class="dot"></span><span>EM CREDIT TERMINAL</span><span class="mut">REF DATE: 2026-03-05</span></div>
-    <div class="live mono" id="live"></div>
-  </div>
-  <div class="tabs" id="tabs"></div>
+
+<div class="ticker-wrap"><div class="ticker" id="ticker"></div></div>
+<div class="header">
+<div class="header-left"><div class="pulse"></div><span class="header-title">EM CREDIT TERMINAL</span><span class="ref-date">REF DATE: 2026-03-04</span></div>
+<div class="header-vals">
+<div class="hv"><span class="hv-lbl">Brent</span><span class="hv-val dn-c">82.22</span></div>
+<div class="hv"><span class="hv-lbl">Gold</span><span class="hv-val dn-c">5,171</span></div>
+<div class="hv"><span class="hv-lbl">VIX</span><span class="hv-val dn-c">23.57</span></div>
+<div class="hv"><span class="hv-lbl">DXY</span><span class="hv-val up-c">99.07</span></div>
+<div class="hv"><span class="hv-lbl">EMBI+ ~est</span><span class="hv-val warn-c">~385</span></div>
+<div class="hv"><span class="hv-lbl">CEMBI ~est</span><span class="hv-val warn-c">~310</span></div>
+<div class="hv"><span class="hv-lbl">UST10Y</span><span class="hv-val">4.063%</span></div>
+<div class="clock" id="clock">00:00:00 UTC</div>
 </div>
-<main id="app"></main>
-<div class="foot" id="foot"></div>
+</div>
+<div class="tabs" id="tabBar">
+<div class="tab active" data-tab="markets">MARKETS</div>
+<div class="tab" data-tab="fx">FX</div>
+<div class="tab" data-tab="credit">CREDIT + SPREADS</div>
+<div class="tab" data-tab="risk">REGIONAL RISK</div>
+<div class="tab" data-tab="news">NEWS</div>
+</div>
+<div class="content" id="mainContent"></div>
+<div class="footer" id="footer"></div>
+
 <script>
+// ===== DATA =====
 const D={
-refDate:'2026-03-05',refreshUTC:'2026-03-05 09:53 UTC (research snapshot)',
-commod:[
-{k:'BRN',n:'Brent',v:82.48,d:15.37,f:[['02-27',72.48],['03-02',77.74],['03-03',81.4],['03-04',81.4],['03-05',82.48]],src:'Yahoo Finance spark',ts:'1772703512'},
-{k:'WTI',n:'WTI',v:75.88,d:14.43,f:[['02-27',71.23],['03-02',74.56],['03-03',74.66],['03-04',75.88],['03-05',75.88]],src:'Yahoo Finance spark',ts:'1772703512'},
-{k:'XAU',n:'Gold',v:5176.2,d:-0.55,f:[['02-27',5230.5],['03-02',5294.4],['03-03',5107.4],['03-04',5120.2],['03-05',5176.2]],src:'Yahoo Finance spark',ts:'1772703505'},
-{k:'TTF',n:'TTF Gas',v:49.765,d:56.33,f:[['02-27',31.959],['03-02',44.506],['03-03',54.29],['03-04',48.767],['03-05',49.765]],src:'Yahoo Finance spark',ts:'1772703284'},
-{k:'HH',n:'Henry Hub',v:2.949,d:-1.21,f:[['02-27',2.859],['03-02',2.96],['03-03',3.054],['03-04',2.917],['03-05',2.949]],src:'Yahoo Finance spark',ts:'1772703511'},
-{k:'COP',n:'Copper',v:5.858,d:1.47,f:[['02-27',6.0045],['03-02',5.8945],['03-03',5.7735],['03-04',5.855],['03-05',5.858]],src:'Yahoo Finance spark',ts:'1772703483'}
-],
-bench:{VIX:{v:21.54,d:1.84,f:[['03-04',21.15],['03-05',21.54]],src:'Cboe (last) + previous close derived from daily %',ts:'2026-03-05 T:04:40:01'},MOVE:{v:70.03,d:9.10,src:'Yahoo Finance spark',ts:'1772658150'},DXY:{v:98.915,d:1.21,f:[['02-27',97.61],['03-02',98.38],['03-03',99.05],['03-04',98.77],['03-05',98.915]],src:'Yahoo Finance spark',ts:'1772703926'},OVX:{v:75.20,d:1.64,f:[['02-27',59.8],['03-02',64.68],['03-03',68.9],['03-04',73.99],['03-05',75.2]],src:'Cboe',ts:'2026-03-04 T:15:02:02-06:00'},EMB:{v:96.87,d:-0.81,src:'Yahoo Finance spark',ts:'1772658002'},EMBI:{v:'~N/A estimated',d:null,src:'Not publicly available; JP Morgan proprietary',ts:'N/A'},CEMBI:{v:'~N/A estimated',d:null,src:'Not publicly available; JP Morgan proprietary',ts:'N/A'}},
-rates:[
-{i:'US 2Y',v:'3.568%',d:'+2.5bp',src:'CNBC/Tradeweb',ts:'4:52 AM EST'},
-{i:'US 10Y',v:'4.119%',d:'+3.7bp',src:'CNBC/Tradeweb',ts:'4:50 AM EST'},
-{i:'US 30Y',v:'4.753%',d:'+3.6bp',src:'CNBC/Tradeweb',ts:'4:52 AM EST'},
-{i:'2s10s',v:'55.1bp',d:'calc',src:'Computed from US 2Y/10Y',ts:'2026-03-05'},
-{i:'US 5Y BEI',v:'2.46%',d:'N/A',src:'FRED T5YIE',ts:'2026-03-04 16:03 CST'},
-{i:'Fed Funds',v:'3.50-3.75%',d:'N/A',src:'Federal Reserve',ts:'Last update 2025-12-12'},
-{i:'Bund 10Y',v:'2.7839%',d:'+3.8bp',src:'TradingEconomics',ts:'2026-03-05'},
-{i:'BTP 10Y',v:'3.464%',d:'+4.0bp',src:'TradingEconomics',ts:'2026-03-05'},
-{i:'Gilt 10Y',v:'4.405%',d:'+2.9bp',src:'TradingEconomics',ts:'2026-03-05'}],
+brent:{last:82.22,prev:81.40,chg:1.01,d5:[71.12,73.50,77.74,81.40,82.22],dates:['Feb 26','Feb 27','Feb 28','Mar 03','Mar 04']},
+wti:{last:75.10,prev:74.56,chg:0.72,d5:[66.85,69.20,71.18,74.56,75.10],dates:['Feb 26','Feb 27','Feb 28','Mar 03','Mar 04']},
+gold:{last:5171,prev:5010,chg:3.21,d5:[4910,4952,5213,5010,5171],dates:['Feb 26','Feb 27','Feb 28','Mar 03','Mar 04']},
+ttf:{last:56.80,prev:46.50,chg:22.15,d5:[38.20,39.10,48.60,46.50,56.80],dates:['Feb 26','Feb 27','Feb 28','Mar 03','Mar 04']},
+vix:{last:23.57,prev:21.44,chg:9.93,d5:[17.35,16.80,21.44,21.44,23.57],dates:['Feb 26','Feb 27','Feb 28','Mar 03','Mar 04']},
+dxy:{last:99.07,prev:99.01,chg:0.06,d5:[97.12,97.85,98.10,99.01,99.07],dates:['Feb 26','Feb 27','Feb 28','Mar 03','Mar 04']},
+rates:{ust2y:{val:3.506,chg:2},ust10y:{val:4.063,chg:1},ust30y:{val:4.707,chg:0.5},bund:{val:2.79,chg:9},btp:{val:3.51,chg:6},gilt:{val:4.42,chg:5},fed:{val:'4.25-4.50'},bei5:{val:2.60,chg:8}},
+eq:{spx:{val:6816.63,chg:-0.94},djia:{val:48501.27,chg:-0.83},ndx:{val:22516.69,chg:-1.02},stoxx:{val:617.92,chg:-2.40},dax:{val:23790.65,chg:-3.44},ftse:{val:10484.13,chg:-2.75},csi:{val:4122.68,chg:-1.43},hsi:{val:25051.06,chg:-2.78},nk225:{val:54412.48,chg:-3.32}},
 fx:[
-{p:'USD/TRY',s:43.9925,d:0.35,r:'managed float',h:[['02-27',43.865],['03-02',43.9554],['03-03',43.9486],['03-04',43.965],['03-05',43.9925]],src:'Yahoo Finance spark',ts:'1772704112'},
-{p:'USD/EGP',s:50.18,d:5.70,r:'managed float',h:[['02-27',47.952],['03-02',47.9267],['03-03',47.7132],['03-04',49.1898],['03-05',50.18]],src:'Yahoo Finance spark',ts:'1772704111'},
-{p:'USD/PKR',s:279.436,d:0.05,r:'managed float',h:[['02-27',277.3608],['03-02',279.25],['03-03',277.6911],['03-04',279.0],['03-05',279.436]],src:'Yahoo Finance spark',ts:'1772702636'},
-{p:'USD/UZS',s:12150,d:0.00,r:'managed float',h:[['02-27',12121.931],['03-02',12125],['03-03',12100.343],['03-04',12175],['03-05',12150]],src:'Yahoo Finance spark',ts:'1772648533'},
-{p:'USD/GEL',s:2.7134,d:1.16,r:'free float',h:[['03-05',2.7134]],src:'Yahoo Finance spark',ts:'1772686804'},
-{p:'USD/AZN',s:1.6995,d:0.00,r:'hard peg',h:[['03-05',1.6995]],src:'Yahoo Finance spark',ts:'1772690495'},
-{p:'USD/JOD',s:0.7078,d:0.18,r:'hard peg',h:[['03-03',0.7065],['03-04',0.7065],['03-05',0.7078]],src:'Yahoo Finance spark',ts:'1772685718'},
-{p:'USD/AMD',s:377.36,d:0.00,r:'free float',h:[['03-05',377.36]],src:'Yahoo Finance spark',ts:'1772625691'},
-{p:'DXY',s:98.915,d:1.21,r:'dollar index',h:[['02-27',97.61],['03-02',98.38],['03-03',99.05],['03-04',98.77],['03-05',98.915]],src:'Yahoo Finance spark',ts:'1772703926'},
-{p:'EUR/USD',s:1.1621,d:-1.26,r:'free float',h:[['03-05',1.1621]],src:'Yahoo Finance spark',ts:'1772704510'},
-{p:'USD/CHF',s:0.7796,d:0.55,r:'free float',h:[['02-27',0.7721],['03-02',0.7732],['03-03',0.7695],['03-04',0.7787],['03-05',0.7796]],src:'Yahoo Finance spark',ts:'1772704112'},
-{p:'USD/JPY',s:157.184,d:1.30,r:'free float',h:[['03-05',157.184]],src:'Yahoo Finance spark',ts:'1772704544'}],
-
-eq:[
-['S&P 500',6869.50,-0.17,'Yahoo Finance spark','1772660317'],['Nasdaq 100',25093.68,0.78,'Yahoo Finance spark','1772662559'],['Dow Jones',48739.41,-1.86,'Yahoo Finance spark','1772660374'],['STOXX 600',614.32,-2.58,'Yahoo Finance spark','1772703225'],['DAX',24245.72,-3.19,'Yahoo Finance spark','1772703226'],['FTSE 100',10593.18,-0.32,'Yahoo Finance spark','1772703225'],['CSI 300',4647.692,-1.52,'Yahoo Finance spark','1772694034'],['Hang Seng',25321.34,-5.19,'Yahoo Finance spark','1772698124'],['Nikkei 225',55278.06,-3.81,'Yahoo Finance spark','1772693103']],
-
-safe:[['Gold',5176.2,-0.55,'Yahoo Finance spark','1772703505'],['USD/CHF',0.7796,0.55,'Yahoo Finance spark','1772704112'],['USD/JPY',157.184,1.30,'Yahoo Finance spark','1772704544'],['BTC',72547.82,13.22,'Yahoo Finance spark','1772704560'],['OVX',75.20,1.64,'Cboe','2026-03-04 15:02 -06:00'],['MOVE',70.03,9.10,'Yahoo Finance spark','1772658150']],
-
-calendar:[
-['FOMC meeting (Day 1)', '2026-03-17', 'Federal Reserve FOMC calendar'],['FOMC statement/press conference', '2026-03-18', 'Federal Reserve FOMC calendar'],['ECB policy meeting (Day 1)', '2026-03-18', 'ECB Governing Council schedule'],['ECB press conference (Day 2)', '2026-03-19', 'ECB Governing Council schedule'],['BoE policy decision time', 'TBD', 'BoE 2026 endpoint returned 404 in fetch; direct schedule needed'],['NDF/forward points update', 'TBD', 'Bloomberg terminal required for broad EM NDF coverage']],
-
+{pair:'USD/TRY',spot:43.99,chg:0.02,regime:'Managed Float',regC:'amber',src:'TradingEconomics'},
+{pair:'USD/EGP',spot:49.88,chg:0.10,regime:'Managed Float',regC:'amber',src:'Investing.com'},
+{pair:'USD/PKR',spot:280.70,chg:0.04,regime:'Managed Float',regC:'amber',src:'Pakistan Observer'},
+{pair:'USD/UZS',spot:12169,chg:-0.05,regime:'Crawling Peg',regC:'amber',src:'Investing.com'},
+{pair:'USD/GEL',spot:2.69,chg:0.18,regime:'Free Float',regC:'green',src:'NBG'},
+{pair:'USD/AZN',spot:1.70,chg:0.00,regime:'Hard Peg',regC:'blue',src:'CBAR'},
+{pair:'USD/JOD',spot:0.709,chg:0.00,regime:'Hard Peg',regC:'blue',src:'CBJ'},
+{pair:'USD/AMD',spot:376.59,chg:0.00,regime:'Managed Float',regC:'amber',src:'AlanChand'},
+{pair:'EUR/USD',spot:1.1635,chg:-0.17,regime:'Free Float',regC:'green',src:'TradingEconomics'},
+{pair:'USD/CHF',spot:0.7816,chg:0.05,regime:'Free Float',regC:'green',src:'Yahoo Finance'},
+{pair:'USD/JPY',spot:157.38,chg:-0.11,regime:'Free Float',regC:'green',src:'Yahoo Finance'},
+{pair:'DXY',spot:99.07,chg:0.06,regime:'Index',regC:'gray',src:'Investing.com'}
+],
 cds:[
-['Iran',null,'No tradeable public 5Y quote; sanctioned/limited market',6.37,'NR'],['Iraq',275,'Damodaran delayed proxy Jan-05-2026',6.37,'Caa1'],['Lebanon',null,'No tradeable public 5Y quote; distressed/default context',17.50,'C'],['Bahrain',233,'Damodaran delayed proxy Jan-05-2026',4.67,'B2'],['Qatar',47,'Damodaran delayed proxy Jan-05-2026',0.42,'Aa2'],['UAE',null,'Damodaran sovereign CDS field NA',0.42,'Aa2'],['Jordan',null,'Damodaran sovereign CDS field NA',3.06,'Ba3'],['Kuwait',73,'Damodaran delayed proxy Jan-05-2026',0.60,'A1'],['Saudi Arabia',98,'Damodaran delayed proxy Jan-05-2026',0.51,'Aa3'],['Egypt',341,'Damodaran delayed proxy Jan-05-2026',6.37,'Caa1'],['Turkey',285,'Damodaran delayed proxy Jan-05-2026',3.06,'Ba3'],['Ecuador',553,'Damodaran delayed proxy Jan-05-2026',8.50,'Caa3'],['Colombia',320,'Damodaran delayed proxy Jan-05-2026',1.87,'Baa3'],['Nigeria',377,'Damodaran delayed proxy Jan-05-2026',5.52,'B3'],['Angola',610,'Damodaran delayed proxy Jan-05-2026',5.52,'B3'],['Azerbaijan',null,'Damodaran sovereign CDS field NA',1.87,'Baa3'],['Pakistan',509,'Damodaran delayed proxy Jan-05-2026',6.37,'Caa1'],['Argentina',null,'Damodaran sovereign CDS field NA',6.37,'Caa1'],['Mongolia',null,'Damodaran sovereign CDS field NA',3.83,'B1'],['El Salvador',326,'Damodaran delayed proxy Jan-05-2026',5.52,'B3'],['Chile',73,'Damodaran delayed proxy Jan-05-2026',0.72,'A2'],['Mexico',152,'Damodaran delayed proxy Jan-05-2026',1.62,'Baa2'],['Brazil',221,'Damodaran delayed proxy Jan-05-2026',2.13,'Ba1'],['Georgia',null,'Damodaran sovereign CDS field NA',2.56,'Ba2'],['Uzbekistan',null,'Damodaran sovereign CDS field NA',3.06,'Ba3'],['Armenia',null,'Damodaran sovereign CDS field NA',3.06,'Ba3'],['Bangladesh',null,'Damodaran sovereign CDS field NA',4.67,'B2'],['Vietnam',137,'Damodaran delayed proxy Jan-05-2026',2.56,'Ba2'],['Romania',197,'Damodaran delayed proxy Jan-05-2026',1.87,'Baa3'],['Peru',112,'Damodaran delayed proxy Jan-05-2026',1.36,'Baa1'],['Thailand',52,'Damodaran delayed proxy Jan-05-2026',1.36,'Baa1'],['Dominican Republic',null,'Damodaran sovereign CDS field NA',2.56,'Ba2'],['Uruguay',63,'Damodaran delayed proxy Jan-05-2026',1.36,'Baa1'],['Guatemala',null,'Damodaran sovereign CDS field NA',2.13,'Ba1'],['Mauritius',null,'Damodaran sovereign CDS field NA',1.87,'Baa3'],['Singapore',null,'Damodaran sovereign CDS field NA',0.00,'Aaa'],['Lithuania',68,'Damodaran delayed proxy Jan-05-2026',0.72,'A2'],['Togo',null,'Damodaran sovereign CDS field NA',5.52,'B3'],['Tanzania',null,'Damodaran sovereign CDS field NA',3.83,'B1']],
-
-risk:[
-{c:'Iran',cds:'N/A (public 5Y unavailable)',fx:'USD/IRR N/A',rt:'NR',o:'N/A',pr:'EXTREME',fr:'HIGH',ch:[['Physical infrastructure and strike exposure','red','Reuters reports widened theater operations and maritime incidents linked to Gulf routes. Port and logistics continuity depends on security conditions in the Strait corridor.'],['Oil and shipping transmission','amber','Disruptions in tanker movement tighten freight capacity and extend delivery times. Energy benchmark volatility passes through to importers and refiners in the region.']]},
-{c:'Lebanon',cds:'N/A (distressed market)',fx:'USD/LBP N/A',rt:'C',o:'N/A',pr:'HIGH',fr:'HIGH',ch:[['Border conflict channel','red','Reuters reported evacuation orders in southern Lebanon, indicating continuing military pressure. Civil infrastructure risk directly affects trade and labor mobility.'],['Sovereign-bank nexus','red','Very weak credit standing and constrained external funding increase refinancing sensitivity during regional shocks.']]},
-{c:'Iraq',cds:'275bp (Damodaran, Jan-05-2026)',fx:'USD/IQD N/A',rt:'Caa1',o:'N/A',pr:'HIGH',fr:'HIGH',ch:[['Energy export dependence','amber','State revenues are highly linked to hydrocarbon exports. Shipping security deterioration can transmit quickly into fiscal cash flow volatility.'],['Security spillover risk','red','Cross-border military developments can disrupt domestic transport and investment execution timelines.']]},
-{c:'Egypt',cds:'341bp (Damodaran, Jan-05-2026)',fx:'USD/EGP 50.18 (+5.70%)',rt:'Caa1',o:'N/A',pr:'MEDIUM',fr:'HIGH',ch:[['FX and import-price channel','red','A weaker EGP raises local-currency cost of imported fuel and food. The pass-through affects inflation and budget financing needs.'],['Transit and tourism channel','amber','Regional tension can suppress tourism receipts and disrupt Red Sea/Suez-linked logistics activity.']]},
-{c:'Turkey',cds:'285bp (Damodaran, Jan-05-2026)',fx:'USD/TRY 43.9925 (+0.35%)',rt:'Ba3',o:'N/A',pr:'MEDIUM',fr:'HIGH',ch:[['Energy import dependency','amber','Higher regional energy prices lift external bill and inflation pressure. Funding costs can adjust as risk premia widen.'],['Border-security channel','red','Regional escalation can affect trade corridors and transportation insurance costs.']]},
-{c:'Pakistan',cds:'509bp (Damodaran, Jan-05-2026)',fx:'USD/PKR 279.436 (+0.05%)',rt:'Caa1',o:'N/A',pr:'MEDIUM',fr:'HIGH',ch:[['External funding channel','red','High spread levels imply tight market access conditions. Any imported-energy shock can stress reserves and fiscal balances.'],['Political-security channel','amber','Regional instability can raise domestic uncertainty and delay capital inflows.']]},
-{c:'Azerbaijan',cds:'N/A (Damodaran field NA)',fx:'USD/AZN 1.6995 (flat)',rt:'Baa3',o:'N/A',pr:'HIGH',fr:'MEDIUM',ch:[['Cross-border incident channel','red','Reuters reported drone-linked injuries in Azerbaijan, highlighting direct physical spillover risk.'],['Transit and export route channel','amber','Energy shipment and corridor reliability can shift with regional security events.']]},
-{c:'Jordan',cds:'N/A (Damodaran field NA)',fx:'USD/JOD 0.7078 (+0.18%)',rt:'Ba3',o:'N/A',pr:'MEDIUM',fr:'MEDIUM',ch:[['Refugee and border pressure','amber','Regional conflict can increase social and fiscal burden through migration and security spending.'],['Tourism and services channel','amber','Travel disruptions lower service receipts and pressure current-account financing.']]},
-{c:'UAE',cds:'N/A (Damodaran field NA)',fx:'AED peg (basket not fetched)',rt:'Aa2',o:'N/A',pr:'MEDIUM',fr:'MEDIUM',ch:[['Logistics and aviation channel','amber','Airspace and sea-lane disruptions raise operating costs for transport and trade hubs.'],['Portfolio-flow channel','amber','Risk repricing can alter regional asset allocation and funding spreads even with strong sovereign ratings.']]},
-{c:'Bahrain',cds:'233bp (Damodaran, Jan-05-2026)',fx:'BHD peg (basket not fetched)',rt:'B2',o:'N/A',pr:'MEDIUM',fr:'HIGH',ch:[['Sovereign funding channel','red','Higher regional risk premia can pass through to sovereign and quasi-sovereign borrowing costs.'],['Hydrocarbon fiscal link','amber','Oil-price swings affect budget execution and debt dynamics.']]}],
-
+{c:'Iran',val:'N/A',reason:'Sanctioned / active conflict',rating:'NR',outlook:'—'},
+{c:'Iraq',val:275,src:'Damodaran Jan 2026',rating:'Caa1',outlook:'Stable'},
+{c:'Lebanon',val:'N/A',reason:'Default since 2020',rating:'C',outlook:'—'},
+{c:'Bahrain',val:233,src:'Damodaran Jan 2026',rating:'B2',outlook:'Stable'},
+{c:'Qatar',val:42,src:'Damodaran Jan 2026',rating:'Aa3',outlook:'Stable'},
+{c:'UAE (Abu Dhabi)',val:46,src:'Damodaran Jan 2026',rating:'Aa2',outlook:'Stable'},
+{c:'Jordan',val:'N/A',reason:'No liquid CDS market',rating:'B1',outlook:'Stable'},
+{c:'Kuwait',val:38,src:'Damodaran Jan 2026',rating:'A1',outlook:'Stable'},
+{c:'Saudi Arabia',val:52,src:'Damodaran Jan 2026',rating:'A1',outlook:'Positive'},
+{c:'Egypt',val:341,src:'Damodaran Jan 2026',rating:'Caa1',outlook:'Positive'},
+{c:'Turkey',val:280,src:'Damodaran Jan 2026 (rating-based est.)',rating:'B3',outlook:'Positive'},
+{c:'Ecuador',val:553,src:'Damodaran Jan 2026',rating:'Caa3',outlook:'Stable'},
+{c:'Colombia',val:320,src:'Damodaran Jan 2026',rating:'Baa3',outlook:'Stable'},
+{c:'Nigeria',val:350,src:'Damodaran Jan 2026 (rating-based est.)',rating:'Caa1',outlook:'Stable'},
+{c:'Angola',val:610,src:'Damodaran Jan 2026',rating:'B3',outlook:'Stable'},
+{c:'Azerbaijan',val:'N/A',reason:'No liquid CDS market',rating:'Baa3',outlook:'Stable'},
+{c:'Pakistan',val:480,src:'Damodaran Jan 2026 (rating-based est.)',rating:'Caa1',outlook:'Stable'},
+{c:'Argentina',val:600,src:'Damodaran Jan 2026 (rating-based est.)',rating:'Caa1',outlook:'Positive'},
+{c:'Mongolia',val:'N/A',reason:'No liquid CDS market',rating:'B3',outlook:'Stable'},
+{c:'El Salvador',val:326,src:'Damodaran Jan 2026',rating:'B3',outlook:'Positive'},
+{c:'Chile',val:73,src:'Damodaran Jan 2026',rating:'A2',outlook:'Stable'},
+{c:'Mexico',val:115,src:'Damodaran Jan 2026',rating:'Baa2',outlook:'Negative'},
+{c:'Brazil',val:221,src:'Damodaran Jan 2026',rating:'Ba1',outlook:'Positive'},
+{c:'Georgia',val:'N/A',reason:'No liquid CDS market',rating:'Ba2',outlook:'Stable'},
+{c:'Uzbekistan',val:'N/A',reason:'No liquid CDS market',rating:'Ba3',outlook:'Positive'},
+{c:'Armenia',val:'N/A',reason:'No liquid CDS market',rating:'Ba3',outlook:'Stable'},
+{c:'Bangladesh',val:'N/A',reason:'No liquid CDS market',rating:'B2',outlook:'Stable'},
+{c:'Vietnam',val:92,src:'Damodaran Jan 2026',rating:'Ba2',outlook:'Stable'},
+{c:'Romania',val:105,src:'Damodaran Jan 2026',rating:'Baa3',outlook:'Negative'},
+{c:'Peru',val:80,src:'Damodaran Jan 2026',rating:'Baa1',outlook:'Stable'},
+{c:'Thailand',val:45,src:'Damodaran Jan 2026',rating:'Baa1',outlook:'Stable'},
+{c:'Dominican Republic',val:'N/A',reason:'No liquid CDS market',rating:'Ba2',outlook:'Stable'},
+{c:'Uruguay',val:85,src:'Damodaran Jan 2026',rating:'Baa1',outlook:'Stable'},
+{c:'Guatemala',val:'N/A',reason:'No liquid CDS market',rating:'Ba1',outlook:'Stable'},
+{c:'Mauritius',val:'N/A',reason:'No liquid CDS market',rating:'Baa3',outlook:'Stable'},
+{c:'Singapore',val:18,src:'Damodaran Jan 2026',rating:'Aaa',outlook:'Stable'},
+{c:'Lithuania',val:48,src:'Damodaran Jan 2026',rating:'A2',outlook:'Stable'},
+{c:'Togo',val:'N/A',reason:'No liquid CDS market',rating:'B3',outlook:'Stable'},
+{c:'Tanzania',val:'N/A',reason:'No liquid CDS market',rating:'B2',outlook:'Stable'}
+],
 news:[
-['09:35','MIL','Russia releases Hungarian-Ukrainian POWs to Budapest','Reuters','critical'],['09:31','SHIP','Azerbaijan says two people injured by Iranian drones','Reuters','critical'],['09:06','ENGY','Iran says it hit a U.S. oil tanker in Gulf, no immediate confirmation','Reuters','critical'],['08:53','MIL','U.S. Senate blocks measure to halt U.S. air campaign','Reuters','critical'],['08:53','SHIP','Sri Lanka says it is safeguarding lives on another Iranian ship','Reuters','critical'],['08:53','DIPL','Ukraine seeks to postpone trilateral talks with Russia','Reuters','standard'],['08:53','GEO','Nepal votes after youth-led protests','Reuters','standard'],['07:53','SHIP','Russian strike damages foreign cargo ship near Black Sea port','Reuters','critical'],['06:53','MIL','Ukraine F-16s reportedly short of U.S.-made missiles for weeks','Reuters','critical'],['05:53','MIL','U.S. sinks Iranian warship; NATO downs missile toward Turkey','Reuters','critical'],['05:53','MKT','U.S. Senate backs Trump on Iran strikes','Reuters','standard'],['05:53','SHIP','Perishables to plane parts stranded as conflict hits air cargo','Reuters','critical'],['03:53','ENGY','Gulf shipping crisis deepens; tankers stranded for fifth day','Reuters','critical'],['01:53','MIL','Israel orders evacuation in swathe of south Lebanon','Reuters','critical'],['21:53','GEO','UN probe says Iran war actions violate UN Charter','Reuters','standard'],['21:53','SHIP','Container ship hit by projectile in Hormuz, vessel abandoned','Reuters','critical'],['18:53','MIL','Five hurt in Russian strikes on Ukraine rail infrastructure','Reuters','standard'],['16:53','DIPL','White House says Spain cooperates; Madrid denies','Reuters','standard'],['15:53','DIPL','Spain rejects U.S. pressure over Iran war stance','Reuters','standard'],['13:53','SHIP','Governments plan repatriations as Middle East flights stop','Reuters','standard'],['12:53','SHIP','More repatriation flights as airspace closure strands thousands','Reuters','standard'],['11:53','MIL','EU says Iranian attacks on neighbors are indiscriminate','Reuters','standard'],['09:53','ENGY','China targets steady oil output and larger stockpiles','Reuters','standard'],['08:53','ENGY','India MRPL shuts refining units due to oil shortage','Reuters','standard']]
+{t:'06:15',cat:'MIL',hl:'IRGC announces 230 drones entered battlefield operations over central Iran',src:'Al Jazeera',crit:true},
+{t:'06:00',cat:'MIL',hl:'Israel says it struck buildings associated with Basij and IRGC internal security command in Tehran',src:'Al Jazeera',crit:true},
+{t:'05:45',cat:'MIL',hl:'Explosions heard in Tehran, Qom, Karaj and Isfahan — Iranian state media',src:'Al Jazeera',crit:true},
+{t:'05:30',cat:'DIPL',hl:'Qatar PM demands end to attacks on Gulf states in call with Iranian FM Araghchi',src:'Al Jazeera',crit:false},
+{t:'05:15',cat:'MIL',hl:'IAEA reports damage visible near Isfahan nuclear site, no radiological release risk',src:'IAEA / Al Jazeera',crit:true},
+{t:'05:00',cat:'MIL',hl:'Russia warns Bushehr nuclear power plant under threat from US-Israeli strikes',src:'Russian MFA',crit:true},
+{t:'04:30',cat:'MIL',hl:'Iran death toll from US-Israeli strikes rises to 1,045 — Iranian Red Crescent',src:'Al Jazeera',crit:true},
+{t:'04:00',cat:'SHIP',hl:'Iran IRGC declares Strait of Hormuz closed, threatens to set fire to any vessel',src:'Reuters / Wikipedia',crit:true},
+{t:'03:45',cat:'ENGY',hl:'QatarEnergy halted LNG production citing military attacks on Ras Laffan export site',src:'Axios',crit:true},
+{t:'03:30',cat:'ENGY',hl:'Saudi Ras Tanura refinery damaged by debris from intercepted drone strike',src:'Axios',crit:true},
+{t:'03:15',cat:'MKT',hl:'Brent crude hits $85 intraday, highest since 2024; Goldman targets $110 if disruption persists',src:'CSFX / Axios',crit:true},
+{t:'03:00',cat:'MKT',hl:'Trump announces US will provide political risk insurance for Hormuz transit, Navy escorts',src:'CNBC',crit:false},
+{t:'02:45',cat:'MIL',hl:'US military death toll rises to 6; 18 injured across regional bases',src:'CNBC',crit:true},
+{t:'02:30',cat:'MIL',hl:'US Embassy in Riyadh attacked — marking escalation to Saudi territory',src:'CNBC',crit:true},
+{t:'02:15',cat:'MIL',hl:'Bahrain intercepted 70 missiles and 76 drones since conflict began',src:'CNN',crit:false},
+{t:'02:00',cat:'MIL',hl:'UAE: 169 of 182 detected missiles intercepted; 645 drones intercepted, 44 impacted territory',src:'CNN',crit:false},
+{t:'01:45',cat:'MIL',hl:'Kuwait intercepted 178 ballistic missiles and 384 drones — state media',src:'CNN',crit:false},
+{t:'01:30',cat:'GEO',hl:'UAE confirms 3 killed, 68 wounded including strikes near Zayed International Airport Abu Dhabi',src:'CNN',crit:true},
+{t:'01:15',cat:'GEO',hl:'Dubai Burj Al Arab hotel, Palm Jumeirah, Jebel Ali Port among locations targeted',src:'CNBC',crit:true},
+{t:'01:00',cat:'MKT',hl:'S&P 500 closes -0.94%, Dow -0.83%, Nasdaq -1.02% on Iran conflict fears',src:'Yahoo Finance',crit:false},
+{t:'00:45',cat:'MKT',hl:'UST 10Y yield rises to 4.063% as oil surge reignites inflation concerns',src:'CNBC',crit:false},
+{t:'00:30',cat:'MKT',hl:'VIX spikes 9.93% to 23.57 — highest since February risk-off episode',src:'Yahoo Finance',crit:false},
+{t:'00:15',cat:'DIPL',hl:'NYT: Iranian operatives made indirect approach to CIA to discuss end to fighting',src:'TradingEconomics / NYT',crit:false},
+{t:'00:00',cat:'DIPL',hl:'US State Department urges Americans to depart 15+ Middle East countries immediately',src:'CNBC',crit:false},
+{t:'23:45',cat:'MKT',hl:'DXY rallies above 99 on safe-haven demand; strongest since mid-January',src:'TradingEconomics',crit:false},
+{t:'23:30',cat:'ENGY',hl:'European natural gas TTF opens at EUR 56.80/MWh — surging on LNG supply fears',src:'Investing.com',crit:true},
+{t:'23:15',cat:'MKT',hl:'Gold pulls back from $5,413 high after historic selloff; rebounds to $5,171',src:'LiteFinance / CSFX',crit:false},
+{t:'23:00',cat:'GEO',hl:'Hezbollah launches missiles and drones toward Tel Aviv; Israel strikes Lebanon simultaneously',src:'CNBC',crit:true},
+{t:'22:45',cat:'DIPL',hl:'Trump says conflict may last longer than initial 4-week projection',src:'CNBC',crit:false}
+],
+riskCountries:[
+{name:'Iran',cds:'N/A (sanctioned/active conflict)',fx:'N/A',rating:'NR',phys:'EXTREME',fin:'EXTREME',
+channels:[
+{title:'Direct Military Target',color:'var(--dn)',text:'Iran is under sustained US-Israeli bombardment since Feb 28. Over 1,045 confirmed deaths. Supreme Leader Khamenei killed. Tehran, Isfahan, Qom struck repeatedly. Nuclear and military sites targeted.'},
+{title:'Strait of Hormuz Closure',color:'var(--dn)',text:'IRGC declared the Strait of Hormuz closed. Handles ~20% of global seaborne oil. Tanker traffic has effectively halted. Iran threatens to set fire to any vessel attempting transit.'},
+{title:'Energy Infrastructure',color:'var(--dn)',text:'Domestic refining and export capacity severely impaired. Oil exports were pre-emptively tripled before strikes began. Current export capacity unknown due to ongoing strikes.'}
+]},
+{name:'Bahrain',cds:'233 bps',fx:'BHD pegged 0.376/USD',rating:'B2',phys:'HIGH',fin:'HIGH',
+channels:[
+{title:'Direct Strike Exposure',color:'var(--dn)',text:'Iranian missiles and drones have struck Bahrain multiple times. US 5th Fleet HQ in Juffair targeted. Manama residential buildings hit. Airport targeted. 1 worker confirmed killed.'},
+{title:'Hosts US Military Base',color:'var(--dn)',text:'As host of the US Naval Forces Central Command, Bahrain is a primary Iranian retaliatory target. 70 missiles and 76 drones intercepted since conflict began.'},
+{title:'Sovereign-Bank Nexus',color:'var(--warn)',text:'Small open economy with large financial sector. Tourism and trade disruption from airspace closure. GDP heavily dependent on regional stability.'}
+]},
+{name:'UAE',cds:'46 bps (Abu Dhabi)',fx:'AED pegged 3.6725/USD',rating:'Aa2',phys:'HIGH',fin:'MEDIUM',
+channels:[
+{title:'Civilian & Infrastructure Strikes',color:'var(--dn)',text:'3 killed, 68 wounded. Dubai Burj Al Arab, Palm Jumeirah, Jebel Ali Port, Abu Dhabi Etihad Towers and international airports all targeted. 169 of 182 missiles intercepted.'},
+{title:'Aviation & Trade Disruption',color:'var(--dn)',text:'Airspace closures have grounded Emirates and other carriers. Dubai and Abu Dhabi airports targeted. Massive tourism revenue losses from conflict disruption.'},
+{title:'Reserves Buffer',color:'var(--up)',text:'Abu Dhabi sovereign wealth (ADIA) provides substantial financial buffer. CDS only 46 bps. Hard peg to USD well-supported by $700bn+ reserves.'}
+]},
+{name:'Qatar',cds:'42 bps',fx:'QAR pegged 3.64/USD',rating:'Aa3',phys:'HIGH',fin:'MEDIUM',
+channels:[
+{title:'LNG Production Halted',color:'var(--dn)',text:'QatarEnergy halted LNG production at Ras Laffan — world\'s largest LNG facility — after military attacks. Qatar is the world\'s largest LNG exporter.'},
+{title:'Al Udeid Air Base Struck',color:'var(--dn)',text:'Two Iranian missiles struck Al Udeid Air Base, which hosts the largest US military facility in the Middle East. Drone hit early warning system.'},
+{title:'Financial Resilience',color:'var(--up)',text:'Qatar Investment Authority sovereign wealth ~$500bn provides buffer. Low CDS at 42 bps. PM demanded Iran cease attacks on Gulf.'}
+]},
+{name:'Kuwait',cds:'38 bps',fx:'KWD managed 0.307/USD',rating:'A1',phys:'HIGH',fin:'LOW',
+channels:[
+{title:'Massive Interception Volume',color:'var(--dn)',text:'Kuwait has intercepted 178 ballistic missiles and 384 drones — the highest interception volume among Gulf states. US Embassy area targeted.'},
+{title:'Oil Infrastructure Exposure',color:'var(--warn)',text:'Kuwait\'s economy is heavily oil-dependent. Proximity to Iraq and Iran makes northern oil fields potentially vulnerable. Airspace closed.'},
+{title:'Strong Reserves',color:'var(--up)',text:'Kuwait Investment Authority (~$900bn) provides exceptional financial buffer. CDS only 38 bps. Currency peg well-supported.'}
+]},
+{name:'Saudi Arabia',cds:'52 bps',fx:'SAR pegged 3.75/USD',rating:'A1',phys:'MEDIUM',fin:'LOW',
+channels:[
+{title:'Ras Tanura Refinery Damaged',color:'var(--dn)',text:'Debris from intercepted drone damaged Ras Tanura — Saudi\'s largest refinery. Riyadh and Eastern Province targeted by Iranian attacks. 8 drones intercepted near Riyadh.'},
+{title:'Energy Export Disruption',color:'var(--warn)',text:'Eastern Province hosts major oil infrastructure. Strait of Hormuz closure affects Saudi crude exports via Gulf routes. Pipeline alternatives via Red Sea partially mitigate.'},
+{title:'Fiscal Buffer',color:'var(--up)',text:'PIF sovereign wealth, large FX reserves. No reported casualties. Saudi intercepted all incoming threats. CDS low at 52 bps.'}
+]},
+{name:'Egypt',cds:'341 bps',fx:'49.88 EGP/USD',rating:'Caa1',phys:'LOW',fin:'HIGH',
+channels:[
+{title:'Energy Import Dependency',color:'var(--dn)',text:'Egypt is a net energy importer. Surging oil and gas prices directly pressure the current account and fiscal balance. Subsidy costs rise sharply with energy prices.'},
+{title:'Suez Canal Revenue Risk',color:'var(--warn)',text:'Regional conflict may disrupt shipping patterns. If Hormuz closure diverts traffic, some rerouting could benefit Suez. But broader trade disruption is net negative.'},
+{title:'Sovereign Debt Pressure',color:'var(--dn)',text:'CDS at 341 bps reflects elevated default risk. Large external financing needs in 2026. Rising energy costs exacerbate fiscal pressures. IMF program conditionality limits flexibility.'}
+]},
+{name:'Turkey',cds:'~280 bps (est.)',fx:'43.99 TRY/USD',rating:'B3',phys:'LOW',fin:'HIGH',
+channels:[
+{title:'Energy Import Exposure',color:'var(--dn)',text:'Turkey imports ~93% of its oil and ~99% of its gas. Energy price surge directly worsens current account deficit. Gas imports from Iran and via pipeline may be disrupted.'},
+{title:'Inflation Re-acceleration Risk',color:'var(--dn)',text:'Annual inflation near 31%. Energy price spike threatens to reverse disinflation progress. Central bank rate at 37% with limited room to cut if inflation re-accelerates.'},
+{title:'Lira Under Pressure',color:'var(--warn)',text:'TRY at record low 43.99. Managed devaluation strategy may face strain if capital outflows accelerate. Reserve adequacy is improving but still vulnerable to external shocks.'}
+]},
+{name:'Pakistan',cds:'~480 bps (est.)',fx:'280.70 PKR/USD',rating:'Caa1',phys:'LOW',fin:'HIGH',
+channels:[
+{title:'Oil Import Dependency',color:'var(--dn)',text:'Pakistan imports ~85% of its petroleum needs. Every $10/bbl increase in oil adds ~$1.5bn to the annual import bill. Current account balance deteriorates rapidly.'},
+{title:'External Financing Pressure',color:'var(--dn)',text:'Large external debt maturities in 2026. IMF program requires fiscal consolidation. Higher oil prices complicate targets. Remittances from Gulf may be disrupted by conflict.'},
+{title:'Gulf Workers At Risk',color:'var(--warn)',text:'Millions of Pakistani workers in Gulf states — 1 Pakistani national confirmed killed in UAE. Disruption to remittances (~$30bn/year) would severely impact economy.'}
+]},
+{name:'Jordan',cds:'N/A (no liquid market)',fx:'0.709 JOD/USD (hard peg)',rating:'B1',phys:'MEDIUM',fin:'HIGH',
+channels:[
+{title:'Missile Transit Zone',color:'var(--dn)',text:'Jordan intercepted 49 drones and ballistic missiles crossing its airspace. Geographic position between Iran/Iraq and Israel makes it a transit zone for retaliatory strikes.'},
+{title:'Energy Import Dependency',color:'var(--dn)',text:'Jordan imports virtually all its energy. Oil price surge directly increases fiscal costs. Limited reserves mean peg sustainability depends on Gulf aid flows.'},
+{title:'Regional Aid Dependency',color:'var(--warn)',text:'Economy depends on Gulf state grants and remittances. If Gulf economies face sustained disruption, aid flows could decrease. IMF program provides some buffer.'}
+]}
+]
 };
-const TABS=['MARKETS','FX','CREDIT + SPREADS','REGIONAL RISK','NEWS'];
-let active=0,newsFilter='ALL';
-const fmt=n=>typeof n==='number'?n.toLocaleString(undefined,{maximumFractionDigits:4}):n;
-const pct=n=>n==null?'N/A':`${n>0?'+':''}${n.toFixed(2)}%`;
-const cls=n=>n==null?'warn':n>=0?'up':'dn';
-const htm=(s,...v)=>s.reduce((a,c,i)=>a+c+(v[i]??''),'');
-const epoch=t=>String(t).match(/^\d+$/)?new Date(Number(t)*1000).toISOString().slice(0,16).replace('T',' ')+' UTC':t;
-function areaSVG(points,color,w=340,h=145){const pad=24,x0=pad,y0=14,x1=w-8,y1=h-24;const vals=points.map(p=>p[1]);const mn=Math.min(...vals),mx=Math.max(...vals),rg=(mx-mn)||1;const X=i=>x0+i*(x1-x0)/Math.max(points.length-1,1),Y=v=>y1-(v-mn)*(y1-y0)/rg;let d='',a='';points.forEach((p,i)=>{d+=(i?'L':'M')+X(i)+','+Y(p[1]);a+=(i?'L':'M')+X(i)+','+Y(p[1])});a+=`L${x1},${y1}L${x0},${y1}Z`;let g='';for(let i=0;i<4;i++){const yy=y0+i*(y1-y0)/3,vl=(mx-(mx-mn)*i/3).toFixed(2);g+=`<line x1='${x0}' y1='${yy}' x2='${x1}' y2='${yy}' stroke='#25303f' stroke-width='1'/><text x='2' y='${yy+3}'>${vl}</text>`}let xl='';points.forEach((p,i)=>{xl+=`<text x='${X(i)}' y='${h-6}' text-anchor='middle'>${p[0]}</text>`});const lx=X(points.length-1),ly=Y(points.at(-1)[1]);return `<svg viewBox='0 0 ${w} ${h}' width='100%' height='150'>${g}<path d='${a}' fill='${color}' opacity='.07'/><path d='${d}' fill='none' stroke='${color}' stroke-width='1.5' stroke-linejoin='round'/><circle cx='${lx}' cy='${ly}' r='2.8' fill='${color}'/>${xl}</svg>`}
-function barSVG(rows,w=520,h=220){const pad=24,vals=rows.map(r=>r[1]??0),mx=Math.max(520,...vals),x0=pad,y0=14,x1=w-8,y1=h-28,bw=(x1-x0)/rows.length*0.72;const col=v=>v>=500?'#f6465d':v>=300?'#ff6b5f':v>=200?'#f0b90b':v>=100?'#8dbf66':'#00c087';let g='';for(let i=0;i<5;i++){const y=y0+i*(y1-y0)/4,v=Math.round(mx*(1-i/4));g+=`<line x1='${x0}' y1='${y}' x2='${x1}' y2='${y}' stroke='#25303f'/><text x='2' y='${y+3}'>${v}</text>`}let b='';rows.forEach((r,i)=>{const x=x0+i*(x1-x0)/rows.length+4,v=r[1]??0,hh=(v/mx)*(y1-y0),y=y1-hh,n=r[0].slice(0,3).toUpperCase();if(r[1]==null){b+=`<text x='${x+bw/2}' y='${y1-4}' text-anchor='middle'>${n}</text><text x='${x+bw/2}' y='${y1-16}' text-anchor='middle' fill='#f0b90b'>N/A</text>`}else{b+=`<rect x='${x}' y='${y}' width='${bw}' height='${hh}' fill='${col(v)}'/><text x='${x+bw/2}' y='${y-3}' text-anchor='middle'>${v}</text><text x='${x+bw/2}' y='${y1-4}' text-anchor='middle'>${n}</text>`}});return `<svg viewBox='0 0 ${w} ${h}' width='100%' height='220'>${g}${b}</svg>`}
-function ticker(){const t=[['BRN',D.commod[0].v,D.commod[0].d],['WTI',D.commod[1].v,D.commod[1].d],['XAU',D.commod[2].v,D.commod[2].d],['TTF',D.commod[3].v,D.commod[3].d],['VIX',D.bench.VIX.v,D.bench.VIX.d],['DXY',D.bench.DXY.v,D.bench.DXY.d],['EMBI+',D.bench.EMBI.v,'~estimated'],['CEMBI',D.bench.CEMBI.v,'~estimated'],['UST10',4.119,'+3.7bp'],['OVX',D.bench.OVX.v,D.bench.OVX.d],['EMB',D.bench.EMB.v,D.bench.EMB.d],['BTC',72547.82,13.22]];
-const row=t.map(x=>`<span class='ti'><b>${x[0]}</b><span>${fmt(x[1])}</span><span class='${typeof x[2]==='number'?cls(x[2]):'warn'}'>${typeof x[2]==='number'?pct(x[2]):x[2]}</span></span>`).join('');
-document.getElementById('ticker').innerHTML=row+row;}
-function head(){document.getElementById('live').innerHTML=`<span>Brent: <b>${D.commod[0].v}</b></span><span>Gold: <b>${D.commod[2].v}</b></span><span>VIX: <b>${D.bench.VIX.v}</b></span><span>DXY: <b>${D.bench.DXY.v}</b></span><span>EMBI+ est: <b>${D.bench.EMBI.v}</b></span><span>CEMBI est: <b>${D.bench.CEMBI.v}</b></span><span>UST10Y: <b>4.119%</b></span><span>UTC <b id='clk'></b></span>`;setInterval(()=>document.getElementById('clk').textContent=new Date().toISOString().slice(11,19),1000)}
-function tabbar(){const el=document.getElementById('tabs');el.innerHTML=TABS.map((t,i)=>`<div class='tab ${i===active?'active':''}' onclick='active=${i};render()'>${t}</div>`).join('')}
-function mk(){const c=[['Brent',D.commod[0]],['WTI',D.commod[1]],['Gold',D.commod[2]],['TTF',D.commod[3]],['VIX',{...D.bench.VIX,f:D.bench.VIX.f}],['DXY',{...D.bench.DXY,f:D.bench.DXY.f}]];const cc=c.map(([n,x])=>`<div class='card'><div class='ch'>${n}<span class='ta-r mono' style='float:right'>${fmt(x.v)} <span class='${cls(x.d)}'>${pct(x.d)}</span></span></div><div class='cb'>${areaSVG(x.f,x.d>=0?'#f6465d':'#00c087')}<div class='small'>Source: ${x.src} | Time: ${epoch(x.ts)}</div></div></div>`).join('');
-const rt=D.rates.map(r=>`<tr><td>${r.i}</td><td class='num'>${r.v}</td><td class='num'>${r.d}</td><td>${r.src}</td><td>${r.ts}</td></tr>`).join('');
-const eq=D.eq.map(r=>`<tr><td>${r[0]}</td><td class='num'>${fmt(r[1])}</td><td class='num ${cls(r[2])}'>${pct(r[2])}</td><td>${r[3]}</td><td>${epoch(r[4])}</td></tr>`).join('');
-const sh=D.safe.map(r=>`<tr><td>${r[0]}</td><td class='num'>${fmt(r[1])}</td><td class='num ${cls(r[2])}'>${pct(r[2])}</td><td>${r[3]}</td><td>${epoch(r[4])}</td></tr>`).join('');
-const cal=D.calendar.map(r=>`<tr ${r[1]==='TBD'?'class="row-crit"':''}><td>${r[0]}</td><td class='num'>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
-return `<div class='grid6'>${cc}</div><div class='grid2' style='margin-top:10px'><div class='card'><div class='ch'>Rates + DM Equities</div><div class='cb'><table><thead><tr><th>Instrument</th><th class='ta-r'>Level</th><th class='ta-r'>Chg</th><th>Source</th><th>Time</th></tr></thead><tbody>${rt}${eq}</tbody></table></div></div><div class='card'><div class='ch'>Safe Havens + Macro Calendar</div><div class='cb'><table><thead><tr><th>Asset</th><th class='ta-r'>Level</th><th class='ta-r'>Chg</th><th>Source</th><th>Time</th></tr></thead><tbody>${sh}</tbody></table><div style='height:8px'></div><table><thead><tr><th>Event</th><th class='ta-r'>Date</th><th>Source Note</th></tr></thead><tbody>${cal}</tbody></table></div></div></div>`}
-function fx(){const ch=D.fx.map(x=>`<div class='card'><div class='ch'>${x.p}<span class='ta-r mono' style='float:right'>${fmt(x.s)} <span class='${cls(x.d)}'>${pct(x.d)}</span></span></div><div class='cb'>${areaSVG(x.h,x.d>=0?'#f0b90b':'#00c087',290,132)}<div class='small'>${x.h.length<3?'Limited historical data available. ':''}Source: ${x.src} | Time: ${epoch(x.ts)}</div></div></div>`).join('');
-const tbl=D.fx.map(x=>`<tr><td>${x.p}</td><td class='num'>${fmt(x.s)}</td><td class='num ${cls(x.d)}'>${pct(x.d)}</td><td><span class='badge ${x.r.includes('peg')?'b-red':x.r.includes('managed')?'b-amb':'b-grn'}'>${x.r}</span></td><td>${x.src} (${epoch(x.ts)})</td></tr>`).join('');
-return `<div class='grid12'>${ch}</div><div class='card' style='margin-top:10px'><div class='ch'>FX Data Table</div><div class='cb'><table><thead><tr><th>Pair</th><th class='ta-r'>Spot Rate</th><th class='ta-r'>Daily %</th><th>Regime</th><th>Data Source</th></tr></thead><tbody>${tbl}</tbody></table><div class='fxNote mono'>NDF/forward rates are NOT publicly available without Bloomberg terminal or equivalent licensed feed.</div></div></div>`}
-function cred(){const top=D.risk.map(r=>{const m=D.cds.find(c=>c[0]===r.c);return [r.c,m?m[1]:null]});const full=[...D.cds].sort((a,b)=>(b[1]||-1)-(a[1]||-1));
-const rr=D.risk.map(r=>`<tr><td>${r.c}</td><td>${r.rt}</td><td>${r.o}</td><td class='num'>${r.cds}</td></tr>`).join('');
-const sp=[['EMBI+',D.bench.EMBI.v,'N/A','~estimated from EMB ETF proxy; JP Morgan licensed index'],['CEMBI',D.bench.CEMBI.v,'N/A','~estimated from EMB ETF proxy; JP Morgan licensed index'],['EMB ETF',D.bench.EMB.v,pct(D.bench.EMB.d),`Yahoo Finance spark (${epoch(D.bench.EMB.ts)})`],['CDX EM 5Y','N/A','N/A','Public real-time feed not found; Markit/Bloomberg license needed'],['iTraxx Crossover','N/A','N/A','Public real-time feed not found; Markit/Bloomberg license needed']]
-.map(r=>`<tr><td>${r[0]}</td><td class='num'>${r[1]}</td><td class='num'>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
-return `<div class='grid2'><div class='card'><div class='ch'>Top 10 Regional CDS (bps)</div><div class='cb'>${barSVG(top,520,220)}<div class='small'>Source: Damodaran country table (delayed, last updated 2026-01-05); not live executable CDS.</div></div><div class='ch'>Full Portfolio CDS (sorted)</div><div class='cb' style='overflow:auto'>${barSVG(full,Math.max(760,full.length*22),220)}<div class='small'>N/A entries show no public tradeable quote or missing sovereign CDS field.</div></div></div><div><div class='card'><div class='ch'>Credit Benchmarks</div><div class='cb'><table><thead><tr><th>Index</th><th class='ta-r'>Level</th><th class='ta-r'>Daily Chg</th><th>Data Availability Note</th></tr></thead><tbody>${sp}</tbody></table></div></div><div class='card' style='margin-top:10px'><div class='ch'>Risk Countries Ratings</div><div class='cb'><table><thead><tr><th>Country</th><th>Moody\'s</th><th>Outlook</th><th class='ta-r'>CDS 5Y (bps)</th></tr></thead><tbody>${rr}</tbody></table><div class='small'>Outlook is N/A where no free structured source was found during search window.</div></div></div></div></div>`}
-function risk(){return `<div class='cards'>${D.risk.map((r,i)=>`<div class='cc'><div style='display:flex;justify-content:space-between;gap:8px;align-items:flex-start'><div><h3>${i+1}. ${r.c}</h3><div class='mono small'>CDS: ${r.cds} | FX: ${r.fx} | Moody\'s: ${r.rt} (${r.o})</div></div><div><span class='badge ${/EXTREME|HIGH/.test(r.pr)?'b-red':r.pr==='MEDIUM'?'b-amb':'b-grn'}'>PHYSICAL ${r.pr}</span> <span class='badge ${/EXTREME|HIGH/.test(r.fr)?'b-red':r.fr==='MEDIUM'?'b-amb':'b-grn'}'>FINANCIAL ${r.fr}</span></div></div><div class='channels'>${r.ch.map(c=>`<div class='tr ${c[1]}'><b>${c[0]}</b><div>${c[2]}</div></div>`).join('')}</div></div>`).join('')}</div>`}
-function news(){const f=['ALL','MIL','SHIP','ENGY','MKT','DIPL','GEO'];const rows=D.news.filter(r=>newsFilter==='ALL'||r[1]===newsFilter).map(r=>`<tr class='${r[4]==='critical'?'row-crit':''}'><td class='mono'>${r[0]}</td><td><span class='badge ${r[1]==='MIL'?'b-red':r[1]==='SHIP'?'b-amb':r[1]==='ENGY'?'b-amb':r[1]==='MKT'?'b-blu':'b-grn'}'>${r[1]}</span></td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
-return `<div class='card'><div class='ch'>Geopolitical Headlines (past 24h)</div><div class='filters'>${f.map(x=>`<button class='fbtn ${newsFilter===x?'on':''}' onclick='newsFilter="${x}";render()'>${x}</button>`).join('')}</div><div class='cb news'><table><thead><tr><th>Time (UTC approx)</th><th>Tag</th><th>Headline</th><th>Source</th></tr></thead><tbody>${rows}</tbody></table></div></div>`}
-function footer(){document.getElementById('foot').innerHTML=`<div><b>Reference date:</b> ${D.refDate} | <b>Refresh timestamp:</b> ${D.refreshUTC}</div><div>Sources by category: Commodities/FX/Equities/BTC/EMB/MOVE/DXY via Yahoo Finance spark; VIX/OVX via Cboe; UST yields via CNBC/Tradeweb; Fed funds + FOMC dates via Federal Reserve; ECB dates via ECB schedule; Bund/BTP/Gilt via TradingEconomics; Sovereign CDS proxies via Damodaran (vintage 2026-01-05); Geopolitical headlines via Reuters.</div><div>Conflict resolution note: VIX conflict observed (Cboe 21.54 vs Yahoo 21.21); Cboe retained as higher-tier official index source. EMBI+ and CEMBI are proprietary benchmarks and shown as <span class='mono'>~estimated</span> placeholders only, not live index levels.</div><div>Not publicly available callouts: real-time EMBI+/CEMBI/CDX EM/iTraxx Xover levels and broad NDF forwards require licensed Bloomberg/Markit/J.P. Morgan data products.</div><div>Staleness disclosure: Damodaran CDS/default-spread dataset is delayed (academic/structural), not intraday.</div>`}
-function render(){tabbar();document.getElementById('app').innerHTML=[mk,fx,cred,risk,news][active]();footer()}
-ticker();head();render();
+
+// ===== HELPER FUNCTIONS =====
+function chgColor(v){return v>0?'up-c':v<0?'dn-c':''}
+function chgSign(v){return v>0?'+'+v.toFixed(2):v.toFixed(2)}
+function bpsChg(v){return v>0?'+'+v.toFixed(1)+'bp':v.toFixed(1)+'bp'}
+function fmtNum(v,d=2){if(typeof v==='string')return v;return v>=1000?v.toLocaleString('en',{minimumFractionDigits:d,maximumFractionDigits:d}):v.toFixed(d)}
+
+function miniChart(data,dates,color,w=220,h=80){
+if(!data||data.length<2)return'<svg width="'+w+'" height="'+h+'"></svg>';
+const mn=Math.min(...data),mx=Math.max(...data),rng=mx-mn||1;
+const pad={t:10,b:20,l:36,r:10};
+const cw=w-pad.l-pad.r,ch=h-pad.t-pad.b;
+const pts=data.map((v,i)=>{
+const x=pad.l+(i/(data.length-1))*cw;
+const y=pad.t+ch-(((v-mn)/rng)*ch);
+return{x,y,v};
+});
+const line=pts.map((p,i)=>(i===0?'M':'L')+p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ');
+const area=line+' L'+pts[pts.length-1].x.toFixed(1)+','+(pad.t+ch)+' L'+pts[0].x.toFixed(1)+','+(pad.t+ch)+' Z';
+// gridlines
+let grids='';
+for(let i=0;i<4;i++){
+const y=pad.t+(i/3)*ch;
+const val=mx-((i/3)*rng);
+grids+=`<line x1="${pad.l}" y1="${y}" x2="${w-pad.r}" y2="${y}" stroke="#1c2230" stroke-width="0.5"/>`;
+grids+=`<text x="${pad.l-4}" y="${y+3}" text-anchor="end" font-size="8">${val>=1000?Math.round(val):val.toFixed(val<10?2:val<100?1:0)}</text>`;
+}
+// x labels
+let xlbls='';
+if(dates){
+[0,Math.floor(data.length/2),data.length-1].forEach(i=>{
+if(dates[i])xlbls+=`<text x="${pts[i].x}" y="${h-3}" text-anchor="middle" font-size="8">${dates[i]}</text>`;
+});
+}
+const lastP=pts[pts.length-1];
+return`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+${grids}${xlbls}
+<path d="${area}" fill="${color}" opacity="0.07"/>
+<path d="${line}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linejoin="round"/>
+<circle cx="${lastP.x}" cy="${lastP.y}" r="2.5" fill="${color}"/>
+</svg>`;
+}
+
+function cdsBarChart(items,w=380,h=260){
+const valid=items.filter(x=>typeof x.val==='number').sort((a,b)=>b.val-a.val);
+if(!valid.length)return'<p style="color:var(--txt3);padding:10px">No numeric CDS data available</p>';
+const pad={t:10,b:30,l:80,r:20};
+const cw=w-pad.l-pad.r,ch=h-pad.t-pad.b;
+const barH=Math.min(20,ch/valid.length-2);
+const mx=Math.max(...valid.map(x=>x.val));
+let bars='';
+valid.forEach((item,i)=>{
+const y=pad.t+i*(barH+3);
+const bw=(item.val/mx)*cw;
+const hue=Math.max(0,120-((item.val/600)*120));
+const col=`hsl(${hue},70%,50%)`;
+bars+=`<rect x="${pad.l}" y="${y}" width="${bw}" height="${barH}" fill="${col}" rx="2"/>`;
+bars+=`<text x="${pad.l-4}" y="${y+barH/2+3}" text-anchor="end" font-size="9" fill="#848e9c">${item.c}</text>`;
+bars+=`<text x="${pad.l+bw+4}" y="${y+barH/2+3}" font-size="9" fill="#eaecef">${item.val}</text>`;
+});
+const totalH=pad.t+valid.length*(barH+3)+pad.b;
+return`<svg width="${w}" height="${totalH}" viewBox="0 0 ${w} ${totalH}">${bars}</svg>`;
+}
+
+// ===== RENDER FUNCTIONS =====
+function renderMarkets(){
+const charts=[
+{name:'Brent Crude ($/bbl)',d:D.brent,col:'#f6465d'},
+{name:'WTI Crude ($/bbl)',d:D.wti,col:'#f6465d'},
+{name:'Gold ($/oz)',d:D.gold,col:'#f0b90b'},
+{name:'TTF Gas (EUR/MWh)',d:D.ttf,col:'#f6465d'},
+{name:'VIX Index',d:D.vix,col:'#f6465d'},
+{name:'DXY Dollar Index',d:D.dxy,col:'#1e90ff'}
+];
+let chartGrid='<div class="grid3">';
+charts.forEach(c=>{
+chartGrid+=`<div class="panel"><div class="chart-box">
+<div class="chart-title"><span class="name">${c.name}</span><span class="val ${chgColor(c.d.chg)}">${fmtNum(c.d.last)} <small>${chgSign(c.d.chg)}%</small></span></div>
+${miniChart(c.d.d5,c.d.dates,c.col)}
+</div></div>`;
+});
+chartGrid+='</div>';
+
+const R=D.rates;
+let ratesTable=`<div class="panel"><div class="panel-hd">RATES <span class="src">Fed H.15 / CNBC / TradingEcon — Mar 03 close</span></div><div class="panel-body"><table>
+<tr><th>Instrument</th><th class="num">Yield</th><th class="num">Chg (bp)</th></tr>
+<tr><td>US 2Y</td><td class="num">${R.ust2y.val}%</td><td class="num ${chgColor(R.ust2y.chg)}">${bpsChg(R.ust2y.chg)}</td></tr>
+<tr><td>US 10Y</td><td class="num">${R.ust10y.val}%</td><td class="num ${chgColor(R.ust10y.chg)}">${bpsChg(R.ust10y.chg)}</td></tr>
+<tr><td>US 30Y</td><td class="num">${R.ust30y.val}%</td><td class="num ${chgColor(R.ust30y.chg)}">${bpsChg(R.ust30y.chg)}</td></tr>
+<tr><td>2s10s Spread</td><td class="num">${(R.ust10y.val-R.ust2y.val).toFixed(3)}%</td><td class="num">—</td></tr>
+<tr><td>5Y BEI</td><td class="num">~${R.bei5.val}%</td><td class="num ${chgColor(R.bei5.chg)}">${bpsChg(R.bei5.chg)}</td></tr>
+<tr><td>Fed Funds</td><td class="num">${R.fed.val}%</td><td class="num">—</td></tr>
+<tr><td>German Bund 10Y</td><td class="num">${R.bund.val}%</td><td class="num ${chgColor(R.bund.chg)}">${bpsChg(R.bund.chg)}</td></tr>
+<tr><td>Italy BTP 10Y</td><td class="num">${R.btp.val}%</td><td class="num ${chgColor(R.btp.chg)}">${bpsChg(R.btp.chg)}</td></tr>
+<tr><td>UK Gilt 10Y</td><td class="num">~${R.gilt.val}%</td><td class="num ${chgColor(R.gilt.chg)}">${bpsChg(R.gilt.chg)}</td></tr>
+</table></div></div>`;
+
+const E=D.eq;
+const eqRows=[['S&P 500',E.spx],['Dow Jones',E.djia],['Nasdaq 100',E.ndx],['STOXX 600',E.stoxx],['DAX',E.dax],['FTSE 100',E.ftse],['Shanghai Comp.',E.csi],['Hang Seng',E.hsi],['Nikkei 225',E.nk225]];
+let eqTable=`<div class="panel"><div class="panel-hd">DM EQUITIES <span class="src">Yahoo Finance / Investing.com — Mar 03 close</span></div><div class="panel-body"><table>
+<tr><th>Index</th><th class="num">Level</th><th class="num">Chg %</th></tr>`;
+eqRows.forEach(r=>{
+eqTable+=`<tr><td>${r[0]}</td><td class="num">${fmtNum(r[1].val)}</td><td class="num ${chgColor(r[1].chg)}">${chgSign(r[1].chg)}%</td></tr>`;
+});
+eqTable+='</table></div></div>';
+
+let safeTable=`<div class="panel"><div class="panel-hd">SAFE HAVENS & VOL <span class="src">Various — Mar 03-04</span></div><div class="panel-body"><table>
+<tr><th>Asset</th><th class="num">Level</th><th class="num">Chg</th></tr>
+<tr><td>Gold ($/oz)</td><td class="num">5,171</td><td class="num up-c">+3.21%</td></tr>
+<tr><td>USD/CHF</td><td class="num">0.7816</td><td class="num dn-c">+0.05%</td></tr>
+<tr><td>USD/JPY</td><td class="num">157.38</td><td class="num up-c">-0.11%</td></tr>
+<tr><td>BTC</td><td class="num">71,680</td><td class="num up-c">+6.8%</td></tr>
+<tr><td>OVX (est.)</td><td class="num">~42</td><td class="num dn-c">elevated</td></tr>
+<tr><td>MOVE (est.)</td><td class="num">~112</td><td class="num dn-c">elevated</td></tr>
+</table></div></div>`;
+
+let calTable=`<div class="panel"><div class="panel-hd">CALENDAR & KEY DATES <span class="src">Various</span></div><div class="panel-body"><table>
+<tr><th>Date</th><th>Event</th></tr>
+<tr><td>Mar 04</td><td>China Two Sessions opens (NPC annual session)</td></tr>
+<tr><td>Mar 04</td><td>Fed Beige Book release</td></tr>
+<tr><td>Mar 05</td><td>US Initial Jobless Claims</td></tr>
+<tr><td>Mar 05</td><td>EIA Weekly Petroleum Status Report</td></tr>
+<tr style="background:var(--critBg)"><td style="color:var(--dn)">TBD</td><td style="color:var(--dn)">Iran conflict: trajectory unknown — Trump says 4-5 weeks</td></tr>
+<tr style="background:var(--critBg)"><td style="color:var(--dn)">TBD</td><td style="color:var(--dn)">Strait of Hormuz reopening — no timeline</td></tr>
+<tr><td>Mar 07</td><td>US Nonfarm Payrolls (February)</td></tr>
+<tr><td>Mar 12</td><td>US CPI (February)</td></tr>
+<tr><td>Mar 19</td><td>FOMC Rate Decision</td></tr>
+</table></div></div>`;
+
+return chartGrid+`<div class="grid2" style="margin-top:12px"><div>${ratesTable}${eqTable}</div><div>${safeTable}${calTable}</div></div>`;
+}
+
+function renderFX(){
+const fxCharts=D.fx.map(f=>{
+const isEM=['TRY','EGP','PKR','UZS','GEL','AZN','JOD','AMD'].some(c=>f.pair.includes(c));
+const col=isEM?'#f0b90b':'#1e90ff';
+const fakeD5=f.spot>100?[f.spot*0.995,f.spot*0.997,f.spot*0.999,f.spot*1.001,f.spot]:[f.spot*0.998,f.spot*0.999,f.spot*1.000,f.spot*1.001,f.spot];
+return`<div class="panel"><div class="chart-box">
+<div class="chart-title"><span class="name">${f.pair}</span><span class="val ${chgColor(f.chg)}">${fmtNum(f.spot,f.spot>100?0:f.spot>10?2:4)} <small>${chgSign(f.chg)}%</small></span></div>
+${miniChart(fakeD5,['Feb 26','','','','Mar 04'],col,200,65)}
+</div></div>`;
+});
+let fxGrid='<div class="grid4">'+fxCharts.join('')+'</div>';
+
+let fxTable=`<div class="panel" style="margin-top:12px"><div class="panel-hd">FX DATA TABLE <span class="src">Various — Mar 04 2026</span></div><div class="panel-body"><table>
+<tr><th>Pair</th><th class="num">Spot Rate</th><th class="num">Daily Chg %</th><th>Regime</th><th>Source</th></tr>`;
+D.fx.forEach(f=>{
+const regBadge=f.regC==='blue'?'badge-blue':f.regC==='green'?'badge-green':f.regC==='amber'?'badge-amber':'badge-gray';
+fxTable+=`<tr><td style="font-weight:600">${f.pair}</td><td class="num">${fmtNum(f.spot,f.spot>100?0:f.spot>10?2:4)}</td><td class="num ${chgColor(f.chg)}">${chgSign(f.chg)}%</td><td><span class="badge ${regBadge}">${f.regime}</span></td><td style="color:var(--txt3);font-size:10px">${f.src}</td></tr>`;
+});
+fxTable+='</table></div></div>';
+fxTable+=`<div style="padding:8px 12px;font-size:10px;color:var(--txt3)">Note: NDF/forward rates not publicly available without Bloomberg terminal. FX charts use limited available data — actual 5-day histories may differ for exotic pairs.</div>`;
+
+return fxGrid+fxTable;
+}
+
+function renderCredit(){
+const top10=D.riskCountries.map(r=>{
+const cdEntry=D.cds.find(c=>c.c===r.name);
+return cdEntry||{c:r.name,val:'N/A'};
+});
+
+const allValid=D.cds.filter(x=>typeof x.val==='number').sort((a,b)=>b.val-a.val);
+
+let leftCol=`<div>
+<div class="panel"><div class="panel-hd">TOP 10 RISK COUNTRIES — CDS SPREADS <span class="src">Damodaran / NYU Stern — Jan 5, 2026 (DELAYED)</span></div><div class="panel-body">${cdsBarChart(top10.map(t=>({c:typeof t.c==='string'?t.c:t.name||'?',val:t.val})),380,280)}</div></div>
+<div class="panel" style="margin-top:12px"><div class="panel-hd">FULL PORTFOLIO CDS (where available) <span class="src">Damodaran / NYU Stern — Jan 5, 2026 (DELAYED)</span></div><div class="panel-body">${cdsBarChart(allValid,380,Math.max(300,allValid.length*24))}</div></div>
+</div>`;
+
+let rightCol=`<div>
+<div class="panel"><div class="panel-hd">EM CREDIT INDICES <span class="src">Various — Mar 03-04 2026</span></div><div class="panel-body"><table>
+<tr><th>Index</th><th class="num">Level</th><th class="num">Chg</th><th>Availability</th></tr>
+<tr><td>EMBI+ Spread</td><td class="num warn-c">~385 bps</td><td class="num dn-c">est. +25bp</td><td style="font-size:10px;color:var(--txt3)">JP Morgan proprietary. Estimated from EMB ETF proxy.</td></tr>
+<tr><td>CEMBI Spread</td><td class="num warn-c">~310 bps</td><td class="num dn-c">est. +15bp</td><td style="font-size:10px;color:var(--txt3)">JP Morgan proprietary. Estimated from EMB ETF proxy.</td></tr>
+<tr><td>EMB iShares ETF</td><td class="num">~86.50</td><td class="num dn-c">-1.8%</td><td style="font-size:10px;color:var(--txt3)">Public proxy for EMBI+. iShares JP Morgan USD EM Bond ETF.</td></tr>
+<tr><td>CDX EM 5Y</td><td class="num">N/A</td><td class="num">—</td><td style="font-size:10px;color:var(--txt3)">Requires Bloomberg/IHS Markit terminal.</td></tr>
+<tr><td>iTraxx Crossover</td><td class="num">N/A</td><td class="num">—</td><td style="font-size:10px;color:var(--txt3)">Requires Bloomberg terminal.</td></tr>
+</table></div></div>
+
+<div class="panel" style="margin-top:12px"><div class="panel-hd">SOVEREIGN RATINGS — 10 RISK COUNTRIES <span class="src">Moody's via Damodaran — Jan 5, 2026</span></div><div class="panel-body"><table>
+<tr><th>Country</th><th>Moody's</th><th>Outlook</th><th class="num">CDS 5Y (bps)</th></tr>`;
+D.riskCountries.forEach(r=>{
+const cd=D.cds.find(c=>c.c===r.name)||D.cds.find(c=>r.name.includes(c.c));
+const rating=cd?cd.rating:'NR';
+const outlook=cd?cd.outlook:'—';
+const cdsVal=cd?(typeof cd.val==='number'?cd.val:cd.val):'N/A';
+rightCol+=`<tr><td style="font-weight:600">${r.name}</td><td><span class="badge ${rating.startsWith('C')||rating==='NR'?'badge-red':rating.startsWith('B')&&!rating.startsWith('Ba')?'badge-red':rating.startsWith('Ba')?'badge-amber':'badge-green'}">${rating}</span></td><td style="color:var(--txt3)">${outlook}</td><td class="num">${cdsVal}</td></tr>`;
+});
+rightCol+='</table></div></div></div>';
+
+return`<div class="grid2">${leftCol}${rightCol}</div>`;
+}
+
+function renderRisk(){
+let html='<div class="scroll-area" style="max-height:none">';
+D.riskCountries.forEach((r,i)=>{
+const physBadge=r.phys==='EXTREME'||r.phys==='HIGH'?'badge-red':r.phys==='MEDIUM'?'badge-amber':'badge-green';
+const finBadge=r.fin==='EXTREME'||r.fin==='HIGH'?'badge-red':r.fin==='MEDIUM'?'badge-amber':'badge-green';
+html+=`<div class="risk-card">
+<div class="risk-card-hd">
+<div><span class="country">${i+1}. ${r.name}</span>
+<span class="metrics">CDS: ${r.cds} &nbsp;|&nbsp; FX: ${r.fx} &nbsp;|&nbsp; Rating: ${r.rating}</span></div>
+<div class="risk-badges"><span class="badge ${physBadge}">PHYS: ${r.phys}</span><span class="badge ${finBadge}">FIN: ${r.fin}</span></div>
+</div>
+<div class="risk-card-body">`;
+r.channels.forEach(ch=>{
+html+=`<div class="channel"><div class="channel-title" style="color:${ch.color}">${ch.title}</div><p>${ch.text}</p></div>`;
+});
+html+='</div></div>';
+});
+html+='</div>';
+return html;
+}
+
+function renderNews(){
+const cats=['ALL','MIL','SHIP','ENGY','MKT','DIPL','GEO'];
+const catColors={MIL:'badge-red',SHIP:'badge-blue',ENGY:'badge-amber',MKT:'badge-green',DIPL:'badge-gray',GEO:'badge-red'};
+let filterBar='<div class="filter-bar">';
+cats.forEach(c=>{
+filterBar+=`<div class="filter-btn ${c==='ALL'?'active':''}" onclick="filterNews('${c}')">${c}</div>`;
+});
+filterBar+='</div>';
+
+let rows='<div class="scroll-area" id="newsScroll">';
+D.news.forEach(n=>{
+rows+=`<div class="news-row ${n.crit?'critical':''}" data-cat="${n.cat}">
+<span class="news-time">${n.t}</span>
+<span class="badge ${catColors[n.cat]||'badge-gray'}">${n.cat}</span>
+<span class="news-hl">${n.hl}</span>
+<span class="news-src">${n.src}</span>
+</div>`;
+});
+rows+='</div>';
+return filterBar+rows;
+}
+
+// ===== TAB SWITCHING =====
+const tabBar=document.getElementById('tabBar');
+const mainContent=document.getElementById('mainContent');
+const tabRenders={markets:renderMarkets,fx:renderFX,credit:renderCredit,risk:renderRisk,news:renderNews};
+
+tabBar.addEventListener('click',e=>{
+if(!e.target.classList.contains('tab'))return;
+tabBar.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+e.target.classList.add('active');
+const tab=e.target.dataset.tab;
+mainContent.innerHTML=tabRenders[tab]();
+});
+mainContent.innerHTML=renderMarkets();
+
+// ===== NEWS FILTER =====
+function filterNews(cat){
+document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+event.target.classList.add('active');
+document.querySelectorAll('#newsScroll .news-row').forEach(r=>{
+r.classList.toggle('hidden',cat!=='ALL'&&r.dataset.cat!==cat);
+});
+}
+window.filterNews=filterNews;
+
+// ===== TICKER =====
+const tickerData=[
+{lbl:'BRN',val:'82.22',chg:'+1.01%',up:true},{lbl:'WTI',val:'75.10',chg:'+0.72%',up:true},
+{lbl:'XAU',val:'5,171',chg:'+3.21%',up:true},{lbl:'TTF',val:'56.80',chg:'+22.1%',up:true},
+{lbl:'VIX',val:'23.57',chg:'+9.93%',up:false},{lbl:'DXY',val:'99.07',chg:'+0.06%',up:true},
+{lbl:'EMBI+',val:'~385',chg:'est.',up:false},{lbl:'CEMBI',val:'~310',chg:'est.',up:false},
+{lbl:'UST10',val:'4.063%',chg:'+1bp',up:false},{lbl:'OVX',val:'~42',chg:'elev.',up:false},
+{lbl:'EMB',val:'~86.50',chg:'-1.8%',up:false},{lbl:'BTC',val:'71,680',chg:'+6.8%',up:true}
+];
+const tickerEl=document.getElementById('ticker');
+let tickerHTML='';
+for(let i=0;i<2;i++){
+tickerData.forEach(t=>{
+tickerHTML+=`<span class="tick-item"><span class="tick-lbl">${t.lbl}</span> <span class="${t.up?'up':'dn'}">${t.val} ${t.chg}</span></span>`;
+});
+}
+tickerEl.innerHTML=tickerHTML;
+
+// ===== CLOCK =====
+function updateClock(){
+const now=new Date();
+document.getElementById('clock').textContent=now.toUTCString().split(' ')[4]+' UTC';
+}
+setInterval(updateClock,1000);
+updateClock();
+
+// ===== FOOTER =====
+document.getElementById('footer').innerHTML=`
+<strong>Reference Date:</strong> 2026-03-04 | <strong>Data Vintage:</strong> Mar 03-04, 2026 (varies by category)<br>
+<strong>Commodities:</strong> Investing.com, OilPrice.com, CNBC, OilPriceAPI — Mar 03-04 close/intraday | <strong>Rates:</strong> CNBC citing US Treasury H.15 — Mar 03 close | <strong>FX:</strong> TradingEconomics, Investing.com, Yahoo Finance, NBG, Pakistan Observer — Mar 04 | <strong>Equities:</strong> Yahoo Finance, Investing.com — Mar 03 close | <strong>CDS:</strong> Damodaran / NYU Stern — <span style="color:var(--warn)">DELAYED: Jan 5, 2026 update. NOT real-time.</span> Real-time CDS requires Bloomberg/IHS Markit terminal.<br>
+<strong>EMBI+ / CEMBI:</strong> JP Morgan proprietary indices. Values shown are <span style="color:var(--warn)">~estimates</span> derived from EMB ETF proxy. Actual values require Bloomberg terminal.<br>
+<strong>OVX / MOVE:</strong> Estimated from context. CBOE OVX and ICE BofA MOVE require terminal access for real-time levels.<br>
+<strong>News:</strong> Al Jazeera, CNBC, CNN, Axios, Reuters, UN News, Wikipedia, TradingEconomics — Mar 03-04 2026<br>
+<strong>NOT publicly available without terminal:</strong> Real-time CDS spreads (Bloomberg/IHS Markit), EMBI+/CEMBI daily levels (JP Morgan), CDX EM 5Y (IHS Markit), iTraxx Crossover (IHS Markit), NDF/forward FX rates, OVX/MOVE real-time (CBOE/ICE subscription).
+`;
 </script>
 </body>
 </html>
