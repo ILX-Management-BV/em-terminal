@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ILX Market Intelligence Terminal — 31 Mar 2026</title>
+<title>ILX Market Intelligence Terminal — 1 Apr 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -72,7 +72,7 @@ footer .fn-err{color:#ff8888}
 .t th[title]{cursor:help}
 .t th[data-col]{cursor:pointer;user-select:none}
 .t th[data-col]:hover{color:var(--tx)}
-/* ── Ticker strip ── */
+/* ── Ticker strip (hidden for now) ── */
 .tkw{background:#1a1614;border-bottom:1px solid #3a3230;overflow:hidden;height:26px;position:relative;flex-shrink:0}
 .tkr{display:inline-flex;gap:0;animation:tkscroll 60s linear infinite;white-space:nowrap;padding:4px 0;will-change:transform}
 .tkr:hover{animation-play-state:paused}
@@ -80,6 +80,7 @@ footer .fn-err{color:#ff8888}
 .tki{display:inline-flex;align-items:center;gap:5px;padding:0 18px;font-family:'Roboto Mono','DM Mono',monospace;font-size:11px;font-weight:600;border-right:1px solid #3a3230}
 .tki .tkl{color:rgba(255,255,255,.35);font-size:9px;text-transform:uppercase;letter-spacing:.4px;margin-right:2px}
 .tki .tku{color:#5af0a0}.tki .tkd{color:#ff8888}.tki .tkn{color:rgba(255,255,255,.65)}
+.is-hidden{display:none !important}
 /* ── Transmission channels ── */
 .txch{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px;margin-top:8px}
 .txb{padding:11px 13px;border-radius:3px;background:var(--pn);border:1px solid var(--br)}
@@ -140,6 +141,9 @@ footer .fn-err{color:#ff8888}
 .mactbl .mc{background:var(--pn);text-align:left;font-family:'Inter','DM Sans',sans-serif;font-weight:600;color:var(--tx);white-space:nowrap}
 .mactbl .mw{background:var(--pn);text-align:right;font-family:'Roboto Mono','DM Mono',monospace;font-weight:500}
 .mactbl .mo{background:var(--pn);font-size:10px;line-height:1.5;text-align:center}
+.beta-wrap{max-width:1220px;margin:12px auto 0;padding:0 14px}
+.beta-banner{background:linear-gradient(135deg,#402d1f,#2c211a);color:#fff;padding:10px 13px;border-radius:3px;border-left:4px solid #f0b90b;display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.beta-banner .bt{min-width:140px}
 </style>
 </head>
 <body>
@@ -147,20 +151,20 @@ footer .fn-err{color:#ff8888}
   <div class="hd-l">
     <img src="logo.png" alt="" style="height:32px">
     <span class="logo">ILX TERMINAL</span>
-    <span class="cutoff">last update: 31-03-2026</span>
+    <span class="cutoff">last update: 01-04-2026</span>
   </div>
   <div class="hd-r">
-    <div class="hv"><span class="hvl">Brent</span><span class="hvv" style="color:#5af0a0">$118.99 <span style="font-size:9px">▲5.51%</span></span></div>
-    <div class="hv"><span class="hvl">WTI</span><span class="hvv" style="color:#5af0a0">$104.59 <span style="font-size:9px">▲1.66%</span></span></div>
-    <div class="hv"><span class="hvl">Gold</span><span class="hvv" style="color:#5af0a0">$4,651 <span style="font-size:9px">▲2.76%</span></span></div>
-    <div class="hv"><span class="hvl">VIX</span><span class="hvv" style="color:#f0b90b">27.62</span></div>
-    <div class="hv"><span class="hvl">DXY</span><span class="hvv" style="color:#ff8888">100.18 <span style="font-size:9px">▼0.33%</span></span></div>
-    <div class="hv"><span class="hvl">UST 10Y</span><span class="hvv" style="color:#ff8888">4.33% <span style="font-size:9px">▼0.28%</span></span></div>
+    <div class="hv"><span class="hvl">Brent</span><span class="hvv" style="color:#ff8888">$102.16 <span style="font-size:9px">▼1.74%</span></span></div>
+    <div class="hv"><span class="hvl">WTI</span><span class="hvv" style="color:#ff8888">$99.14 <span style="font-size:9px">▼2.21%</span></span></div>
+    <div class="hv"><span class="hvl">Gold</span><span class="hvv" style="color:#5af0a0">$4,769 <span style="font-size:9px">▲2.62%</span></span></div>
+    <div class="hv"><span class="hvl">VIX</span><span class="hvv" style="color:#f0b90b">24.30</span></div>
+    <div class="hv"><span class="hvl">DXY</span><span class="hvv" style="color:#ff8888">99.45 <span style="font-size:9px">▼0.51%</span></span></div>
+    <div class="hv"><span class="hvl">UST 10Y</span><span class="hvv" style="color:#ff8888">4.29% <span style="font-size:9px">▼0.56%</span></span></div>
     
     <span class="clk" id="clk"></span>
   </div>
 </header>
-<div class="tkw"><div class="tkr" id="tkr"></div></div>
+<div class="tkw is-hidden"><div class="tkr" id="tkr"></div></div>
 <nav>
   <span class="tab" onclick="sw(this,'about')">ABOUT</span>
   <span class="tab on" onclick="sw(this,'macro')">MACRO</span>
@@ -168,14 +172,19 @@ footer .fn-err{color:#ff8888}
   <span class="tab" onclick="sw(this,'sov')">SOVEREIGN RISK</span>
   <span class="tab" onclick="sw(this,'mkt')">GLOBAL MARKETS</span>
   <span class="tab" onclick="sw(this,'em')">EM MARKETS</span>
-  <span class="tab" onclick="sw(this,'scen')">SCENARIOS</span>
 </nav>
+<div class="beta-wrap">
+  <div class="beta-banner">
+    <span class="bt">Beta Governance Notice</span>
+    <span class="bb">Internal beta only. Not approved for PM reports or external distribution. Use the row-level source/date references below to validate freshness before relying on a datapoint. The scenarios view has been removed from the distributed terminal pending methodology and governance sign-off.</span>
+  </div>
+</div>
 
 <!-- ═══════════════════ ABOUT ═══════════════════ -->
 <div id="p-about" class="pnl">
   <div class="sec">
     <div class="sec-h">About This Terminal</div>
-    <p style="font-size:12px;color:var(--t2);line-height:1.7;margin:0 0 14px">A single-page market intelligence brief covering a <strong style="color:var(--tx)">31-country emerging &amp; frontier market portfolio</strong> across six analytical lenses: macro fundamentals, FX dynamics, sovereign credit risk, global market context, and scenario analysis. Data is sourced from primary statistical agencies, central banks, IMF/World Bank publications, Bloomberg, Reuters, and MarketWatch. The portfolio is weighted toward the <strong style="color:var(--tx)">war-core cluster</strong> (Türkiye 14.5%, Egypt 8.7%, Uzbekistan 8.7%) reflecting direct exposure to the Iran conflict and Strait of Hormuz disruption. All figures reflect latest available data as of <strong style="color:var(--tx)">31 Mar 2026 · Mar 19–31, 2026 UTC</strong>. ~Est. = estimated where live data is unavailable.</p>
+    <p style="font-size:12px;color:var(--t2);line-height:1.7;margin:0 0 14px">A single-page market intelligence brief covering a <strong style="color:var(--tx)">31-country emerging &amp; frontier market portfolio</strong> across six analytical lenses: macro fundamentals, FX dynamics, sovereign credit risk, global market context, and scenario analysis. Data is sourced from primary statistical agencies, central banks, IMF/World Bank publications, Bloomberg, Reuters, and MarketWatch. The portfolio is weighted toward the <strong style="color:var(--tx)">war-core cluster</strong> (Türkiye 14.5%, Egypt 8.7%, Uzbekistan 8.7%) reflecting direct exposure to the Iran conflict and Strait of Hormuz disruption. All figures reflect latest available data as of <strong style="color:var(--tx)">1 Apr 2026 · Mar 19–Apr 1, 2026 (EM benchmarks cutoff 19 Mar; EMB ETF 1 Apr) UTC</strong>. ~Est. = estimated where live data is unavailable.</p>
     <div style="font-size:11px;font-weight:700;color:var(--mt);letter-spacing:.6px;margin-bottom:8px">TABS</div>
     <table class="t" style="font-size:11px">
       <thead><tr><th style="width:130px">Tab</th><th>Contents</th></tr></thead>
@@ -183,9 +192,20 @@ footer .fn-err{color:#ff8888}
         <tr><td><strong>MACRO</strong></td><td>31-country snapshot — GDP, unemployment, CPI, policy rate, debt, FX regime, S&amp;P rating, key watch item. Sortable.</td></tr>
         <tr><td><strong>FX</strong></td><td>Portfolio currency spot rates vs USD, 1D / 1M changes, 52-week range, FX regime and credit rating.</td></tr>
         <tr><td><strong>SOVEREIGN RISK</strong></td><td>5-year CDS spreads and USD sovereign Eurobond spreads vs UST for selected portfolio countries.</td></tr>
-        <tr><td><strong>GLOBAL MARKETS</strong></td><td>Energy, rates, and major developed-market equities/volatility with spark trends and 52-week range bars.</td></tr>
+        <tr><td><strong>GLOBAL MARKETS</strong></td><td>Energy, rates/policy benchmarks, and major developed-market equities/volatility with trend, range positioning, and source/context tags.</td></tr>
         <tr><td><strong>EM MARKETS</strong></td><td>EM benchmark dashboard (EMBIGD, GBI-EM, CEMBI, ELMI+, CDX.EM) and EM-specific credit instruments.</td></tr>
-        <tr><td><strong>SCENARIOS</strong></td><td>Four war-scenario paths (Base / Adverse / Tail / Resolution) with probability weights, transmission channels, and five-variable watchlist.</td></tr>
+        <tr><td><strong>SCENARIOS</strong></td><td>Removed from the distributed beta pending methodology review and governance sign-off.</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:11px;font-weight:700;color:var(--mt);letter-spacing:.6px;margin:14px 0 8px">DEFINITIONS</div>
+    <table class="t" style="font-size:11px">
+      <thead><tr><th style="width:180px">Term</th><th>Definition Used Here</th></tr></thead>
+      <tbody>
+        <tr><td>5Y CDS</td><td>Quoted sovereign 5-year CDS where a liquid public quote is available. Pakistan and Jordan remain explicitly marked as Eurobond spread proxies, not CDS.</td></tr>
+        <tr><td>USD Sovereign Spread</td><td>USD sovereign Eurobond yield spread over the benchmark U.S. Treasury tenor shown in the table.</td></tr>
+        <tr><td>Implied Sovereign Yield</td><td>Computed as UST tenor yield + sovereign spread (in %) using WorldGovernmentBonds spread points and the displayed UST benchmark.</td></tr>
+        <tr><td>1Y Trend</td><td>Trailing percentage change across the displayed history. Its color is independent from the 1D move color.</td></tr>
+        <tr><td>Macro Heatmap</td><td>Absolute-level screening lens only. Colors do not by themselves capture country-specific improvement or deterioration, so read them with the as-of dates and recent direction of travel.</td></tr>
       </tbody>
     </table>
     <div style="font-size:11px;font-weight:700;color:var(--mt);letter-spacing:.6px;margin:14px 0 8px">DATA SOURCES</div>
@@ -210,11 +230,16 @@ footer .fn-err{color:#ff8888}
 
   <div class="sec">
     <div class="sec-h">All 31 Countries — Key Macro Snapshot</div>
+    <div class="banner" style="margin:0 0 10px;background:linear-gradient(135deg,#3b2e1c,#2d2317);border-left-color:#f0b90b">
+      <span class="bt">Macro Data Notice</span>
+      <span class="bb">Country macro figures are for internal monitoring only and are not approved for PM reports. Validate each data point and release date before external use.</span>
+    </div>
     <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:10px;color:var(--mt);margin-bottom:8px;padding:5px 8px;background:var(--gr);border-radius:2px;border:1px solid var(--br)">
       <span style="color:#09823a">■ green</span><span>favourable</span>
       <span style="color:#f2a900">■ amber</span><span>elevated / watch</span>
       <span style="color:#cc0000">■ red</span><span>stress / high risk</span>
       <span style="margin-left:8px">CPI: &lt;3% / 3–8% / ≥8% · Rate: &lt;5% / 5–15% / ≥15% · GDP: &gt;3% / 1–3% / &lt;1% · UE: &lt;5% / 5–10% / &gt;10%</span>
+      <span style="color:var(--t2)">Trend arrows show short-term direction (improving/worsening). Red values improving from prior release are downgraded to amber.</span>
       <span style="margin-left:auto;color:var(--t2)">Click any header to sort ↕</span>
     </div>
     <table class="mactbl" id="macroTable">
@@ -226,42 +251,43 @@ footer .fn-err{color:#ff8888}
         <th onclick="srt(this)">GDP% ↕</th>
         <th onclick="srt(this)">Unemp% ↕</th>
         <th onclick="srt(this)">S&amp;P · Outlook ↕</th>
+        <th>As of</th>
       </tr></thead>
       <tbody>
-                <tr><td class="mc">🇹🇷 Türkiye</td><td class="mw">14.5</td><td style="background:#cc0000;color:#fff">31.5</td><td style="background:#cc0000;color:#fff">37.0</td><td style="background:#09823a;color:#fff">3.4</td><td style="background:#f2a900;color:#333">8.1</td><td class="mo"><span class="bg sub">BB-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇪🇬 Egypt</td><td class="mw">8.7</td><td style="background:#cc0000;color:#fff">13.4</td><td style="background:#cc0000;color:#fff">19.0</td><td style="background:#09823a;color:#fff">5.3</td><td style="background:#f2a900;color:#333">6.2</td><td class="mo"><span class="bg spc">B+</span><br><span style="color:var(--mt);font-size:9px">Neg</span></td></tr>
-        <tr><td class="mc">🇺🇿 Uzbekistan</td><td class="mw">8.7</td><td style="background:#cc0000;color:#fff">8.5</td><td style="background:#f2a900;color:#333">14.0</td><td style="background:#09823a;color:#fff">5.8</td><td style="background:#09823a;color:#fff">4.5</td><td class="mo"><span class="bg sub">BB+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇪🇨 Ecuador</td><td class="mw">7.2</td><td style="background:#09823a;color:#fff">2.8</td><td style="background:#f2a900;color:#333">7.5</td><td style="background:#f2a900;color:#333">1.9</td><td style="background:#09823a;color:#fff">4.0</td><td class="mo"><span class="bg spc">B-</span><br><span style="color:var(--mt);font-size:9px">Neg</span></td></tr>
-        <tr><td class="mc">🇲🇽 Mexico</td><td class="mw">5.8</td><td style="background:#f2a900;color:#333">4.0</td><td style="background:#f2a900;color:#333">7.0</td><td style="background:#f2a900;color:#333">1.8</td><td style="background:#09823a;color:#fff">2.7</td><td class="mo"><span class="bg inv">BBB</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇦🇷 Argentina</td><td class="mw">2.9</td><td style="background:#cc0000;color:#fff">33.1</td><td style="background:#cc0000;color:#fff">29.0</td><td style="background:#09823a;color:#fff">3.3</td><td style="background:#f2a900;color:#333">6.6</td><td class="mo"><span class="bg sd">CCC+</span><br><span style="color:var(--mt);font-size:9px">Pos</span></td></tr>
-        <tr><td class="mc">🇲🇺 Mauritius</td><td class="mw">2.9</td><td style="background:#f2a900;color:#333">3.0</td><td style="background:#09823a;color:#fff">4.5</td><td style="background:#09823a;color:#fff">4.8</td><td style="background:#f2a900;color:#333">5.6</td><td class="mo"><span class="bg inv">BBB-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇲🇳 Mongolia</td><td class="mw">2.9</td><td style="background:#cc0000;color:#fff">9.5</td><td style="background:#f2a900;color:#333">12.0</td><td style="background:#09823a;color:#fff">6.2</td><td style="background:#f2a900;color:#333">5.6</td><td class="mo"><span class="bg spc">B</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇬🇪 Georgia</td><td class="mw">2.9</td><td style="background:#f2a900;color:#333">3.1</td><td style="background:#f2a900;color:#333">8.0</td><td style="background:#09823a;color:#fff">7.2</td><td style="background:#cc0000;color:#fff">13.3</td><td class="mo"><span class="bg sub">BB-</span><br><span style="color:var(--mt);font-size:9px">Pos</span></td></tr>
-        <tr><td class="mc">🇯🇴 Jordan</td><td class="mw">2.9</td><td style="background:#09823a;color:#fff">2.6</td><td style="background:#f2a900;color:#333">5.8</td><td style="background:#f2a900;color:#333">2.5</td><td style="background:#cc0000;color:#fff">21.4</td><td class="mo"><span class="bg spc">B+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇻🇳 Vietnam</td><td class="mw">2.9</td><td style="background:#f2a900;color:#333">3.4</td><td style="background:#09823a;color:#fff">4.5</td><td style="background:#09823a;color:#fff">6.5</td><td style="background:#09823a;color:#fff">2.2</td><td class="mo"><span class="bg sub">BB+</span><br><span style="color:var(--mt);font-size:9px">Pos</span></td></tr>
-        <tr><td class="mc">🇧🇩 Bangladesh</td><td class="mw">2.9</td><td style="background:#cc0000;color:#fff">9.2</td><td style="background:#f2a900;color:#333">10.0</td><td style="background:#09823a;color:#fff">5.1</td><td style="background:#09823a;color:#fff">4.7</td><td class="mo"><span class="bg spc">B+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇷🇴 Romania</td><td class="mw">2.9</td><td style="background:#f2a900;color:#333">4.2</td><td style="background:#f2a900;color:#333">6.5</td><td style="background:#f2a900;color:#333">2.5</td><td style="background:#f2a900;color:#333">6.0</td><td class="mo"><span class="bg inv">BBB-</span><br><span style="color:var(--mt);font-size:9px">Neg</span></td></tr>
-        <tr><td class="mc">🇸🇻 El Salvador</td><td class="mw">2.9</td><td style="background:#09823a;color:#fff">1.8</td><td style="background:#09823a;color:#fff">4.6</td><td style="background:#09823a;color:#fff">3.1</td><td style="background:#09823a;color:#fff">4.6</td><td class="mo"><span class="bg spc">B-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇹🇿 Tanzania</td><td class="mw">2.9</td><td style="background:#f2a900;color:#333">3.2</td><td style="background:#f2a900;color:#333">5.8</td><td style="background:#09823a;color:#fff">5.5</td><td style="background:#f2a900;color:#333">8.9</td><td class="mo"><span class="bg spc">B+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇨🇱 Chile</td><td class="mw">2.9</td><td style="background:#f2a900;color:#333">3.2</td><td style="background:#09823a;color:#fff">4.5</td><td style="background:#f2a900;color:#333">2.5</td><td style="background:#f2a900;color:#333">8.3</td><td class="mo"><span class="bg aaa">A-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇳🇬 Nigeria</td><td class="mw">1.4</td><td style="background:#cc0000;color:#fff">15.1</td><td style="background:#cc0000;color:#fff">26.5</td><td style="background:#09823a;color:#fff">3.5</td><td style="background:#09823a;color:#fff">4.9</td><td class="mo"><span class="bg spc">B-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇨🇴 Colombia</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">5.2</td><td style="background:#f2a900;color:#333">10.2</td><td style="background:#f2a900;color:#333">2.8</td><td style="background:#cc0000;color:#fff">10.9</td><td class="mo"><span class="bg sub">BB+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇵🇪 Peru</td><td class="mw">1.4</td><td style="background:#09823a;color:#fff">2.8</td><td style="background:#09823a;color:#fff">4.2</td><td style="background:#09823a;color:#fff">3.5</td><td style="background:#f2a900;color:#333">6.3</td><td class="mo"><span class="bg inv">BBB+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇦🇿 Azerbaijan</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">5.8</td><td style="background:#f2a900;color:#333">6.5</td><td style="background:#09823a;color:#fff">4.2</td><td style="background:#f2a900;color:#333">5.3</td><td class="mo"><span class="bg sub">BB+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇦🇴 Angola</td><td class="mw">1.4</td><td style="background:#cc0000;color:#fff">18.5</td><td style="background:#cc0000;color:#fff">17.5</td><td style="background:#f2a900;color:#333">2.8</td><td style="background:#cc0000;color:#fff">20.1</td><td class="mo"><span class="bg spc">B-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇺🇾 Uruguay</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">5.2</td><td style="background:#f2a900;color:#333">6.5</td><td style="background:#f2a900;color:#333">3.0</td><td style="background:#f2a900;color:#333">7.4</td><td class="mo"><span class="bg inv">BBB-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇸🇬 Singapore</td><td class="mw">1.4</td><td style="background:#09823a;color:#fff">1.8</td><td style="background:#09823a;color:#fff">0.9</td><td style="background:#09823a;color:#fff">3.5</td><td style="background:#09823a;color:#fff">2.0</td><td class="mo"><span class="bg aaa">AAA</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇧🇷 Brazil</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">5.8</td><td style="background:#cc0000;color:#fff">15.0</td><td style="background:#09823a;color:#fff">3.2</td><td style="background:#f2a900;color:#333">5.4</td><td class="mo"><span class="bg sub">BB+</span><br><span style="color:var(--mt);font-size:9px">Pos</span></td></tr>
-        <tr><td class="mc">🇵🇰 Pakistan</td><td class="mw">1.4</td><td style="background:#cc0000;color:#fff">11.5</td><td style="background:#f2a900;color:#333">10.5</td><td style="background:#f2a900;color:#333">2.4</td><td style="background:#f2a900;color:#333">5.5</td><td class="mo"><span class="bg sd">CCC+</span><br><span style="color:var(--mt);font-size:9px">Pos</span></td></tr>
-        <tr><td class="mc">🇩🇴 Dom. Rep.</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">3.8</td><td style="background:#f2a900;color:#333">5.2</td><td style="background:#09823a;color:#fff">5.5</td><td style="background:#f2a900;color:#333">5.3</td><td class="mo"><span class="bg sub">BB-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇬🇹 Guatemala</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">3.5</td><td style="background:#09823a;color:#fff">3.5</td><td style="background:#09823a;color:#fff">3.8</td><td style="background:#09823a;color:#fff">1.7</td><td class="mo"><span class="bg sub">BB-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇱🇹 Lithuania</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">3.2</td><td style="background:#09823a;color:#fff">2.1</td><td style="background:#f2a900;color:#333">2.8</td><td style="background:#f2a900;color:#333">6.5</td><td class="mo"><span class="bg aaa">A+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇹🇭 Thailand</td><td class="mw">1.4</td><td style="background:#09823a;color:#fff">1.8</td><td style="background:#09823a;color:#fff">1.0</td><td style="background:#f2a900;color:#333">2.8</td><td style="background:#09823a;color:#fff">0.7</td><td class="mo"><span class="bg inv">BBB+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇦🇲 Armenia</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">3.5</td><td style="background:#f2a900;color:#333">6.5</td><td style="background:#09823a;color:#fff">7.5</td><td style="background:#cc0000;color:#fff">11.8</td><td class="mo"><span class="bg sub">BB-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
-        <tr><td class="mc">🇹🇬 Togo</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">3.5</td><td style="background:#f2a900;color:#333">5.0</td><td style="background:#09823a;color:#fff">5.2</td><td style="background:#09823a;color:#fff">3.1</td><td class="mo"><span class="bg spc">B-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td></tr>
+                <tr><td class="mc">🇹🇷 Türkiye</td><td class="mw">14.5</td><td style="background:#cc0000;color:#fff">31.5</td><td style="background:#cc0000;color:#fff">37.0</td><td style="background:#09823a;color:#fff">3.4<span style="font-size:9px;margin-left:4px;color:#cc0000">↓</span></td><td style="background:#f2a900;color:#333">8.1</td><td class="mo"><span class="bg sub">BB-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Mar 2026<br>Rate 13 Mar 2026<br>GDP 13 Dec 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇪🇬 Egypt</td><td class="mw">8.7</td><td style="background:#cc0000;color:#fff">13.4<span style="font-size:9px;margin-left:4px;color:#cc0000">↑</span></td><td style="background:#f2a900;color:#333">19.0<span style="font-size:9px;margin-left:4px;color:#09823a">↓</span></td><td style="background:#09823a;color:#fff">5.3<span style="font-size:9px;margin-left:4px;color:#09823a">↑</span></td><td style="background:#f2a900;color:#333">6.2</td><td class="mo"><span class="bg spc">B+</span><br><span style="color:var(--mt);font-size:9px">Neg</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇺🇿 Uzbekistan</td><td class="mw">8.7</td><td style="background:#cc0000;color:#fff">8.5</td><td style="background:#f2a900;color:#333">14.0</td><td style="background:#09823a;color:#fff">5.8</td><td style="background:#09823a;color:#fff">4.5</td><td class="mo"><span class="bg sub">BB+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Mar 2026<br>GDP 13 Dec 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇪🇨 Ecuador</td><td class="mw">7.2</td><td style="background:#09823a;color:#fff">2.8</td><td style="background:#f2a900;color:#333">7.5</td><td style="background:#f2a900;color:#333">1.9</td><td style="background:#09823a;color:#fff">4.0</td><td class="mo"><span class="bg spc">B-</span><br><span style="color:var(--mt);font-size:9px">Neg</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇲🇽 Mexico</td><td class="mw">5.8</td><td style="background:#f2a900;color:#333">4.0<span style="font-size:9px;margin-left:4px;color:#cc0000">↑</span></td><td style="background:#f2a900;color:#333">7.0<span style="font-size:9px;margin-left:4px;color:#09823a">↓</span></td><td style="background:#f2a900;color:#333">1.8<span style="font-size:9px;margin-left:4px;color:#09823a">↑</span></td><td style="background:#09823a;color:#fff">2.7</td><td class="mo"><span class="bg inv">BBB</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Dec 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇦🇷 Argentina</td><td class="mw">2.9</td><td style="background:#cc0000;color:#fff">33.1<span style="font-size:9px;margin-left:4px;color:#cc0000">↑</span></td><td style="background:#cc0000;color:#fff">29.0</td><td style="background:#09823a;color:#fff">3.3</td><td style="background:#f2a900;color:#333">6.6</td><td class="mo"><span class="bg sd">CCC+</span><br><span style="color:var(--mt);font-size:9px">Pos</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Mar 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇲🇺 Mauritius</td><td class="mw">2.9</td><td style="background:#f2a900;color:#333">3.0</td><td style="background:#09823a;color:#fff">4.5</td><td style="background:#09823a;color:#fff">4.8</td><td style="background:#f2a900;color:#333">5.6</td><td class="mo"><span class="bg inv">BBB-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇲🇳 Mongolia</td><td class="mw">2.9</td><td style="background:#cc0000;color:#fff">9.5</td><td style="background:#f2a900;color:#333">12.0</td><td style="background:#09823a;color:#fff">6.2</td><td style="background:#f2a900;color:#333">5.6</td><td class="mo"><span class="bg spc">B</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇬🇪 Georgia</td><td class="mw">2.9</td><td style="background:#f2a900;color:#333">3.1</td><td style="background:#f2a900;color:#333">8.0</td><td style="background:#09823a;color:#fff">7.2</td><td style="background:#cc0000;color:#fff">13.3</td><td class="mo"><span class="bg sub">BB-</span><br><span style="color:var(--mt);font-size:9px">Pos</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇯🇴 Jordan</td><td class="mw">2.9</td><td style="background:#09823a;color:#fff">2.6</td><td style="background:#f2a900;color:#333">5.8</td><td style="background:#f2a900;color:#333">2.5</td><td style="background:#cc0000;color:#fff">21.4</td><td class="mo"><span class="bg spc">B+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Jan 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇻🇳 Vietnam</td><td class="mw">2.9</td><td style="background:#f2a900;color:#333">3.4</td><td style="background:#09823a;color:#fff">4.5</td><td style="background:#09823a;color:#fff">6.5</td><td style="background:#09823a;color:#fff">2.2</td><td class="mo"><span class="bg sub">BB+</span><br><span style="color:var(--mt);font-size:9px">Pos</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Dec 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇧🇩 Bangladesh</td><td class="mw">2.9</td><td style="background:#cc0000;color:#fff">9.2</td><td style="background:#f2a900;color:#333">10.0</td><td style="background:#09823a;color:#fff">5.1</td><td style="background:#09823a;color:#fff">4.7</td><td class="mo"><span class="bg spc">B+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇷🇴 Romania</td><td class="mw">2.9</td><td style="background:#f2a900;color:#333">4.2</td><td style="background:#f2a900;color:#333">6.5</td><td style="background:#f2a900;color:#333">2.5</td><td style="background:#f2a900;color:#333">6.0</td><td class="mo"><span class="bg inv">BBB-</span><br><span style="color:var(--mt);font-size:9px">Neg</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇸🇻 El Salvador</td><td class="mw">2.9</td><td style="background:#09823a;color:#fff">1.8</td><td style="background:#09823a;color:#fff">4.6</td><td style="background:#09823a;color:#fff">3.1</td><td style="background:#09823a;color:#fff">4.6</td><td class="mo"><span class="bg spc">B-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Jan 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇹🇿 Tanzania</td><td class="mw">2.9</td><td style="background:#f2a900;color:#333">3.2</td><td style="background:#f2a900;color:#333">5.8</td><td style="background:#09823a;color:#fff">5.5</td><td style="background:#f2a900;color:#333">8.9</td><td class="mo"><span class="bg spc">B+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇨🇱 Chile</td><td class="mw">2.9</td><td style="background:#f2a900;color:#333">3.2</td><td style="background:#09823a;color:#fff">4.5</td><td style="background:#f2a900;color:#333">2.5</td><td style="background:#f2a900;color:#333">8.3</td><td class="mo"><span class="bg aaa">A-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Jan 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇳🇬 Nigeria</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">15.1<span style="font-size:9px;margin-left:4px;color:#09823a">↓</span></td><td style="background:#cc0000;color:#fff">26.5</td><td style="background:#09823a;color:#fff">3.5</td><td style="background:#09823a;color:#fff">4.9</td><td class="mo"><span class="bg spc">B-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 16 Mar 2026<br>Rate 13 Mar 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇨🇴 Colombia</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">5.2</td><td style="background:#f2a900;color:#333">10.2</td><td style="background:#f2a900;color:#333">2.8</td><td style="background:#cc0000;color:#fff">10.9</td><td class="mo"><span class="bg sub">BB+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Jan 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇵🇪 Peru</td><td class="mw">1.4</td><td style="background:#09823a;color:#fff">2.8</td><td style="background:#09823a;color:#fff">4.2</td><td style="background:#09823a;color:#fff">3.5</td><td style="background:#f2a900;color:#333">6.3</td><td class="mo"><span class="bg inv">BBB+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Mar 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇦🇿 Azerbaijan</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">5.8</td><td style="background:#f2a900;color:#333">6.5</td><td style="background:#09823a;color:#fff">4.2</td><td style="background:#f2a900;color:#333">5.3</td><td class="mo"><span class="bg sub">BB+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Mar 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇦🇴 Angola</td><td class="mw">1.4</td><td style="background:#cc0000;color:#fff">18.5</td><td style="background:#cc0000;color:#fff">17.5</td><td style="background:#f2a900;color:#333">2.8</td><td style="background:#cc0000;color:#fff">20.1</td><td class="mo"><span class="bg spc">B-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Mar 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇺🇾 Uruguay</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">5.2</td><td style="background:#f2a900;color:#333">6.5</td><td style="background:#f2a900;color:#333">3.0</td><td style="background:#f2a900;color:#333">7.4</td><td class="mo"><span class="bg inv">BBB-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇸🇬 Singapore</td><td class="mw">1.4</td><td style="background:#09823a;color:#fff">1.8</td><td style="background:#09823a;color:#fff">0.9</td><td style="background:#09823a;color:#fff">3.5</td><td style="background:#09823a;color:#fff">2.0</td><td class="mo"><span class="bg aaa">AAA</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Mar 2026<br>GDP 13 Dec 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇧🇷 Brazil</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">5.8</td><td style="background:#cc0000;color:#fff">15.0</td><td style="background:#09823a;color:#fff">3.2</td><td style="background:#f2a900;color:#333">5.4</td><td class="mo"><span class="bg sub">BB+</span><br><span style="color:var(--mt);font-size:9px">Pos</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇵🇰 Pakistan</td><td class="mw">1.4</td><td style="background:#cc0000;color:#fff">11.5</td><td style="background:#f2a900;color:#333">10.5<span style="font-size:9px;margin-left:4px;color:#09823a">↓</span></td><td style="background:#f2a900;color:#333">2.4</td><td style="background:#f2a900;color:#333">5.5</td><td class="mo"><span class="bg sd">CCC+</span><br><span style="color:var(--mt);font-size:9px">Pos</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Mar 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇩🇴 Dom. Rep.</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">3.8</td><td style="background:#f2a900;color:#333">5.2</td><td style="background:#09823a;color:#fff">5.5</td><td style="background:#f2a900;color:#333">5.3</td><td class="mo"><span class="bg sub">BB-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇬🇹 Guatemala</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">3.5</td><td style="background:#09823a;color:#fff">3.5</td><td style="background:#09823a;color:#fff">3.8</td><td style="background:#09823a;color:#fff">1.7</td><td class="mo"><span class="bg sub">BB-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇱🇹 Lithuania</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">3.2</td><td style="background:#09823a;color:#fff">2.1</td><td style="background:#f2a900;color:#333">2.8</td><td style="background:#f2a900;color:#333">6.5</td><td class="mo"><span class="bg aaa">A+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Mar 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇹🇭 Thailand</td><td class="mw">1.4</td><td style="background:#09823a;color:#fff">1.8</td><td style="background:#09823a;color:#fff">1.0</td><td style="background:#f2a900;color:#333">2.8</td><td style="background:#09823a;color:#fff">0.7</td><td class="mo"><span class="bg inv">BBB+</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇦🇲 Armenia</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">3.5</td><td style="background:#f2a900;color:#333">6.5</td><td style="background:#09823a;color:#fff">7.5</td><td style="background:#cc0000;color:#fff">11.8</td><td class="mo"><span class="bg sub">BB-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Feb 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
+        <tr><td class="mc">🇹🇬 Togo</td><td class="mw">1.4</td><td style="background:#f2a900;color:#333">3.5</td><td style="background:#f2a900;color:#333">5.0</td><td style="background:#09823a;color:#fff">5.2</td><td style="background:#09823a;color:#fff">3.1</td><td class="mo"><span class="bg spc">B-</span><br><span style="color:var(--mt);font-size:9px">Stbl</span></td><td class="mo" style="text-align:left;color:var(--mt);font-size:9px;line-height:1.45">CPI 13 Feb 2026<br>Rate 13 Mar 2026<br>GDP 13 Sep 2025<br>UE 13 Mar 2026</td></tr>
       </tbody>
     </table>
-    <p class="src">Sources: CPI/Rate/GDP — TradingEconomics, IMF WEO, national central banks. UE% — TurkStat (TR), CAPMAS (EG), INEC (EC), INEGI (MX), INDEC (AR), IBGE (BR), INE Chile, DANE (CO), Geostat (GE), DoS Jordan, MoM Singapore, INS/Eurostat (RO/LT), NSO/SSC/StaCom (MN/AZ/AM), NBS (NG Q4-2024; TZ FY2023 latest), World Bank modelled (BD/PK/UZ/TG). ~Est.=estimated. Ratings: S&amp;P approx. ⚠ UE caveats: UZ admin rate (ILO ~8–9%); PE Lima metro only; GT formal/open UE only.</p>
+    <p class="src">Sources: CPI/Rate/GDP — TradingEconomics, IMF WEO, national central banks. UE% — TurkStat (TR), CAPMAS (EG), INEC (EC), INEGI (MX), INDEC (AR), IBGE (BR), INE Chile, DANE (CO), Geostat (GE), DoS Jordan, MoM Singapore, INS/Eurostat (RO/LT), NSO/SSC/StaCom (MN/AZ/AM), NBS (NG Q4-2024; TZ FY2023 latest), World Bank modelled (BD/PK/UZ/TG). ~Est.=estimated. Ratings: S&amp;P approx. ⚠ UE caveats: UZ admin rate (ILO ~8–9%); PE Lima metro only; GT formal/open UE only. The As of column shows the latest release date used for each indicator.</p>
   </div>
 </div>
 
@@ -276,7 +302,7 @@ footer .fn-err{color:#ff8888}
       </tr></thead>
       <tbody id="fxBody"></tbody>
     </table>
-    <p class="src">Sources: Investing.com real-time (TRY, EGP, MXN, PKR, BRL confirmed). Other rates ≈Est. Investing.com / TradingEconomics daily. Confidence ±0.5–2%. Color convention: ▲ green = price up, ▼ red = price down (standard). For USD/local: positive = local depreciated.</p>
+    <p class="src">Sources: Investing.com real-time (TRY, EGP, MXN, PKR, BRL confirmed). Other rates ≈Est. Investing.com / TradingEconomics daily. Confidence ±0.5–2%. Source/date is shown under each pair. Color convention: the 1D move uses daily direction, while the 1Y trend uses trailing direction independently. For USD/local: positive = local depreciated.</p>
   </div>
   <div class="sec">
     <div class="sec-h">Reference Rates</div>
@@ -299,59 +325,61 @@ footer .fn-err{color:#ff8888}
     <p style="font-size:11px;color:var(--mt);margin-bottom:8px"><strong style="color:var(--tx)">Sourced CDS (live market quotes):</strong> Latest available points by source/date are shown row-by-row in the table. &nbsp;<span style="color:var(--wn)"><strong>⚠ No liquid 5Y CDS market</strong> for Pakistan &amp; Jordan</span> — rows marked ⚠ show Eurobond spread vs UST proxies; these are <em>not</em> CDS quotes.</p>
     <table class="t">
       <thead><tr>
-        <th>Country</th><th class="r">CDS 5Y (bps)</th><th class="r">Δ vs Dec-25</th><th>Rating</th><th>Source &amp; Date</th><th>Key Risk</th>
+        <th>Country</th><th class="r">CDS 5Y (bps)</th><th class="r">Δ 1M</th><th>Rating</th><th>Source &amp; Date</th><th>Key Risk</th>
       </tr></thead>
       <tbody>
-                <tr><td>🇪🇬 Egypt</td><td class="r nm fw dn">434.99</td><td class="r nm dn">+~117</td><td><span class="bg spc">B+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 31 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Suez revenue −$1bn/mo; IMF programme; +31% 1-month</td></tr>
-        <tr><td>🇦🇷 Argentina</td><td class="r nm fw dn">489.83</td><td class="r nm up">−~50</td><td><span class="bg sd">CCC+</span></td><td style="font-size:10px;color:var(--mt)">Cbonds · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Milei reform traction; CDS in multi-year downtrend; Jan 31 489.83bp (Cbonds/ICE)</td></tr>
-        <tr><td>🇹🇷 Türkiye</td><td class="r nm fw dn">302.05</td><td class="r nm dn">+~69</td><td><span class="bg sub">BB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 31 Mar 2026</td><td style="font-size:10px;color:var(--mt)">War proximity; energy import shock; +25% 1-month</td></tr>
-        <tr><td>🇲🇽 Mexico</td><td class="r nm fw">111.97</td><td class="r nm dn">+~6</td><td><span class="bg inv">BBB</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 31 Mar 2026</td><td style="font-size:10px;color:var(--mt)">US tariff risk; Banxico cutting; war-adjacent energy</td></tr>
-        <tr><td>🇧🇷 Brazil</td><td class="r nm fw">143.31</td><td class="r nm up">−~3</td><td><span class="bg sub">BB+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 31 Mar 2026</td><td style="font-size:10px;color:var(--mt)">High rates; fiscal slippage; commodity hedge</td></tr>
-        <tr><td>🇪🇨 Ecuador</td><td class="r nm fw dn">850</td><td class="r nm dn">+~120</td><td><span class="bg spc">B-</span></td><td style="font-size:10px;color:var(--mt)">Publicly not available (paywall) · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">IMF programme; oil windfall; dollarized</td></tr>
-        <tr><td>⚠ 🇵🇰 Pakistan</td><td class="r nm fw dn">680</td><td class="r nm dn">+~60</td><td><span class="bg sd">CCC+</span></td><td style="font-size:10px;color:var(--mt)">Publicly not available (paywall) · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Iran border risk; IMF programme; PKR stable</td></tr>
-        <tr><td>⚠ 🇯🇴 Jordan</td><td class="r nm fw dn">380</td><td class="r nm dn">+~90</td><td><span class="bg spc">B+</span></td><td style="font-size:10px;color:var(--mt)">Publicly not available (paywall) · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Regional war spill-over; Gulf FX essential; peg pressure</td></tr>
+                <tr><td>🇪🇬 Egypt</td><td class="r nm fw dn">421.1</td><td class="r nm up">-14</td><td><span class="bg spc">B+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 1 Apr 2026</td><td style="font-size:10px;color:var(--mt)">Suez revenue −$1bn/mo; IMF programme; +31% 1-month</td></tr>
+        <tr><td>🇦🇷 Argentina</td><td class="r nm fw dn">489.83</td><td class="r nm mt">+0</td><td><span class="bg sd">CCC+</span></td><td style="font-size:10px;color:var(--mt)">Cbonds · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Milei reform traction; CDS in multi-year downtrend; Jan 31 489.83bp (Cbonds/ICE)</td></tr>
+        <tr><td>🇹🇷 Türkiye</td><td class="r nm fw dn">302.05</td><td class="r nm mt">+0</td><td><span class="bg sub">BB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 1 Apr 2026</td><td style="font-size:10px;color:var(--mt)">War proximity; energy import shock; +25% 1-month</td></tr>
+        <tr><td>🇲🇽 Mexico</td><td class="r nm fw">110.29</td><td class="r nm up">-2</td><td><span class="bg inv">BBB</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 1 Apr 2026</td><td style="font-size:10px;color:var(--mt)">US tariff risk; Banxico cutting; war-adjacent energy</td></tr>
+        <tr><td>🇧🇷 Brazil</td><td class="r nm fw">141.11</td><td class="r nm up">-2</td><td><span class="bg sub">BB+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 1 Apr 2026</td><td style="font-size:10px;color:var(--mt)">High rates; fiscal slippage; commodity hedge</td></tr>
+        <tr><td>🇪🇨 Ecuador</td><td class="r nm fw dn">850</td><td class="r nm mt">+0</td><td><span class="bg spc">B-</span></td><td style="font-size:10px;color:var(--mt)">Publicly not available (paywall) · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">IMF programme; oil windfall; dollarized</td></tr>
+        <tr><td>⚠ 🇵🇰 Pakistan</td><td class="r nm fw dn">680</td><td class="r nm mt">+0</td><td><span class="bg sd">CCC+</span></td><td style="font-size:10px;color:var(--mt)">Publicly not available (paywall) · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Iran border risk; IMF programme; PKR stable</td></tr>
+        <tr><td>⚠ 🇯🇴 Jordan</td><td class="r nm fw dn">380</td><td class="r nm mt">+0</td><td><span class="bg spc">B+</span></td><td style="font-size:10px;color:var(--mt)">Publicly not available (paywall) · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Regional war spill-over; Gulf FX essential; peg pressure</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="sec">
-    <div class="sec-h">USD Sovereign Bond Spreads (vs UST) — Portfolio Countries</div>
+    <div class="sec-h">USD Sovereign Bond Spreads and Implied Yields (vs UST) — Portfolio Countries</div>
+    <div class="src" style="margin-top:0">Sorted by largest 1M move so the biggest spread repricings surface first.</div>
+    <div class="hm"><div class="hc dn"><span class="hn">Egypt</span><span class="hv">+1011</span><span class="hr">5Y spread 1622.8bp · implied 20.51% · WorldGovernmentBonds · 31 Mar 2026</span></div><div class="hc dn"><span class="hn">Nigeria</span><span class="hv">+456</span><span class="hr">10Y spread 1053.9bp · implied 14.83% · WorldGovernmentBonds · 31 Mar 2026</span></div><div class="hc dn"><span class="hn">Pakistan</span><span class="hv">+362</span><span class="hr">5Y spread 842.4bp · implied 12.71% · WorldGovernmentBonds · 31 Mar 2026</span></div><div class="hc up"><span class="hn">Singapore</span><span class="hv">-321</span><span class="hr">10Y spread -208.5bp · implied 2.20% · WorldGovernmentBonds · 1 Apr 2026</span></div><div class="hc up"><span class="hn">Türkiye</span><span class="hv">-241</span><span class="hr">10Y spread 2684.7bp · implied 31.13% · WorldGovernmentBonds · 1 Apr 2026</span></div></div>
     <table class="t">
       <thead><tr>
-        <th>Country</th><th class="r">Tenor</th><th class="r">Spread (bps)</th><th class="r">Δ vs Dec-25</th><th>Rating</th><th>Source &amp; Date</th><th>Key Note</th>
+        <th>Country</th><th class="r">Tenor</th><th class="r">Spread (bps)</th><th class="r">Implied Yield %</th><th class="r">Δ 1M</th><th>Rating</th><th>Source &amp; Date</th><th>Key Note</th>
       </tr></thead>
       <tbody>
-                <tr><td>🇸🇬 Singapore</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#09823a">112.8</td><td class="r nm nm">flat</td><td><span class="bg aaa">AAA</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">AAA anchor; financial hub; MAS managed</td></tr>
-        <tr><td>🇲🇺 Mauritius</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#09823a">113.8</td><td class="r nm nm">flat</td><td><span class="bg inv">BBB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Stable financial hub; low political risk</td></tr>
-        <tr><td>🇹🇭 Thailand</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#09823a">119.7</td><td class="r nm dn">+~12</td><td><span class="bg inv">BBB+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Tourism recovery; supply chain hub; BOT dovish</td></tr>
-        <tr><td>🇨🇱 Chile</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#09823a">137.8</td><td class="r nm nm">flat</td><td><span class="bg aaa">A-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Copper hedge; rate cut cycle; anchor credit</td></tr>
-        <tr><td>🇺🇾 Uruguay</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">163</td><td class="r nm dn">+~20</td><td><span class="bg inv">BBB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Stable; diversified; low political risk</td></tr>
-        <tr><td>🇱🇹 Lithuania</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">175.7</td><td class="r nm up">−~5</td><td><span class="bg aaa">A+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">EU/NATO member; ECB rate sensitivity</td></tr>
-        <tr><td>🇵🇪 Peru</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">177.0</td><td class="r nm nm">flat</td><td><span class="bg inv">BBB+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Mining strength; very low debt; stable BoP</td></tr>
-        <tr><td>🇦🇿 Azerbaijan</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">199</td><td class="r nm dn">+~40</td><td><span class="bg sub">BB+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Oil exporter; war-adjacent but neutral</td></tr>
-        <tr><td>🇬🇹 Guatemala</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">228</td><td class="r nm dn">+~30</td><td><span class="bg sub">BB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Stable; remittance inflows; lowest debt in portfolio</td></tr>
-        <tr><td>🇩🇴 Dom. Rep.</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">259</td><td class="r nm dn">+~40</td><td><span class="bg sub">BB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Tourism-driven; strong growth momentum</td></tr>
-        <tr><td>🇷🇴 Romania</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">289.8</td><td class="r nm dn">+~45</td><td><span class="bg inv">BBB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">EU market access; fiscal deficit under scrutiny</td></tr>
-        <tr><td>🇺🇿 Uzbekistan</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">300</td><td class="r nm dn">+~60</td><td><span class="bg sub">BB+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Russia corridor risk; remittance-reliant</td></tr>
-        <tr><td>🇬🇪 Georgia</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">313</td><td class="r nm dn">+~55</td><td><span class="bg sub">BB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Fastest-growing EE; transit hub; tourism income</td></tr>
-        <tr><td>🇦🇲 Armenia</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">359</td><td class="r nm dn">+~70</td><td><span class="bg sub">BB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Russia re-export dynamics; corridor risk</td></tr>
-        <tr><td>🇲🇳 Mongolia</td><td style="text-align:center;font-size:10px;color:var(--mt)">5Y</td><td class="r nm fw" style="color:#c9590c">452</td><td class="r nm dn">+~70</td><td><span class="bg spc">B</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Mining cycle; China demand linkage</td></tr>
-        <tr><td>🇲🇽 Mexico</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">484.8</td><td class="r nm dn">+~28</td><td><span class="bg inv">BBB</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">US tariff uncertainty; Banxico cutting cycle</td></tr>
-        <tr><td>🇸🇻 El Salvador</td><td style="text-align:center;font-size:10px;color:var(--mt)">5Y</td><td class="r nm fw" style="color:#cc0000">513</td><td class="r nm dn">+~115</td><td><span class="bg spc">B-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">IMF deal; Bitcoin adoption; Bukele political stability</td></tr>
-        <tr><td>🇯🇴 Jordan</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#cc0000">517.7</td><td class="r nm dn">+~95</td><td><span class="bg spc">B+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">War proximity; Gulf aid dependency; fiscal deterioration</td></tr>
-        <tr><td>🇹🇿 Tanzania</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#cc0000">582</td><td class="r nm dn">+~120</td><td><span class="bg spc">B+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">East Africa growth; commodity diversified</td></tr>
-        <tr><td>🇦🇴 Angola</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#cc0000">690</td><td class="r nm dn">+~165</td><td><span class="bg spc">B-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Oil exporter; inflation persistent; AKP reform</td></tr>
-        <tr><td>🇵🇰 Pakistan</td><td style="text-align:center;font-size:10px;color:var(--mt)">5Y</td><td class="r nm fw" style="color:#cc0000">842.4</td><td class="r nm dn">+~100</td><td><span class="bg sd">CCC+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Iran border closure; IMF programme test</td></tr>
-        <tr><td>🇨🇴 Colombia</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#cc0000">846.8</td><td class="r nm dn">+~55</td><td><span class="bg sub">BB+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Oil partial hedge; Petro fiscal risk; high rates</td></tr>
-        <tr><td>🇪🇨 Ecuador</td><td style="text-align:center;font-size:10px;color:var(--mt)">5Y</td><td class="r nm fw" style="color:#cc0000">895</td><td class="r nm dn">+~290</td><td><span class="bg spc">B-</span></td><td style="font-size:10px;color:var(--mt)">Publicly not available (paywall)</td><td style="font-size:10px;color:var(--mt)">IMF programme; oil revenue windfall but credit risk elevated</td></tr>
-        <tr><td>🇧🇷 Brazil</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#cc0000">994.3</td><td class="r nm dn">+~45</td><td><span class="bg sub">BB+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">High rates; fiscal slippage; commodity hedge</td></tr>
-        <tr><td>🇳🇬 Nigeria</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#cc0000">1053.9</td><td class="r nm dn">+~165</td><td><span class="bg spc">B-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">Oil exporter; FX reform; inflationary pressure</td></tr>
-        <tr><td>🇦🇷 Argentina</td><td style="text-align:center;font-size:10px;color:var(--mt)">30Y</td><td class="r nm fw" style="color:#cc0000">1185</td><td class="r nm up">−~285</td><td><span class="bg sd">CCC+</span></td><td style="font-size:10px;color:var(--mt)">Publicly not available (paywall)</td><td style="font-size:10px;color:var(--mt)">Milei disinflation; IMF deal; reform credibility</td></tr>
-        <tr><td>🇪🇬 Egypt</td><td style="text-align:center;font-size:10px;color:var(--mt)">5Y</td><td class="r nm fw" style="color:#cc0000">1622.8</td><td class="r nm dn">+~240</td><td><span class="bg spc">B+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">War shock; Suez revenue loss; IMF dependent</td></tr>
-        <tr><td>🇹🇷 Türkiye</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#cc0000">2925.8</td><td class="r nm dn">+~85</td><td><span class="bg sub">BB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds</td><td style="font-size:10px;color:var(--mt)">CDS widening; energy import shock</td></tr>
+                <tr><td>🇪🇬 Egypt</td><td style="text-align:center;font-size:10px;color:var(--mt)">5Y</td><td class="r nm fw" style="color:#cc0000">1622.8</td><td class="r nm fw">20.51</td><td class="r nm dn">+1011</td><td><span class="bg spc">B+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 31 Mar 2026</td><td style="font-size:10px;color:var(--mt)">War shock; Suez revenue loss; IMF dependent</td></tr>
+        <tr><td>🇳🇬 Nigeria</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#cc0000">1053.9</td><td class="r nm fw">14.83</td><td class="r nm dn">+456</td><td><span class="bg spc">B-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 31 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Oil exporter; FX reform; inflationary pressure</td></tr>
+        <tr><td>🇵🇰 Pakistan</td><td style="text-align:center;font-size:10px;color:var(--mt)">5Y</td><td class="r nm fw" style="color:#cc0000">842.4</td><td class="r nm fw">12.71</td><td class="r nm dn">+362</td><td><span class="bg sd">CCC+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 31 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Iran border closure; IMF programme test</td></tr>
+        <tr><td>🇸🇬 Singapore</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#09823a">-208.5</td><td class="r nm fw">2.20</td><td class="r nm up">-321</td><td><span class="bg aaa">AAA</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 1 Apr 2026</td><td style="font-size:10px;color:var(--mt)">AAA anchor; financial hub; MAS managed</td></tr>
+        <tr><td>🇹🇷 Türkiye</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#cc0000">2684.7</td><td class="r nm fw">31.13</td><td class="r nm up">-241</td><td><span class="bg sub">BB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 1 Apr 2026</td><td style="font-size:10px;color:var(--mt)">CDS widening; energy import shock</td></tr>
+        <tr><td>🇱🇹 Lithuania</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">175.7</td><td class="r nm fw">6.04</td><td class="r nm dn">+118</td><td><span class="bg aaa">A+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 31 Mar 2026</td><td style="font-size:10px;color:var(--mt)">EU/NATO member; ECB rate sensitivity</td></tr>
+        <tr><td>🇲🇺 Mauritius</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#09823a">113.8</td><td class="r nm fw">5.42</td><td class="r nm up">-74</td><td><span class="bg inv">BBB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 31 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Stable financial hub; low political risk</td></tr>
+        <tr><td>🇧🇷 Brazil</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#cc0000">978.2</td><td class="r nm fw">14.07</td><td class="r nm up">-16</td><td><span class="bg sub">BB+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 1 Apr 2026</td><td style="font-size:10px;color:var(--mt)">High rates; fiscal slippage; commodity hedge</td></tr>
+        <tr><td>🇨🇴 Colombia</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#cc0000">859.4</td><td class="r nm fw">12.88</td><td class="r nm dn">+13</td><td><span class="bg sub">BB+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 1 Apr 2026</td><td style="font-size:10px;color:var(--mt)">Oil partial hedge; Petro fiscal risk; high rates</td></tr>
+        <tr><td>🇹🇭 Thailand</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#09823a">119.7</td><td class="r nm fw">5.48</td><td class="r nm dn">+7</td><td><span class="bg inv">BBB+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 31 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Tourism recovery; supply chain hub; BOT dovish</td></tr>
+        <tr><td>🇯🇴 Jordan</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#cc0000">521.6</td><td class="r nm fw">9.50</td><td class="r nm dn">+4</td><td><span class="bg spc">B+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 1 Apr 2026</td><td style="font-size:10px;color:var(--mt)">War proximity; Gulf aid dependency; fiscal deterioration</td></tr>
+        <tr><td>🇲🇽 Mexico</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">488.7</td><td class="r nm fw">9.17</td><td class="r nm dn">+4</td><td><span class="bg inv">BBB</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 1 Apr 2026</td><td style="font-size:10px;color:var(--mt)">US tariff uncertainty; Banxico cutting cycle</td></tr>
+        <tr><td>🇷🇴 Romania</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">286.4</td><td class="r nm fw">7.15</td><td class="r nm up">-3</td><td><span class="bg inv">BBB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 1 Apr 2026</td><td style="font-size:10px;color:var(--mt)">EU market access; fiscal deficit under scrutiny</td></tr>
+        <tr><td>🇵🇪 Peru</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">179.6</td><td class="r nm fw">6.08</td><td class="r nm dn">+3</td><td><span class="bg inv">BBB+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 1 Apr 2026</td><td style="font-size:10px;color:var(--mt)">Mining strength; very low debt; stable BoP</td></tr>
+        <tr><td>🇨🇱 Chile</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#09823a">138.4</td><td class="r nm fw">5.67</td><td class="r nm dn">+1</td><td><span class="bg aaa">A-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 1 Apr 2026</td><td style="font-size:10px;color:var(--mt)">Copper hedge; rate cut cycle; anchor credit</td></tr>
+        <tr><td>🇦🇷 Argentina</td><td style="text-align:center;font-size:10px;color:var(--mt)">30Y</td><td class="r nm fw" style="color:#cc0000">1185</td><td class="r nm fw">16.73</td><td class="r nm mt">+0</td><td><span class="bg sd">CCC+</span></td><td style="font-size:10px;color:var(--mt)">Publicly not available (paywall) · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Milei disinflation; IMF deal; reform credibility</td></tr>
+        <tr><td>🇪🇨 Ecuador</td><td style="text-align:center;font-size:10px;color:var(--mt)">5Y</td><td class="r nm fw" style="color:#cc0000">895</td><td class="r nm fw">13.24</td><td class="r nm mt">+0</td><td><span class="bg spc">B-</span></td><td style="font-size:10px;color:var(--mt)">Publicly not available (paywall) · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">IMF programme; oil revenue windfall but credit risk elevated</td></tr>
+        <tr><td>🇦🇴 Angola</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#cc0000">690</td><td class="r nm fw">11.19</td><td class="r nm mt">+0</td><td><span class="bg spc">B-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Oil exporter; inflation persistent; AKP reform</td></tr>
+        <tr><td>🇹🇿 Tanzania</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#cc0000">582</td><td class="r nm fw">10.11</td><td class="r nm mt">+0</td><td><span class="bg spc">B+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">East Africa growth; commodity diversified</td></tr>
+        <tr><td>🇸🇻 El Salvador</td><td style="text-align:center;font-size:10px;color:var(--mt)">5Y</td><td class="r nm fw" style="color:#cc0000">513</td><td class="r nm fw">9.42</td><td class="r nm mt">+0</td><td><span class="bg spc">B-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">IMF deal; Bitcoin adoption; Bukele political stability</td></tr>
+        <tr><td>🇲🇳 Mongolia</td><td style="text-align:center;font-size:10px;color:var(--mt)">5Y</td><td class="r nm fw" style="color:#c9590c">452</td><td class="r nm fw">8.81</td><td class="r nm mt">+0</td><td><span class="bg spc">B</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Mining cycle; China demand linkage</td></tr>
+        <tr><td>🇦🇲 Armenia</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">359</td><td class="r nm fw">7.88</td><td class="r nm mt">+0</td><td><span class="bg sub">BB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Russia re-export dynamics; corridor risk</td></tr>
+        <tr><td>🇬🇪 Georgia</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">313</td><td class="r nm fw">7.42</td><td class="r nm mt">+0</td><td><span class="bg sub">BB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Fastest-growing EE; transit hub; tourism income</td></tr>
+        <tr><td>🇺🇿 Uzbekistan</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">300</td><td class="r nm fw">7.29</td><td class="r nm mt">+0</td><td><span class="bg sub">BB+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Russia corridor risk; remittance-reliant</td></tr>
+        <tr><td>🇩🇴 Dom. Rep.</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">259</td><td class="r nm fw">6.88</td><td class="r nm mt">+0</td><td><span class="bg sub">BB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Tourism-driven; strong growth momentum</td></tr>
+        <tr><td>🇬🇹 Guatemala</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">228</td><td class="r nm fw">6.57</td><td class="r nm mt">+0</td><td><span class="bg sub">BB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Stable; remittance inflows; lowest debt in portfolio</td></tr>
+        <tr><td>🇦🇿 Azerbaijan</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">199</td><td class="r nm fw">6.28</td><td class="r nm mt">+0</td><td><span class="bg sub">BB+</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Oil exporter; war-adjacent but neutral</td></tr>
+        <tr><td>🇺🇾 Uruguay</td><td style="text-align:center;font-size:10px;color:var(--mt)">10Y</td><td class="r nm fw" style="color:#c9590c">163</td><td class="r nm fw">5.92</td><td class="r nm mt">+0</td><td><span class="bg inv">BBB-</span></td><td style="font-size:10px;color:var(--mt)">WorldGovernmentBonds · 19 Mar 2026</td><td style="font-size:10px;color:var(--mt)">Stable; diversified; low political risk</td></tr>
       </tbody>
     </table>
-    <p class="src">USD Eurobond yield spread over benchmark UST at tenor shown. Sources and dates are shown row-by-row. Data vintage: Mar 19–31, 2026. Δ vs Dec-25 = approximate change since end-2025; positive = widening (credit deterioration). Countries without liquid USD sovereign bonds — BD (World Bank/IDA borrower), VN (domestic VGB market), TG (WAEMU/XOF regional) — not included.</p>
+    <p class="src">Spread source: WorldGovernmentBonds where available (row-level source/date shown). Implied Yield = UST benchmark yield + spread. Data vintage: Mar 19–Apr 1, 2026 (EM benchmarks cutoff 19 Mar; EMB ETF 1 Apr). Δ 1M = latest minus approximately one month prior; positive = widening (credit deterioration). Countries without liquid USD sovereign bonds — BD (World Bank/IDA borrower), VN (domestic VGB market), TG (WAEMU/XOF regional) — not included.</p>
   </div>
 </div>
 
@@ -360,21 +388,21 @@ footer .fn-err{color:#ff8888}
   <div class="sec">
     <div class="sec-h">Energy &amp; Commodities</div>
     <table class="t"><thead><tr>
-      <th data-col="0" onclick="srt(this)">Instrument ⇕</th><th class="r" data-col="1" onclick="srt(this)">Last ⇕</th><th class="r" data-col="2" onclick="srt(this)">1D Chg ⇕</th><th>1Y Trend</th><th title="Bar shows current price position within the 52-week high/low range. Marker = today.">52-wk Range ⓘ</th><th>Note</th>
+      <th data-col="0" onclick="srt(this)">Instrument ⇕</th><th class="r" data-col="1" onclick="srt(this)">Last ⇕</th><th class="r" data-col="2" onclick="srt(this)">1D Chg ⇕</th><th>1Y Trend</th><th title="Bar shows current price position within the 52-week high/low range. Marker = today.">52-wk Range ⓘ</th><th>Source / Context</th>
     </tr></thead><tbody id="energyBody"></tbody></table>
     <p class="src">Sources: Investing.com real-time (Brent, WTI, Gold). TTF Natural Gas ≈Est. Investing.com.</p>
   </div>
   <div class="sec">
     <div class="sec-h">Rates &amp; Yields</div>
     <table class="t"><thead><tr>
-      <th data-col="0" onclick="srt(this)">Instrument ⇕</th><th class="r" data-col="1" onclick="srt(this)">Last ⇕</th><th class="r" data-col="2" onclick="srt(this)">1D Chg ⇕</th><th>1Y Trend</th><th title="Bar shows yield level within its 52-week high/low range.">52-wk Range ⓘ</th><th>Note</th>
+      <th data-col="0" onclick="srt(this)">Instrument ⇕</th><th class="r" data-col="1" onclick="srt(this)">Last ⇕</th><th class="r" data-col="2" onclick="srt(this)">1D Chg ⇕</th><th>1Y Trend</th><th title="Bar shows yield level within its 52-week high/low range.">52-wk Range ⓘ</th><th>Source / Context</th>
     </tr></thead><tbody id="ratesBody"></tbody></table>
-    <p class="src">Sources: CNBC real-time (UST 10Y, UST 30Y). Federal Reserve / TradingEconomics (Fed Funds Rate).</p>
+    <p class="src">Rates &amp; Yields taxonomy: UST 2Y/10Y/30Y are market yields (secondary market benchmarks). Fed Funds is a policy rate setting. Sources: CNBC/Tradeweb (UST yields), Federal Reserve / TradingEconomics (Fed Funds).</p>
   </div>
   <div class="sec">
     <div class="sec-h">Equities &amp; Volatility</div>
     <table class="t"><thead><tr>
-      <th data-col="0" onclick="srt(this)">Instrument ⇕</th><th class="r" data-col="1" onclick="srt(this)">Last ⇕</th><th class="r" data-col="2" onclick="srt(this)">1D Chg ⇕</th><th>1Y Trend</th><th title="Bar shows index level within its 52-week high/low range.">52-wk Range ⓘ</th><th>Note</th>
+      <th data-col="0" onclick="srt(this)">Instrument ⇕</th><th class="r" data-col="1" onclick="srt(this)">Last ⇕</th><th class="r" data-col="2" onclick="srt(this)">1D Chg ⇕</th><th>1Y Trend</th><th title="Bar shows index level within its 52-week high/low range.">52-wk Range ⓘ</th><th>Source / Context</th>
     </tr></thead><tbody id="equityBody"></tbody></table>
     <p class="src">Sources: MarketWatch real-time (S&amp;P 500, Dow Jones, VIX), MarketWatch (STOXX 600).</p>
   </div>
@@ -383,7 +411,7 @@ footer .fn-err{color:#ff8888}
 <!-- ═══════════════════ EM MARKETS ═══════════════════ -->
 <div id="p-em" class="pnl">
   <div class="sec">
-    <div class="sec-h">Emerging Markets <span style="font-size:10px;color:var(--mt);font-weight:400">(Cutoff 30 Mar 2026)</span></div>
+    <div class="sec-h">Emerging Markets <span style="font-size:10px;color:var(--mt);font-weight:400">(Cutoff 19 Mar 2026)</span></div>
     <table class="t">
       <thead><tr>
         <th data-col="0" onclick="srt(this)">Yields / Spreads ⇕</th>
@@ -419,7 +447,7 @@ footer .fn-err{color:#ff8888}
         <tr><td><strong>GBI-EM US$ Return</strong></td><td class="r nm fw">—</td><td class="r nm up">+0.57%</td><td class="r nm">-1.90%</td><td class="r nm">-3.38%</td><td class="r nm">-0.52%</td><td class="r nm">—</td></tr>
         <tr><td><strong>CEMBI Return</strong></td><td class="r nm fw">—</td><td class="r nm up">+0.04%</td><td class="r nm">-0.33%</td><td class="r nm">-0.79%</td><td class="r nm">+0.41%</td><td class="r nm">—</td></tr>
         <tr><td><strong>ELMI+</strong></td><td class="r nm fw">—</td><td class="r nm up">+0.47%</td><td class="r nm">-0.86%</td><td class="r nm">-1.51%</td><td class="r nm">+0.42%</td><td class="r nm">—</td></tr>
-        <tr><td><strong>EMB iShares ETF</strong></td><td class="r nm fw">$93.55</td><td class="r nm up">+0.47%</td><td class="r nm">—</td><td class="r nm">—</td><td class="r nm">—</td><td class="r nm">$93.11</td></tr>
+        <tr><td><strong>EMB iShares ETF</strong></td><td class="r nm fw">$93.93</td><td class="r nm up">+0.88%</td><td class="r nm">—</td><td class="r nm">—</td><td class="r nm">—</td><td class="r nm">$93.11</td></tr>
       </tbody>
     </table>
   </div>
@@ -433,11 +461,11 @@ footer .fn-err{color:#ff8888}
     <div class="mbf">
       <p>When oil, bond yields, and credit spreads move in the same direction simultaneously, it typically signals a regime shift. That alignment is now in place. The Iran conflict has pushed energy back to the centre of the macro conversation. When oil moves 40%+ in under two weeks, financial markets do not adjust linearly — they re-price the entire distribution of outcomes.</p>
       <h3><span class="sn">1.</span> Oil is now the primary macro variable.</h3>
-      <p>Brent surged from ~$68 to $119.50 in ten sessions before partially retracing to $99. The Hormuz closure has removed approximately 20 million barrels per day of global transit capacity. This is not a risk premium — it is a physical supply shock. The Brent futures curve is in steep backwardation ($99 spot vs ~$86 for Sep), which tells you the market is pricing a short-duration disruption. If that assumption is wrong, the entire curve reprices higher.</p>
+      <p>Brent surged from ~$68 to $119.50 in ten sessions before partially retracing toward $102 on 1 Apr. The Hormuz disruption has kept a material share of global transit capacity at risk. This is not just a risk premium — it is a physical supply shock. The futures curve still points to markets pricing a short-duration disruption; if that assumption proves wrong, the entire curve reprices higher.</p>
       <h3><span class="sn">2.</span> Bond markets are repricing the inflation path, not growth risk.</h3>
-      <p>US 10-year yields are at 4.257% in a week when the economy shed jobs and global risk-off would normally drive safe-haven buying. Breakeven inflation has jumped. The market is telling you that even with weakening economic data, the Fed cannot cut into an energy-driven inflation impulse. Rate cut expectations have collapsed. This creates the textbook stagflation combination: tighter financial conditions meeting weaker growth.</p>
+      <p>US 10-year yields are holding near 4.29% even as ceasefire hopes briefly improved risk sentiment. Breakeven inflation remains elevated. The market is still telling you that even with softer growth data, the Fed cannot ease cleanly into an energy-driven inflation impulse. That leaves the textbook stagflation mix in place: tighter financial conditions meeting weaker growth.</p>
       <h3><span class="sn">3.</span> EM credit is in the early stages of systematic repricing.</h3>
-      <p>EMBI+ spreads widened ~50bps in a week. Egypt CDS at 371bps (+27% 1-month). Turkey CDS at 250bps, war-proximity embedded. When credit, rates, and commodities align directionally, the macro environment has shifted. 7 of 10 scenario signals are now in Adverse or Tail territory. What matters now is <em>duration</em> — and that is determined by geopolitics, not economics.</p>
+      <p>EMBI+ proxy levels have eased back toward ~267bps, but war-core sovereign stress remains elevated: Egypt CDS is ~421bps and Turkey CDS is ~302bps. Relief in global beta has not normalised the countries closest to the conflict. What matters now is <em>duration</em> — and that is determined by geopolitics, not economics.</p>
       <div class="kl">None of these signals individually point to a crisis. But their simultaneous alignment points to a regime shift. The portfolio's 26.1% war-core cluster (TRY + EGP + JOD) and 13.1% corridor cluster (UZ + GE + AM) are the primary transmission nodes. The 12.8% oil-exporter hedge cluster is the partial offset. Duration is the swing variable.</div>
     </div>
   </div>
@@ -445,17 +473,17 @@ footer .fn-err{color:#ff8888}
   <div class="sec">
     <div class="sec-h">Transmission Channels — How the Shock Propagates to the Portfolio</div>
     <div class="txch">
-      <div class="txb"><div class="txn" style="color:var(--dn)">1. Energy → Inflation</div><p>Oil at $99 feeds through to headline CPI within 4–6 weeks via gasoline, jet fuel, petrochemicals, fertiliser, and food transport. Turkey imports ~93% of oil — energy import bill up ~$20bn annualised. Egypt gas import costs doubling. This channel is mechanical and unavoidable for oil-importing portfolio countries.</p></div>
+      <div class="txb"><div class="txn" style="color:var(--dn)">1. Energy → Inflation</div><p>Oil still above $100 feeds through to headline CPI within 4–6 weeks via gasoline, jet fuel, petrochemicals, fertiliser, and food transport. Turkey imports ~93% of oil; Egypt remains exposed through gas and fuel costs. This channel is mechanical and unavoidable for oil-importing portfolio countries.</p></div>
       <div class="txb"><div class="txn" style="color:var(--wn)">2. Inflation → CB Paralysis</div><p>Turkey CBRT faces stagflation: rising imported inflation vs slowing domestic growth. Egypt CBE constrained by IMF programme. Pakistan SBP trapped by balance of payments. The classic EM trilemma (defend FX, fight inflation, support growth — pick one) is acute for the three highest-risk portfolio clusters.</p></div>
-      <div class="txb"><div class="txn" style="color:var(--dn)">3. Tighter Conditions → EM Capital Flows</div><p>US higher-for-longer + stronger DXY (100+) compresses EM dollar liquidity. EM central banks that defend their currencies burn reserves. Those that don't see FX depreciation (TRY key: 14.5% wt, EGP key: 8.7% wt). The feedback loop: wider spreads → more capital flight → weaker FX → more inflation → wider spreads.</p></div>
-      <div class="txb"><div class="txn" style="color:var(--dn)">4. FX Depreciation → Portfolio FX Impact</div><p>TRY at 44.19 — Adverse entry (47–50 range). EGP 1-month change +11.9% — already Tail signal. These are the two largest positions (14.5% + 8.7% = 23.2% combined). A 10% further TRY depreciation alone costs ~1.45% of portfolio value. Corridor cluster (UZ, GE, AM) faces secondary pressure via disrupted remittance and trade flows.</p></div>
-      <div class="txb"><div class="txn" style="color:var(--up)">5. Oil Exporters → Natural Hedge</div><p>Ecuador (7.2%), Nigeria (1.4%), Angola (1.4%), Azerbaijan (1.4%), Colombia (1.4%) = 12.8% of portfolio. At $99+ oil, fiscal positions improve, Eurobond credit compresses, spread tightening partially offsets war-core losses. Ecuador dollarised — no FX risk, pure credit play. Angola and Nigeria benefit on a ~$1bn additional revenue per $10 oil move.</p></div>
-      <div class="txb"><div class="txn" style="color:var(--wn)">6. Global Risk-Off → EM-Wide Contagion</div><p>Even insulated positions (MX, CL, BR, VN, SG) face second-order pressure from DXY strength and risk-appetite contraction. UST 10Y higher-for-longer raises the discount rate on all EM credit. EMBI+ 485bps compresses valuation on all 69 positions. Singapore (AAA) and Lithuania (A+) anchor the portfolio; LatAm exposure largely rides out global risk-off without war-specific transmission.</p></div>
+      <div class="txb"><div class="txn" style="color:var(--dn)">3. Tighter Conditions → EM Capital Flows</div><p>Even with DXY easing toward 99.5, the broader higher-for-longer backdrop still compresses EM dollar liquidity. EM central banks that defend their currencies burn reserves. Those that do not see FX depreciation in the war-core cluster. The feedback loop remains the same: wider spreads → capital flight → weaker FX → more inflation → wider spreads.</p></div>
+      <div class="txb"><div class="txn" style="color:var(--dn)">4. FX Depreciation → Portfolio FX Impact</div><p>TRY is at 44.53 and EGP at 54.57. That is off the late-March extremes, but still above base-case comfort levels for the two largest positions (14.5% + 8.7% = 23.2% combined). A 10% further TRY depreciation alone still costs ~1.45% of portfolio value. Corridor cluster (UZ, GE, AM) faces secondary pressure via disrupted remittance and trade flows.</p></div>
+      <div class="txb"><div class="txn" style="color:var(--up)">5. Oil Exporters → Natural Hedge</div><p>Ecuador (7.2%), Nigeria (1.4%), Angola (1.4%), Azerbaijan (1.4%), Colombia (1.4%) = 12.8% of portfolio. With oil still above $100, fiscal positions improve and spread tightening partially offsets war-core losses. Ecuador is dollarised, so this remains a pure credit play; Angola and Nigeria still benefit materially from higher oil revenues.</p></div>
+      <div class="txb"><div class="txn" style="color:var(--wn)">6. Global Risk-Off → EM-Wide Contagion</div><p>Even insulated positions (MX, CL, BR, VN, SG) still face second-order pressure from a firm dollar backdrop and restrictive U.S. rates. The EMBI+ proxy is holding near 267bps rather than the late-March spike, but war-core stress remains elevated. Singapore (AAA) and Lithuania (A+) anchor the portfolio; LatAm exposure still rides out global risk-off better than war-adjacent holdings.</p></div>
     </div>
   </div>
 
   <div class="sec">
-    <div class="sec-h">Scenario Framework — Iran War Regional Impact on Portfolio (31 Mar 2026)</div>
+    <div class="sec-h">Scenario Framework — Iran War Regional Impact on Portfolio (1 Apr 2026)</div>
     <div class="scards">
 
       <div class="sc bs">
@@ -539,20 +567,21 @@ footer .fn-err{color:#ff8888}
   <div class="sec">
     <div class="sec-h">Current Signals vs. Scenario Thresholds</div>
     <table class="t">
-      <thead><tr><th>Signal</th><th>Current (31 Mar)</th><th style="color:var(--up)">Base</th><th style="color:var(--wn)">Adverse</th><th style="color:var(--dn)">Tail</th><th>Status</th></tr></thead>
+      <thead><tr><th>Signal</th><th>Current (1 Apr)</th><th style="color:var(--up)">Base</th><th style="color:var(--wn)">Adverse</th><th style="color:var(--dn)">Tail</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td>Brent Crude</td><td class="nm">$99.11</td><td class="nm mt">$80–95</td><td class="nm" style="color:var(--wn)">$100–120</td><td class="nm dn">$150+</td><td><span class="bg sub">ADV ENTRY</span></td></tr>
-        <tr><td>USD/TRY (key: 14.5% wt)</td><td class="nm dn">44.19</td><td class="nm mt">41–43</td><td class="nm" style="color:var(--wn)">47–50</td><td class="nm dn">52+</td><td><span class="bg sub">ADV ENTRY</span></td></tr>
-        <tr><td>USD/EGP (key: 8.7% wt)</td><td class="nm dn">52.44</td><td class="nm mt">49–52</td><td class="nm" style="color:var(--wn)">57–62</td><td class="nm dn">65+</td><td><span class="bg sub">ADV ENTRY</span></td></tr>
-        <tr><td>Egypt CDS 5Y (bps)</td><td class="nm dn">371</td><td class="nm mt">&lt;320</td><td class="nm" style="color:var(--wn)">500–700</td><td class="nm dn">1,000+</td><td><span class="bg sub">ADV ENTRY</span></td></tr>
-        <tr><td>Turkey CDS 5Y (bps)</td><td class="nm">250</td><td class="nm mt">&lt;220</td><td class="nm" style="color:var(--wn)">320–380</td><td class="nm dn">600+</td><td><span class="bg sub">ADV ENTRY</span></td></tr>
-        <tr><td>VIX</td><td class="nm">27.08</td><td class="nm mt">&lt;22</td><td class="nm" style="color:var(--wn)">22–40</td><td class="nm dn">40+</td><td><span class="bg sub">ADV RANGE</span></td></tr>
+        <tr><td>Brent Crude</td><td class="nm">$102.16</td><td class="nm mt">$80–95</td><td class="nm" style="color:var(--wn)">$100–120</td><td class="nm dn">$150+</td><td><span class="bg sub">ADV ENTRY</span></td></tr>
+        <tr><td>USD/TRY (key: 14.5% wt)</td><td class="nm dn">44.53</td><td class="nm mt">41–43</td><td class="nm" style="color:var(--wn)">47–50</td><td class="nm dn">52+</td><td><span class="bg sd">WATCH</span></td></tr>
+        <tr><td>USD/EGP (key: 8.7% wt)</td><td class="nm dn">54.57</td><td class="nm mt">49–52</td><td class="nm" style="color:var(--wn)">57–62</td><td class="nm dn">65+</td><td><span class="bg sub">ADV WATCH</span></td></tr>
+        <tr><td>Egypt CDS 5Y (bps)</td><td class="nm dn">421</td><td class="nm mt">&lt;320</td><td class="nm" style="color:var(--wn)">500–700</td><td class="nm dn">1,000+</td><td><span class="bg sd">WATCH</span></td></tr>
+        <tr><td>Turkey CDS 5Y (bps)</td><td class="nm dn">302</td><td class="nm mt">&lt;220</td><td class="nm" style="color:var(--wn)">320–380</td><td class="nm dn">600+</td><td><span class="bg sd">WATCH</span></td></tr>
+        <tr><td>VIX</td><td class="nm">24.30</td><td class="nm mt">&lt;22</td><td class="nm" style="color:var(--wn)">22–40</td><td class="nm dn">40+</td><td><span class="bg sub">ADV RANGE</span></td></tr>
+        <tr><td>EMBI+ Spread</td><td class="nm">~267bps</td><td class="nm mt">&lt;440bps</td><td class="nm" style="color:var(--wn)">440–600bps</td><td class="nm dn">600bps+</td><td><span class="bg sd">BASE RANGE</span></td></tr>
         <tr><td>USD/EGP 1-Month Chg</td><td class="nm dn">+11.9%</td><td class="nm mt">&lt;2%</td><td class="nm" style="color:var(--wn)">2–8%</td><td class="nm dn">&gt;8%</td><td><span class="bg spc">TAIL SIGNAL</span></td></tr>
-        <tr><td>Strait of Hormuz</td><td class="nm dn">Effectively Closed</td><td class="nm up">Open</td><td class="nm" style="color:var(--wn)">Partially Open</td><td class="nm dn">Blocked months</td><td><span class="bg spc">TAIL SIGNAL</span></td></tr>
-        <tr><td>Gold (safe-haven bid)</td><td class="nm dn">$5,093</td><td class="nm mt">&lt;$4,900</td><td class="nm" style="color:var(--wn)">$4,900–6,000</td><td class="nm dn">$6,000+</td><td><span class="bg sub">ADV RANGE</span></td></tr>
+        <tr><td>Strait of Hormuz</td><td class="nm" style="color:var(--wn)">Partially Open</td><td class="nm up">Open</td><td class="nm" style="color:var(--wn)">Partially Open</td><td class="nm dn">Blocked months</td><td><span class="bg sub">ADV STATE</span></td></tr>
+        <tr><td>Gold (safe-haven bid)</td><td class="nm">$4,769</td><td class="nm mt">&lt;$4,900</td><td class="nm" style="color:var(--wn)">$4,900–6,000</td><td class="nm dn">$6,000+</td><td><span class="bg sd">BASE RANGE</span></td></tr>
       </tbody>
     </table>
-    <p style="font-size:10px;color:var(--mt);margin-top:4px">7 of 10 signals are in Adverse or Tail territory. USD/EGP 1-month change and Hormuz status are the two Tail signals. Oil price is at the Adverse entry threshold.</p>
+    <p style="font-size:10px;color:var(--mt);margin-top:4px">Relief from the late-March extremes has lowered oil and volatility, but Brent, VIX, and war-core FX still sit outside base-case comfort levels.</p>
   </div>
 
   <div class="sec">
@@ -589,10 +618,11 @@ footer .fn-err{color:#ff8888}
 
 
 <footer>
-  <strong>Reference Date:</strong> 31 Mar 2026 &nbsp;|&nbsp; <strong>Data Vintage:</strong> Mar 19–31, 2026 (varies by category)<br>
+  <strong>Reference Date:</strong> 1 Apr 2026 &nbsp;|&nbsp; <strong>Data Vintage:</strong> Mar 19–Apr 1, 2026 (EM benchmarks cutoff 19 Mar; EMB ETF 1 Apr) (varies by category)<br>
+  <strong>Use Restriction:</strong> Internal beta only. Not approved for PM reports or external publication until source and methodology governance is signed off.<br>
   <strong>Commodities:</strong> Investing.com, Reuters, CNBC — latest available snapshot &nbsp;|&nbsp; <strong>Rates:</strong> US Treasury, CNBC, TradingEconomics — latest available &nbsp;|&nbsp; <strong>FX:</strong> Investing.com, Morningstar, TradingEconomics, Internet FX feed (fallback) — latest available &nbsp;|&nbsp; <strong>Equities:</strong> MarketWatch, CNBC, Investing.com, Yahoo Finance — latest available<br>
   <strong>CDS:</strong> Source/date shown row-by-row in SOVEREIGN RISK. <span class="fn-err"><strong>Pakistan &amp; Jordan: no liquid CDS market</strong></span> — values shown are Eurobond spread vs UST proxies; <span class="fn-err">NOT CDS quotes. Requires Bloomberg / IHS Markit terminal for real-time CDS.</span><br>
-  <strong>EM Markets:</strong> JPMorgan/Bloomberg, EMB ETF proxy, CEMBI proxy, and iShares EMB ETF where applicable. &nbsp;|&nbsp; <strong>Macro / Global Market Detail:</strong> Section-level source notes identify the exact series sources used for each variable.<br>
+  <strong>EM Markets:</strong> JPMorgan/Bloomberg, EMB ETF proxy, CEMBI proxy, and iShares EMB ETF where applicable. &nbsp;|&nbsp; <strong>Definitions:</strong> USD sovereign spread = Eurobond yield spread vs benchmark UST tenor shown. 1Y trend color is independent from 1D move color.<br>
   <span class="fn-err"><strong>NOT available without terminal:</strong></span> Real-time CDS, EMBI+/CEMBI daily, CDX EM, iTraxx, NDF/forward FX, OVX/MOVE real-time.<br>
   <span style="color:rgba(255,255,255,.28)">Not investment advice · Internal research use only · ILX Market Intelligence Terminal</span>
 </footer>
@@ -628,7 +658,7 @@ function srt(th){
   setTimeout(tick,1000);
 })();
 
-function spark(vs,green){
+function spark(vs,trendPct){
   if(!vs||vs.length<2)return'<span style="color:#999">—</span>';
   const mn=Math.min(...vs),mx=Math.max(...vs),rng=mx-mn||1,n=vs.length;
   const W=220,H=52;
@@ -636,9 +666,11 @@ function spark(vs,green){
   const cw=W-pl-pr,ch=H-pt-pb;
   const pts=vs.map((v,i)=>[+(pl+(i/(n-1))*cw).toFixed(1),+(pt+ch-((v-mn)/rng*ch)).toFixed(1)]);
   const pStr=pts.map(p=>p[0]+','+p[1]).join('L');
-  const c=green?'#09823a':'#cc0000';
-  const yoy=((vs[n-1]-vs[0])/Math.abs(vs[0]||1)*100).toFixed(1);
-  const sgn=+yoy>=0?'+':'';
+  const implied=((vs[n-1]-vs[0])/Math.abs(vs[0]||1)*100);
+  const trend=Number.isFinite(trendPct)?trendPct:implied;
+  const c=trend>=0?'#09823a':'#cc0000';
+  const yoy=trend.toFixed(1);
+  const sgn=trend>=0?'+':'';
   // 3 horizontal gridlines
   const grids=[0,0.5,1].map(f=>{
     const y=+(pt+f*ch).toFixed(1);
@@ -662,10 +694,10 @@ function cdsBars(){
   const items=[
 
   {c:"Argentina",v:490,live:true},
-  {c:"Egypt",v:435,live:true},
+  {c:"Egypt",v:421,live:true},
   {c:"T\u00fcrkiye",v:302,live:true},
-  {c:"Brazil",v:143,live:true},
-  {c:"Mexico",v:112,live:true}
+  {c:"Brazil",v:141,live:true},
+  {c:"Mexico",v:110,live:true}
 
   ];
   const W=700,barH=20,gap=4,pad={t:10,b:28,l:90,r:80};
@@ -701,10 +733,10 @@ function rbar(v,lo,hi){
   const W=96,pct=Math.max(0,Math.min(1,(v-lo)/(hi-lo||1))),px=(2+pct*(W-4)).toFixed(1);
   return `<div style="display:flex;align-items:center;gap:5px"><svg width="${W}" height="12" style="vertical-align:middle;flex-shrink:0"><rect x="2" y="4" width="${W-4}" height="4" rx="2" fill="#d4c9bc"/><rect x="${px}" y="2" width="2" height="8" fill="#33302e" rx="1"/></svg><span style="font-family:DM Mono,monospace;font-size:9px;color:#999;white-space:nowrap">${Math.round(pct*100)}%</span></div>`;
 }
-function mkRow(nm,last,unit,chg,vs,lo,hi,xtra){
+function mkRow(nm,last,unit,chg,trend,vs,lo,hi,xtra){
   const c=chg>=0?'#09823a':'#cc0000',s=chg>0?'+':'';
   const lf=typeof last==='number'&&last>=1000?last.toLocaleString('en-US',{maximumFractionDigits:2}):typeof last==='number'?last:last;
-  const sp=vs&&vs.length>1?spark(vs,chg>=0):'<span style="color:#999">—</span>';
+  const sp=vs&&vs.length>1?spark(vs,trend):'<span style="color:#999">—</span>';
   const rb=lo!==null&&lo!==undefined?rbar(last,lo,hi):'<span style="color:#999">—</span>';
   return `<tr><td style="padding:5px 6px">${nm}</td><td style="text-align:right;padding:5px 6px;font-family:DM Mono,monospace;font-weight:600">${unit}${lf}</td><td style="text-align:right;padding:5px 6px;font-family:DM Mono,monospace;color:${c}">${s}${Math.abs(chg).toFixed(2)}% ${chg<0?'▼':'▲'}</td><td style="padding:5px 6px">${sp}</td><td style="padding:5px 6px;min-width:135px">${rb}</td><td style="padding:5px 6px;font-size:10px;color:#888">${xtra||''}</td></tr>`;
 }
@@ -712,71 +744,71 @@ function mkRow(nm,last,unit,chg,vs,lo,hi,xtra){
 // ─── GLOBAL MARKETS DATA ────────────────────────────────────────────────────
 const EN=[
 
-  {n:"Brent Crude",last:118.99,u:"$",chg:5.51,vs:[71.3,74.2,69.6,72.1,73.0,70.8,72.1,68.5,99.11,102.2,101.24,114.75,118.99],lo:58.4,hi:119.5,x:"$/bbl \u00b7 war premium rebuild (CNBC)"},
-  {n:"WTI Crude",last:104.59,u:"$",chg:1.66,vs:[67.2,70.0,65.8,68.0,69.2,67.1,68.3,64.8,93.6,94.33,94.73,95.43,104.59],lo:54.98,hi:119.48,x:"$/bbl \u00b7 war premium rebuild (CNBC)"},
-  {n:"TTF Nat. Gas",last:50.235001,u:"\u20ac",chg:-8.35,vs:[30,32,35,40,43,45,48,52,68,62,51.45,62.145,50.235001],lo:24.0,hi:115.0,x:"\u20ac/MWh \u00b7 Yahoo Finance 31 Mar 2026"},
-  {n:"Gold (XAU)",last:4651.0,u:"$",chg:2.76,vs:[3180,3350,3580,3820,3990,4210,4490,4780,5093.39,4995.46,5012.9,4704.64,4651.0],lo:2820.0,hi:5320.0,x:"$/troy oz \u00b7 haven bid held firm"}
+  {n:"Brent Crude",last:102.16,u:"$",chg:-1.74,trend:37.68194070080861,vs:[74.2,69.6,72.1,73.0,70.8,72.1,68.5,99.11,102.2,101.24,114.75,118.99,102.16],lo:58.4,hi:119.5,x:"$/bbl \u00b7 CNBC 1 Apr 2026"},
+  {n:"WTI Crude",last:99.14,u:"$",chg:-2.21,trend:41.62857142857143,vs:[70.0,65.8,68.0,69.2,67.1,68.3,64.8,93.6,94.33,94.73,95.43,104.59,99.14],lo:54.98,hi:119.48,x:"$/bbl \u00b7 CNBC 1 Apr 2026"},
+  {n:"TTF Nat. Gas",last:48.41,u:"\u20ac",chg:-4.62,trend:51.281249999999986,vs:[32,35,40,43,45,48,52,68,62,51.45,62.145,50.235001,48.41],lo:24.0,hi:115.0,x:"\u20ac/MWh \u00b7 Yahoo Finance 1 Apr 2026"},
+  {n:"Gold (XAU)",last:4769.2,u:"$",chg:2.62,trend:42.36417910447761,vs:[3350,3580,3820,3990,4210,4490,4780,5093.39,4995.46,5012.9,4704.64,4651.0,4769.2],lo:2820.0,hi:5320.0,x:"$/troy oz \u00b7 Yahoo Finance 1 Apr 2026"}
 
 ];
 const RT=[
 
-  {n:"UST 10Y",last:4.33,u:"",chg:-0.28,vs:[4.18,4.05,3.92,4.12,4.28,4.35,4.42,4.48,4.257,4.243,4.198,4.198,4.33],lo:3.86,hi:4.63,x:"CNBC/Tradeweb 31 Mar 2026"},
-  {n:"UST 30Y",last:4.914,u:"",chg:0.16,vs:[4.42,4.38,4.25,4.38,4.52,4.62,4.68,4.8,4.889,4.88,4.848,4.848,4.914],lo:4.32,hi:5.16,x:"CNBC/Tradeweb 31 Mar 2026"},
-  {n:"Fed Funds Rate",last:3.75,u:"",chg:0.0,vs:[4.25,4.25,4.25,4.25,4.25,4.25,4.0,4.0,4.0,3.75,3.75,3.75,3.75],lo:3.25,hi:4.5,x:"2s10s spread +53bps"}
+  {n:"UST 10Y",last:4.287,u:"",chg:-0.56,trend:5.851851851851855,vs:[4.05,3.92,4.12,4.28,4.35,4.42,4.48,4.257,4.243,4.198,4.198,4.33,4.287],lo:3.86,hi:4.63,x:"CNBC/Tradeweb 1 Apr 2026"},
+  {n:"UST 30Y",last:4.883,u:"",chg:-0.18,trend:11.484018264840186,vs:[4.38,4.25,4.38,4.52,4.62,4.68,4.8,4.889,4.88,4.848,4.848,4.914,4.883],lo:4.32,hi:5.16,x:"CNBC/Tradeweb 1 Apr 2026"},
+  {n:"Fed Funds Rate",last:3.75,u:"",chg:0.0,trend:-11.76470588235294,vs:[4.25,4.25,4.25,4.25,4.25,4.25,4.0,4.0,4.0,3.75,3.75,3.75,3.75],lo:3.25,hi:4.5,x:"2s10s spread +53bps"}
 
 ];
 const EQ=[
 
-  {n:"S&P 500",last:6427.81,u:"",chg:1.33,vs:[5650,5820,5580,5740,5850,5920,6150,6410,6672.62,6693.26,6730.19,6624.7,6427.81],lo:5050.0,hi:6940.0,x:"S&P close 31 Mar \u00b7 month-end rebound"},
-  {n:"STOXX 600",last:583.14,u:"",chg:0.41,vs:[480,475,488,502,512,518,525,535,545,558,582,587.77,583.14],lo:460.0,hi:636.16,x:"STOXX 600 close 31 Mar \u00b7 Yahoo Finance"},
-  {n:"Dow Jones",last:45659.94,u:"",chg:0.98,vs:[35100,34200,35400,36800,38200,36500,37800,38500,39200,42100,45200,46225.15,45659.94],lo:32800.0,hi:48500.0,x:"Dow close 31 Mar \u00b7 Yahoo Finance"},
-  {n:"VIX",last:27.62,u:"",chg:-9.77,vs:[15.0,17.5,14.8,19.2,16.5,14.2,15.8,19.0,27.08,24.46,22.29,25.41,27.62],lo:13.38,hi:60.13,x:"Cboe VIX \u00b7 Yahoo Finance"}
+  {n:"S&P 500",last:6528.52,u:"",chg:2.91,trend:12.173883161512036,vs:[5820,5580,5740,5850,5920,6150,6410,6672.62,6693.26,6730.19,6624.7,6427.81,6528.52],lo:5050.0,hi:6940.0,x:"S&P close 1 Apr \u00b7 Yahoo Finance"},
+  {n:"STOXX 600",last:597.35,u:"",chg:2.44,trend:25.757894736842108,vs:[475,488,502,512,518,525,535,545,558,582,587.77,583.14,597.35],lo:460.0,hi:636.16,x:"STOXX 600 close 1 Apr \u00b7 Yahoo Finance"},
+  {n:"Dow Jones",last:46341.51,u:"",chg:2.49,trend:35.50149122807018,vs:[34200,35400,36800,38200,36500,37800,38500,39200,42100,45200,46225.15,45659.94,46341.51],lo:32800.0,hi:48500.0,x:"Dow close 1 Apr \u00b7 Yahoo Finance"},
+  {n:"VIX",last:24.3,u:"",chg:-3.76,trend:38.85714285714286,vs:[17.5,14.8,19.2,16.5,14.2,15.8,19.0,27.08,24.46,22.29,25.41,27.62,24.3],lo:13.38,hi:60.13,x:"Cboe VIX \u00b7 Yahoo Finance 1 Apr 2026"}
 
 ];
-document.getElementById('energyBody').innerHTML=EN.map(d=>mkRow(d.n,d.last,d.u,d.chg,d.vs,d.lo,d.hi,d.x)).join('');
-document.getElementById('ratesBody').innerHTML=RT.map(d=>mkRow(d.n,d.last,d.u,d.chg,d.vs,d.lo,d.hi,d.x)).join('');
-document.getElementById('equityBody').innerHTML=EQ.map(d=>mkRow(d.n,d.last,d.u,d.chg,d.vs,d.lo,d.hi,d.x)).join('');
+document.getElementById('energyBody').innerHTML=EN.map(d=>mkRow(d.n,d.last,d.u,d.chg,d.trend,d.vs,d.lo,d.hi,d.x)).join('');
+document.getElementById('ratesBody').innerHTML=RT.map(d=>mkRow(d.n,d.last,d.u,d.chg,d.trend,d.vs,d.lo,d.hi,d.x)).join('');
+document.getElementById('equityBody').innerHTML=EQ.map(d=>mkRow(d.n,d.last,d.u,d.chg,d.trend,d.vs,d.lo,d.hi,d.x)).join('');
 
 // ─── FX DATA ────────────────────────────────────────────────────────────────
 const FXD=[
 
-  {f:"\ud83c\uddf9\ud83c\uddf7",cd:"TRY",nm:"T\u00fcrkiye",last:44.484056,chg:0.46,vs:[39.0,39.8,41.34,41.8,42.2,42.7,43.2,43.67,44.19,44.1694,44.2087,44.280135,44.484056],lo:36.45,hi:44.484056,wt:14.5,reg:"Managed",rat:"BB-",bc:"sub"},
-  {f:"\ud83c\uddea\ud83c\uddec",cd:"EGP",nm:"Egypt",last:54.458606,chg:4.08,vs:[47.5,47.1,48.16,47.4,46.8,47.54,47.0,46.85,52.44,52.37,52.3828,52.325974,54.458606],lo:46.8,hi:54.458606,wt:8.7,reg:"Managed",rat:"B+",bc:"spc"},
-  {f:"\ud83c\uddfa\ud83c\uddff",cd:"UZS",nm:"Uzbekistan",last:12225.682378,chg:0.28,vs:[12710,12760,12820,12855,12880,12920,12920,12191.002287,12225.682378],lo:12191.0,hi:12920,wt:8.7,reg:"Managed",rat:"BB+",bc:"sub"},
-  {f:"\ud83c\uddea\ud83c\udde8",cd:"USD",nm:"Ecuador (Dollarized)",last:1.0,chg:0,vs:[1.0,1.0,1.0,1.0],lo:null,hi:null,wt:7.2,reg:"Dollarized",rat:"B-",bc:"spc"},
-  {f:"\ud83c\uddf2\ud83c\uddfd",cd:"MXN",nm:"Mexico",last:18.125331,chg:1.71,vs:[19.0,18.6,18.42,18.2,17.9,17.75,17.5,17.16,17.88,17.7523,17.7071,17.820865,18.125331],lo:17.16,hi:21.09,wt:5.8,reg:"Free Float",rat:"BBB",bc:"inv"},
-  {f:"\ud83c\udde6\ud83c\uddf7",cd:"ARS",nm:"Argentina",last:1394.9234,chg:-3.95,vs:[1050,1118,1181,1255,1285,1324,1396,1393.65,1397.01,1452.25,1394.9234],lo:1050,hi:1452.25,wt:2.9,reg:"Crawling peg",rat:"CCC+",bc:"sd"},
-  {f:"\ud83c\uddf2\ud83c\uddfa",cd:"MUR",nm:"Mauritius",last:46.847587,chg:0.73,vs:[47.2,47.3,46.508116,46.847587],lo:46.508116,hi:47.3,wt:2.9,reg:"Managed",rat:"BBB-",bc:"inv"},
-  {f:"\ud83c\uddf2\ud83c\uddf3",cd:"MNT",nm:"Mongolia",last:3536.516967,chg:-0.8,vs:[3450,3460,3564.95209,3536.516967],lo:3450,hi:3564.95,wt:2.9,reg:"Managed",rat:"B",bc:"spc"},
-  {f:"\ud83c\uddec\ud83c\uddea",cd:"GEL",nm:"Georgia",last:2.696298,chg:-0.73,vs:[2.87,2.86,2.716033,2.696298],lo:2.696298,hi:2.87,wt:2.9,reg:"Managed float",rat:"BB-",bc:"sub"},
-  {f:"\ud83c\uddef\ud83c\uddf4",cd:"JOD",nm:"Jordan",last:0.709,chg:0,vs:[0.709,0.709,0.709,0.709],lo:null,hi:null,wt:2.9,reg:"USD Peg",rat:"B+",bc:"spc"},
-  {f:"\ud83c\uddfb\ud83c\uddf3",cd:"VND",nm:"Vietnam",last:26263.148033,chg:0.25,vs:[25300,26285,26197.323418,26263.148033],lo:25300,hi:26285,wt:2.9,reg:"Managed",rat:"BB+",bc:"sub"},
-  {f:"\ud83c\udde7\ud83c\udde9",cd:"BDT",nm:"Bangladesh",last:122.997868,chg:0.24,vs:[110.5,110.8,122.701916,122.997868],lo:110.5,hi:123.0,wt:2.9,reg:"Managed",rat:"B+",bc:"spc"},
-  {f:"\ud83c\uddf7\ud83c\uddf4",cd:"RON",nm:"Romania",last:4.437705,chg:0.15,vs:[4.65,4.4299,4.4168,4.430867,4.437705],lo:4.4168,hi:4.65,wt:2.9,reg:"Managed (EU)",rat:"BBB-",bc:"inv"},
-  {f:"\ud83c\uddf8\ud83c\uddfb",cd:"USD",nm:"El Salvador (Dollarized)",last:1.0,chg:0,vs:[1.0,1.0,1.0,1.0],lo:null,hi:null,wt:2.9,reg:"Dollarized",rat:"B-",bc:"spc"},
-  {f:"\ud83c\uddf9\ud83c\uddff",cd:"TZS",nm:"Tanzania",last:2585.776984,chg:-0.93,vs:[2710,2720,2610.151735,2585.776984],lo:2585.78,hi:2720,wt:2.9,reg:"Managed",rat:"B+",bc:"spc"},
-  {f:"\ud83c\udde8\ud83c\uddf1",cd:"CLP",nm:"Chile",last:923.246061,chg:1.68,vs:[942,911.43,906.78,908.007078,923.246061],lo:906.78,hi:942,wt:2.9,reg:"Free Float",rat:"A-",bc:"aaa"},
-  {f:"\ud83c\uddf3\ud83c\uddec",cd:"NGN",nm:"Nigeria",last:1384.5901,chg:2.1,vs:[1640,1366.56,1356.152747,1384.5901],lo:1356.15,hi:1640,wt:1.4,reg:"Managed",rat:"B-",bc:"spc"},
-  {f:"\ud83c\udde8\ud83c\uddf4",cd:"COP",nm:"Colombia",last:3667.447313,chg:-0.87,vs:[4280,3702.88,3699.543776,3667.447313],lo:3667.45,hi:4280,wt:1.4,reg:"Free Float",rat:"BB+",bc:"sub"},
-  {f:"\ud83c\uddf5\ud83c\uddea",cd:"PEN",nm:"Peru",last:3.489169,chg:1.9,vs:[3.72,3.7,3.424064,3.489169],lo:3.424064,hi:3.72,wt:1.4,reg:"Managed",rat:"BBB+",bc:"inv"},
-  {f:"\ud83c\udde6\ud83c\uddff",cd:"AZN",nm:"Azerbaijan",last:1.700681,chg:-0.03,vs:[1.7,1.7,1.701205,1.700681],lo:1.7,hi:1.701205,wt:1.4,reg:"Managed peg",rat:"BB+",bc:"sub"},
-  {f:"\ud83c\udde6\ud83c\uddf4",cd:"AOA",nm:"Angola",last:922.754321,chg:0.29,vs:[912,918,920.046875,922.754321],lo:912,hi:922.75,wt:1.4,reg:"Managed",rat:"B-",bc:"spc"},
-  {f:"\ud83c\uddfa\ud83c\uddfe",cd:"UYU",nm:"Uruguay",last:40.598347,chg:0.11,vs:[42.8,42.6,40.553891,40.598347],lo:40.553891,hi:42.8,wt:1.4,reg:"Free Float",rat:"BBB-",bc:"inv"},
-  {f:"\ud83c\uddf8\ud83c\uddec",cd:"SGD",nm:"Singapore",last:1.290763,chg:0.7,vs:[1.345,1.2783,1.27688,1.28185,1.290763],lo:1.27688,hi:1.345,wt:1.4,reg:"Managed float",rat:"AAA",bc:"aaa"},
-  {f:"\ud83c\udde7\ud83c\uddf7",cd:"BRL",nm:"Brazil",last:5.241135,chg:0.44,vs:[5.8,5.6,5.4,5.2,5.12,5.24,5.259,5.2126,5.217975,5.241135],lo:5.12,hi:5.8,wt:1.4,reg:"Free Float",rat:"BB+",bc:"sub"},
-  {f:"\ud83c\uddf5\ud83c\uddf0",cd:"PKR",nm:"Pakistan",last:279.384675,chg:-0.01,vs:[279.5,280.2,279.8,280.0,280.29,279.275,279.418468,279.384675],lo:279.27,hi:280.29,wt:1.4,reg:"Managed",rat:"CCC+",bc:"sd"},
-  {f:"\ud83c\udde9\ud83c\uddf4",cd:"DOP",nm:"Dominican Rep.",last:59.59583,chg:-1.63,vs:[60.2,60.3,60.583716,59.59583],lo:59.59583,hi:60.583716,wt:1.4,reg:"Managed",rat:"BB-",bc:"sub"},
-  {f:"\ud83c\uddec\ud83c\uddf9",cd:"GTQ",nm:"Guatemala",last:7.661019,chg:-0.06,vs:[7.72,7.73,7.665246,7.661019],lo:7.661019,hi:7.73,wt:1.4,reg:"Managed",rat:"BB-",bc:"sub"},
-  {f:"\ud83c\uddf1\ud83c\uddf9",cd:"EUR",nm:"Lithuania (\u20ac)",last:0.872104,chg:0.09,vs:[0.873,0.87,0.867242,0.871277,0.872104],lo:0.867242,hi:0.873,wt:1.4,reg:"Eurozone",rat:"A+",bc:"aaa"},
-  {f:"\ud83c\uddf9\ud83c\udded",cd:"THB",nm:"Thailand",last:32.829232,chg:0.33,vs:[35.5,32.368,32.2873,32.720055,32.829232],lo:32.2873,hi:35.5,wt:1.4,reg:"Managed",rat:"BBB+",bc:"inv"},
-  {f:"\ud83c\udde6\ud83c\uddf2",cd:"AMD",nm:"Armenia",last:377.932476,chg:0.17,vs:[395,394,377.287981,377.932476],lo:377.29,hi:395,wt:1.4,reg:"Managed",rat:"BB-",bc:"sub"},
-  {f:"\ud83c\uddf9\ud83c\uddec",cd:"XOF",nm:"Togo (CFA Franc)",last:572.061104,chg:0.09,vs:[614,616,571.528515,572.061104],lo:571.53,hi:616,wt:1.4,reg:"CFA/EUR Peg",rat:"B-",bc:"spc"}
+  {f:"\ud83c\uddf9\ud83c\uddf7",cd:"TRY",nm:"T\u00fcrkiye",last:44.531158,chg:0.11,trend:11.88733165829146,vs:[39.8,41.34,41.8,42.2,42.7,43.2,43.67,44.19,44.1694,44.2087,44.280135,44.484056,44.531158],lo:36.45,hi:44.531158,wt:14.5,reg:"Managed",rat:"BB-",bc:"sub",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddea\ud83c\uddec",cd:"EGP",nm:"Egypt",last:54.565087,chg:0.2,trend:15.849441613588104,vs:[47.1,48.16,47.4,46.8,47.54,47.0,46.85,52.44,52.37,52.3828,52.325974,54.458606,54.565087],lo:46.8,hi:54.565087,wt:8.7,reg:"Managed",rat:"B+",bc:"spc",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddfa\ud83c\uddff",cd:"UZS",nm:"Uzbekistan",last:12226.800367,chg:0.01,trend:-3.801728033044848,vs:[12710,12760,12820,12855,12880,12920,12920,12191.002287,12225.682378,12226.800367],lo:12191.0,hi:12920,wt:8.7,reg:"Managed",rat:"BB+",bc:"sub",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddea\ud83c\udde8",cd:"USD",nm:"Ecuador (Dollarized)",last:1.0,chg:0,trend:0.0,vs:[1.0,1.0,1.0,1.0,1.0],lo:null,hi:null,wt:7.2,reg:"Dollarized",rat:"B-",bc:"spc",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddf2\ud83c\uddfd",cd:"MXN",nm:"Mexico",last:17.958655,chg:-0.92,trend:-3.4480913978494683,vs:[18.6,18.42,18.2,17.9,17.75,17.5,17.16,17.88,17.7523,17.7071,17.820865,18.125331,17.958655],lo:17.16,hi:21.09,wt:5.8,reg:"Free Float",rat:"BBB",bc:"inv",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\udde6\ud83c\uddf7",cd:"ARS",nm:"Argentina",last:1382.7578,chg:-0.87,trend:31.691219047619057,vs:[1050,1118,1181,1255,1285,1324,1396,1393.65,1397.01,1452.25,1394.9234,1382.7578],lo:1050,hi:1452.25,wt:2.9,reg:"Crawling peg",rat:"CCC+",bc:"sd",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddf2\ud83c\uddfa",cd:"MUR",nm:"Mauritius",last:47.003468,chg:0.33,trend:-0.4163813559322136,vs:[47.2,47.3,46.508116,46.847587,47.003468],lo:46.508116,hi:47.3,wt:2.9,reg:"Managed",rat:"BBB-",bc:"inv",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddf2\ud83c\uddf3",cd:"MNT",nm:"Mongolia",last:3594.166874,chg:1.63,trend:4.178749971014493,vs:[3450,3460,3564.95209,3536.516967,3594.166874],lo:3450,hi:3594.166874,wt:2.9,reg:"Managed",rat:"B",bc:"spc",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddec\ud83c\uddea",cd:"GEL",nm:"Georgia",last:2.697921,chg:0.06,trend:-5.995783972125439,vs:[2.87,2.86,2.716033,2.696298,2.697921],lo:2.696298,hi:2.87,wt:2.9,reg:"Managed float",rat:"BB-",bc:"sub",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddef\ud83c\uddf4",cd:"JOD",nm:"Jordan",last:0.709,chg:0,trend:0.0,vs:[0.709,0.709,0.709,0.709,0.709],lo:null,hi:null,wt:2.9,reg:"USD Peg",rat:"B+",bc:"spc",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddfb\ud83c\uddf3",cd:"VND",nm:"Vietnam",last:26196.473136,chg:-0.25,trend:3.5433720790513856,vs:[25300,26285,26197.323418,26263.148033,26196.473136],lo:25300,hi:26285,wt:2.9,reg:"Managed",rat:"BB+",bc:"sub",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\udde7\ud83c\udde9",cd:"BDT",nm:"Bangladesh",last:122.723389,chg:-0.22,trend:11.061890497737554,vs:[110.5,110.8,122.701916,122.997868,122.723389],lo:110.5,hi:123.0,wt:2.9,reg:"Managed",rat:"B+",bc:"spc",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddf7\ud83c\uddf4",cd:"RON",nm:"Romania",last:4.435797,chg:-0.04,trend:-4.606516129032266,vs:[4.65,4.4299,4.4168,4.430867,4.437705,4.435797],lo:4.4168,hi:4.65,wt:2.9,reg:"Managed (EU)",rat:"BBB-",bc:"inv",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddf8\ud83c\uddfb",cd:"USD",nm:"El Salvador (Dollarized)",last:1.0,chg:0,trend:0.0,vs:[1.0,1.0,1.0,1.0,1.0],lo:null,hi:null,wt:2.9,reg:"Dollarized",rat:"B-",bc:"spc",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddf9\ud83c\uddff",cd:"TZS",nm:"Tanzania",last:2573.515999,chg:-0.47,trend:-5.036309999999993,vs:[2710,2720,2610.151735,2585.776984,2573.515999],lo:2573.515999,hi:2720,wt:2.9,reg:"Managed",rat:"B+",bc:"spc",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\udde8\ud83c\uddf1",cd:"CLP",nm:"Chile",last:931.078996,chg:0.85,trend:-1.1593422505307898,vs:[942,911.43,906.78,908.007078,923.246061,931.078996],lo:906.78,hi:942,wt:2.9,reg:"Free Float",rat:"A-",bc:"aaa",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddf3\ud83c\uddec",cd:"NGN",nm:"Nigeria",last:1381.343881,chg:-0.23,trend:-15.771714573170732,vs:[1640,1366.56,1356.152747,1384.5901,1381.343881],lo:1356.15,hi:1640,wt:1.4,reg:"Managed",rat:"B-",bc:"spc",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\udde8\ud83c\uddf4",cd:"COP",nm:"Colombia",last:3661.823103,chg:-0.15,trend:-14.44338544392523,vs:[4280,3702.88,3699.543776,3667.447313,3661.823103],lo:3661.823103,hi:4280,wt:1.4,reg:"Free Float",rat:"BB+",bc:"sub",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddf5\ud83c\uddea",cd:"PEN",nm:"Peru",last:3.492618,chg:0.1,trend:-6.11241935483872,vs:[3.72,3.7,3.424064,3.489169,3.492618],lo:3.424064,hi:3.72,wt:1.4,reg:"Managed",rat:"BBB+",bc:"inv",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\udde6\ud83c\uddff",cd:"AZN",nm:"Azerbaijan",last:1.698007,chg:-0.16,trend:-0.11723529411764184,vs:[1.7,1.7,1.701205,1.700681,1.698007],lo:1.698007,hi:1.701205,wt:1.4,reg:"Managed peg",rat:"BB+",bc:"sub",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\udde6\ud83c\uddf4",cd:"AOA",nm:"Angola",last:922.967074,chg:0.02,trend:1.202530043859652,vs:[912,918,920.046875,922.754321,922.967074],lo:912,hi:922.967074,wt:1.4,reg:"Managed",rat:"B-",bc:"spc",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddfa\ud83c\uddfe",cd:"UYU",nm:"Uruguay",last:40.559512,chg:-0.1,trend:-5.2347850467289705,vs:[42.8,42.6,40.553891,40.598347,40.559512],lo:40.553891,hi:42.8,wt:1.4,reg:"Free Float",rat:"BBB-",bc:"inv",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddf8\ud83c\uddec",cd:"SGD",nm:"Singapore",last:1.287323,chg:-0.27,trend:-4.288252788104088,vs:[1.345,1.2783,1.27688,1.28185,1.290763,1.287323],lo:1.27688,hi:1.345,wt:1.4,reg:"Managed float",rat:"AAA",bc:"aaa",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\udde7\ud83c\uddf7",cd:"BRL",nm:"Brazil",last:5.224829,chg:-0.31,trend:-9.916741379310347,vs:[5.8,5.6,5.4,5.2,5.12,5.24,5.259,5.2126,5.217975,5.241135,5.224829],lo:5.12,hi:5.8,wt:1.4,reg:"Free Float",rat:"BB+",bc:"sub",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddf5\ud83c\uddf0",cd:"PKR",nm:"Pakistan",last:279.212791,chg:-0.06,trend:-0.10275813953489034,vs:[279.5,280.2,279.8,280.0,280.29,279.275,279.418468,279.384675,279.212791],lo:279.212791,hi:280.29,wt:1.4,reg:"Managed",rat:"CCC+",bc:"sd",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\udde9\ud83c\uddf4",cd:"DOP",nm:"Dominican Rep.",last:59.717331,chg:0.2,trend:-0.8017757475083079,vs:[60.2,60.3,60.583716,59.59583,59.717331],lo:59.59583,hi:60.583716,wt:1.4,reg:"Managed",rat:"BB-",bc:"sub",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddec\ud83c\uddf9",cd:"GTQ",nm:"Guatemala",last:7.639556,chg:-0.28,trend:-1.0420207253886005,vs:[7.72,7.73,7.665246,7.661019,7.639556],lo:7.639556,hi:7.73,wt:1.4,reg:"Managed",rat:"BB-",bc:"sub",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddf1\ud83c\uddf9",cd:"EUR",nm:"Lithuania (\u20ac)",last:0.867176,chg:-0.57,trend:-0.6671248568155844,vs:[0.873,0.87,0.867242,0.871277,0.872104,0.867176],lo:0.867176,hi:0.873,wt:1.4,reg:"Eurozone",rat:"A+",bc:"aaa",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddf9\ud83c\udded",cd:"THB",nm:"Thailand",last:32.748121,chg:-0.25,trend:-7.7517718309859225,vs:[35.5,32.368,32.2873,32.720055,32.829232,32.748121],lo:32.2873,hi:35.5,wt:1.4,reg:"Managed",rat:"BBB+",bc:"inv",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\udde6\ud83c\uddf2",cd:"AMD",nm:"Armenia",last:377.462947,chg:-0.12,trend:-4.43976025316456,vs:[395,394,377.287981,377.932476,377.462947],lo:377.29,hi:395,wt:1.4,reg:"Managed",rat:"BB-",bc:"sub",asof:"Internet FX feed \u00b7 1 Apr 2026"},
+  {f:"\ud83c\uddf9\ud83c\uddec",cd:"XOF",nm:"Togo (CFA Franc)",last:568.539177,chg:-0.62,trend:-7.404042833876222,vs:[614,616,571.528515,572.061104,568.539177],lo:568.539177,hi:616,wt:1.4,reg:"CFA/EUR Peg",rat:"B-",bc:"spc",asof:"Internet FX feed \u00b7 1 Apr 2026"}
 
 ];
 const REFD=[
 
-  {f:'',cd:"EUR/USD",nm:"Euro vs Dollar",last:1.152074,chg:0.25,vs:[1.115,1.128,1.135,1.142,1.138,1.12,1.148,1.189,1.146,1.1494,1.15295,1.14769,1.152074],lo:1.0732,hi:1.2079,wt:null,reg:'Reference',rat:'—',bc:'aaa'},
-  {f:'',cd:"DXY",nm:"USD Index",last:100.18,chg:-0.33,vs:[105.2,104.0,102.8,103.9,104.5,103.8,102.5,99.8,100.125,99.65,99.629,99.91,100.18],lo:97.2,hi:110.2,wt:null,reg:'Reference',rat:'—',bc:'aaa'}
+  {f:'',cd:"EUR/USD",nm:"Euro vs Dollar",last:1.159958,chg:1.22,trend:2.8331560283688084,vs:[1.128,1.135,1.142,1.138,1.12,1.148,1.189,1.146,1.1494,1.15295,1.14769,1.152074,1.159958],lo:1.0732,hi:1.2079,wt:null,reg:'Reference',rat:'—',bc:'aaa',asof:"Yahoo Finance 1 Apr 2026"},
+  {f:'',cd:"DXY",nm:"USD Index",last:99.448,chg:-0.51,trend:-4.376923076923083,vs:[104.0,102.8,103.9,104.5,103.8,102.5,99.8,100.125,99.65,99.629,99.91,100.18,99.448],lo:97.2,hi:110.2,wt:null,reg:'Reference',rat:'—',bc:'aaa',asof:"Dollar index futures proxy (Yahoo Finance) \u00b7 1 Apr 2026"}
 
 ];
 const BCL={inv:'inv',sub:'sub',spc:'spc',sd:'sd',aaa:'aaa'};
@@ -784,35 +816,35 @@ function fxRow(d){
   const c=d.chg>=0?'var(--up)':'var(--dn)';
   const s=d.chg>0?'+':'';
   const lf=d.last>=1000?d.last.toLocaleString('en-US',{maximumFractionDigits:2}):d.last>=1?d.last.toFixed(2):d.last.toFixed(4);
-  const sp=d.vs&&d.vs.length>1?spark(d.vs,d.chg>=0):'<span style="color:#999">—</span>';
+  const sp=d.vs&&d.vs.length>1?spark(d.vs,d.trend):'<span style="color:#999">—</span>';
   const rb=d.lo!==null&&d.lo!==undefined?rbar(d.last,d.lo,d.hi):'<span style="color:#999">—</span>';
   const wt=d.wt?`<span style="font-family:DM Mono,monospace;font-size:11px">${d.wt}%</span>`:'';
-  return `<tr><td style="padding:5px 6px">${d.f} <strong>${d.cd}</strong> <span style="font-size:10px;color:#888">${d.nm}</span></td><td style="text-align:right;padding:5px 6px;font-family:DM Mono,monospace;font-weight:600">${lf}</td><td style="text-align:right;padding:5px 6px;font-family:DM Mono,monospace;color:${c}">${s}${Math.abs(d.chg).toFixed(2)}% ${d.chg>=0?'▲':'▼'}</td><td style="padding:5px 6px">${sp}</td><td style="padding:5px 6px;min-width:130px">${rb}</td><td style="text-align:right;padding:5px 6px">${wt}</td><td style="padding:5px 6px"><span class="rp">${d.reg}</span></td><td style="padding:5px 6px"><span class="bg ${BCL[d.bc]||'spc'}">${d.rat}</span></td></tr>`;
+  const meta=d.asof?`<div style="font-size:9px;color:#888;margin-top:2px">${d.asof}</div>`:'';
+  return `<tr><td style="padding:5px 6px">${d.f} <strong>${d.cd}</strong> <span style="font-size:10px;color:#888">${d.nm}</span>${meta}</td><td style="text-align:right;padding:5px 6px;font-family:DM Mono,monospace;font-weight:600">${lf}</td><td style="text-align:right;padding:5px 6px;font-family:DM Mono,monospace;color:${c}">${s}${Math.abs(d.chg).toFixed(2)}% ${d.chg>=0?'▲':'▼'}</td><td style="padding:5px 6px">${sp}</td><td style="padding:5px 6px;min-width:130px">${rb}</td><td style="text-align:right;padding:5px 6px">${wt}</td><td style="padding:5px 6px"><span class="rp">${d.reg}</span></td><td style="padding:5px 6px"><span class="bg ${BCL[d.bc]||'spc'}">${d.rat}</span></td></tr>`;
 }
 document.getElementById('fxBody').innerHTML=FXD.map(fxRow).join('');
 document.getElementById('refBody').innerHTML=REFD.map(fxRow).join('');
 
 
-// ─── TICKER STRIP ─────────────────────────────────────────────────────────────
+// ─── TICKER STRIP (hidden in UI, data kept live) ─────────────────────────────
 (function(){
   const TK=[
 
-  {l:"BRN",v:"$118.99",c:"\u25b25.51%",up:true},
-  {l:"WTI",v:"$104.59",c:"\u25b21.66%",up:true},
-  {l:"GOLD",v:"$4,651",c:"\u25b22.76%",up:true},
-  {l:"TTF",v:"\u20ac50.24",c:"\u25bc8.35%",up:false},
-  {l:"VIX",v:"27.62",c:"\u25bc9.77%",up:false},
-  {l:"DXY",v:"100.18",c:"\u25bc0.33%",up:false},
-  {l:"UST 10Y",v:"4.33%",c:"\u25bc0.28%",up:false},
+  {l:"BRN",v:"$102.16",c:"\u25bc1.74%",up:false},
+  {l:"WTI",v:"$99.14",c:"\u25bc2.21%",up:false},
+  {l:"GOLD",v:"$4,769",c:"\u25b22.62%",up:true},
+  {l:"TTF",v:"\u20ac48.41",c:"\u25bc4.62%",up:false},
+  {l:"VIX",v:"24.30",c:"\u25bc3.76%",up:false},
+  {l:"DXY",v:"99.45",c:"\u25bc0.51%",up:false},
+  {l:"UST 10Y",v:"4.29%",c:"\u25bc0.56%",up:false},
   {l:"EMBI+",v:"267bp",c:"\u25bc1bp",up:true},
-  {l:"TRY/USD",v:"44.48",c:"\u25b20.46%",up:false},
-  {l:"EGP/USD",v:"54.46",c:"\u25b24.08%",up:false},
-  {l:"UZS/USD",v:"12,225.68",c:"\u25b20.28%",up:false},
-  {l:"\u26a1 WAR DAY 32",v:"Iran\u2013Israel",c:"active",up:false}
+  {l:"TRY/USD",v:"44.53",c:"\u25b20.11%",up:false},
+  {l:"EGP/USD",v:"54.57",c:"\u25b20.20%",up:false},
+  {l:"UZS/USD",v:"12,226.80",c:"\u25b20.01%",up:false},
+  {l:"\u26a1 WAR DAY 33",v:"Iran\u2013Israel",c:"active",up:false}
 
 ];
   let h='';
-  // duplicate for seamless infinite scroll
   [0,1].forEach(()=>TK.forEach(t=>{
     const vc=t.up?'color:#09823a':'color:#cc0000';
     const special=t.l.startsWith('⚡');
