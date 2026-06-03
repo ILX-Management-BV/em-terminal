@@ -190,7 +190,7 @@ footer .fn-err{color:#ff8888}
 <div id="p-about" class="pnl">
   <div class="sec">
     <div class="sec-h">About This Terminal</div>
-    <p style="font-size:12px;color:var(--t2);line-height:1.7;margin:0 0 14px">A single-page market intelligence brief covering a <strong style="color:var(--tx)">31-country emerging &amp; frontier market portfolio</strong> across seven analytical lenses: macro fundamentals, FX dynamics, sovereign credit, global market context, geopolitical risk, EM benchmarks, and scenario analysis. Data is sourced from primary statistical agencies, central banks, IMF/World Bank publications, S&amp;P Capital IQ Pro, Investing.com, and WorldGovernmentBonds. The portfolio is weighted toward the <strong style="color:var(--tx)">war-core cluster</strong> (Türkiye 14.5%, Egypt 8.7%, Uzbekistan 8.7%) reflecting direct exposure to the Iran conflict and Strait of Hormuz disruption. All figures reflect latest available data as of <strong style="color:var(--tx)">3 Jun 2026 · Mar 19-Jun 3, 2026 (EM benchmarks cutoff 2 Jun 2026; market snapshot 3 Jun) UTC</strong>. ~Est. = estimated where live data is unavailable.</p>
+    <p style="font-size:12px;color:var(--t2);line-height:1.7;margin:0 0 14px">A single-page market intelligence brief covering a <strong style="color:var(--tx)">31-country emerging &amp; frontier market portfolio</strong> across seven analytical lenses: macro fundamentals, FX dynamics, sovereign credit, global market context, geopolitical risk, EM benchmarks, and scenario analysis. Data is sourced from primary statistical agencies, central banks, IMF/World Bank publications, S&amp;P Capital IQ Pro, Investing.com, and WorldGovernmentBonds. The portfolio is weighted toward the <strong style="color:var(--tx)">war-core cluster</strong> (Türkiye 14.5%, Egypt 8.7%, Uzbekistan 8.7%) reflecting direct exposure to the Iran conflict and Strait of Hormuz disruption. This terminal is published as a <strong style="color:var(--tx)">weekly update</strong>; underlying series remain mixed-frequency and refresh on their own source cadence. All figures reflect latest available data as of <strong style="color:var(--tx)">3 Jun 2026 · Mar 19-Jun 3, 2026 (EM benchmarks cutoff 2 Jun 2026; market snapshot 3 Jun) UTC</strong>. ~Est. = estimated where live data is unavailable.</p>
     <div style="font-size:11px;font-weight:700;color:var(--mt);letter-spacing:.6px;margin-bottom:8px">TABS</div>
     <table class="t" style="font-size:11px">
       <thead><tr><th style="width:130px">Tab</th><th>Contents</th></tr></thead>
@@ -200,7 +200,7 @@ footer .fn-err{color:#ff8888}
         <tr><td><strong>SOVEREIGN CREDIT</strong></td><td>Per-country S&amp;P rating and outlook, live 5Y CDS (bps), USD sovereign bond spread vs UST (bps), implied yield, and composite risk score. Includes ranked CDS bar chart.</td></tr>
         <tr><td><strong>GLOBAL MARKETS</strong></td><td>Energy, rates/policy benchmarks, and major developed-market equities/volatility with trend, range positioning, and source/context tags.</td></tr>
         <tr><td><strong>GPR</strong></td><td>Country-level geopolitical risk index (recent and historical monthly series) for available portfolio countries. Source: Caldara &amp; Iacoviello.</td></tr>
-        <tr><td><strong>EM MARKETS</strong></td><td>Weekly EM benchmark dashboard showing spread to worst and total return for EMBI Global, EMBI Global Diversified, CEMBI Broad Diversified, and JPM Institutional HY.</td></tr>
+        <tr><td><strong>EM MARKETS</strong></td><td>Weekly EM benchmark dashboard for EMBI Global, EMBI Global Diversified, and CEMBI Broad Diversified, shown with current level, 1D move, 1Y trend sparkline, YTD change, and 52-week range positioning.</td></tr>
         <tr><td><strong>SCENARIOS</strong></td><td>Disabled &mdash; pending methodology review and governance sign-off.</td></tr>
       </tbody>
     </table>
@@ -462,43 +462,25 @@ footer .fn-err{color:#ff8888}
 <!-- ═══════════════════ EM MARKETS ═══════════════════ -->
 <div id="p-em" class="pnl">
   <div class="sec">
-    <div class="sec-h">Emerging Markets <span style="font-size:10px;color:var(--mt);font-weight:400">(Cutoff 2 Jun 2026)</span></div>
-    <table class="t">
-      <thead><tr>
-        <th data-col="0" onclick="srt(this)">Spread to Worst ⇕</th>
-        <th class="r" data-col="1" onclick="srt(this)">Current ⇕</th>
-        <th class="r" data-col="2" onclick="srt(this)">1D ⇕</th>
-        <th class="r" data-col="3" onclick="srt(this)">1W ⇕</th>
-        <th class="r" data-col="4" onclick="srt(this)">1M ⇕</th>
-        <th class="r" data-col="5" onclick="srt(this)">YTD ⇕</th>
-        <th class="r" data-col="6" onclick="srt(this)">Yesterday ⇕</th>
-      </tr></thead>
-      <tbody>
-                <tr><td><strong>EMBI Global Diversified STW</strong></td><td class="r nm fw">233bp</td><td class="r nm up">-4bp</td><td class="r nm">-9bp</td><td class="r nm">-8bp</td><td class="r nm">-20bp</td><td class="r nm">237bp</td></tr>
-        <tr><td><strong>EMBI Global STW</strong></td><td class="r nm fw">214bp</td><td class="r nm up">-4bp</td><td class="r nm">-7bp</td><td class="r nm">-5bp</td><td class="r nm">-17bp</td><td class="r nm">218bp</td></tr>
-        <tr><td><strong>CEMBI Broad Diversified STW</strong></td><td class="r nm fw">167bp</td><td class="r nm up">-1bp</td><td class="r nm">-2bp</td><td class="r nm">-3bp</td><td class="r nm">-21bp</td><td class="r nm">168bp</td></tr>
-        <tr><td><strong>JPM Institutional HY STW</strong></td><td class="r nm fw">245bp</td><td class="r nm up">-3bp</td><td class="r nm">-6bp</td><td class="r nm">-14bp</td><td class="r nm">-11bp</td><td class="r nm">248bp</td></tr>
-      </tbody>
-    </table>
+    <div class="sec-h">Spread to Worst <span style="font-size:10px;color:var(--mt);font-weight:400">(Cutoff 2 Jun 2026)</span></div>
+    <table class="t"><thead><tr>
+      <th data-col="0" onclick="srt(this)">Instrument ⇕</th><th class="r" data-col="1" onclick="srt(this)">Current ⇕</th><th class="r" data-col="2" onclick="srt(this)">1D Chg ⇕</th><th>1Y Trend</th><th class="r" data-col="4" onclick="srt(this)">YTD ⇕</th><th title="Bar shows where the current level sits within the trailing 52-week low/high range.">52-wk Range ⓘ</th>
+    </tr></thead><tbody id="emStwBody"></tbody></table>
   </div>
   <div class="sec">
-    <div class="sec-h">Total Return</div>
+    <div class="sec-h">Total Return <span style="font-size:10px;color:var(--mt);font-weight:400">(1Y rebased index)</span></div>
     <table class="t">
       <thead><tr>
-        <th data-col="0" onclick="srt(this)">Total Return ⇕</th>
-        <th class="r" data-col="1" onclick="srt(this)">1D ⇕</th>
-        <th class="r" data-col="2" onclick="srt(this)">1W ⇕</th>
-        <th class="r" data-col="3" onclick="srt(this)">1M ⇕</th>
+        <th data-col="0" onclick="srt(this)">Instrument ⇕</th>
+        <th class="r" data-col="1" onclick="srt(this)">Current ⇕</th>
+        <th class="r" data-col="2" onclick="srt(this)">1D Chg ⇕</th>
+        <th>1Y Trend</th>
         <th class="r" data-col="4" onclick="srt(this)">YTD ⇕</th>
+        <th title="Bar shows where the current rebased index sits within the trailing 52-week low/high range.">52-wk Range ⓘ</th>
       </tr></thead>
-      <tbody>
-                <tr><td><strong>EMBI Global Diversified Return</strong></td><td class="r nm up">+0.27%</td><td class="r nm">+1.02%</td><td class="r nm">+1.36%</td><td class="r nm">+3.23%</td></tr>
-        <tr><td><strong>EMBI Global Return</strong></td><td class="r nm up">+0.27%</td><td class="r nm">+0.96%</td><td class="r nm">+1.19%</td><td class="r nm">+2.82%</td></tr>
-        <tr><td><strong>CEMBI Broad Diversified Return</strong></td><td class="r nm up">+0.08%</td><td class="r nm">+0.39%</td><td class="r nm">+0.61%</td><td class="r nm">+2.15%</td></tr>
-        <tr><td><strong>JPM Institutional HY Return</strong></td><td class="r nm up">+0.08%</td><td class="r nm">+0.34%</td><td class="r nm">+0.80%</td><td class="r nm">+2.16%</td></tr>
-      </tbody>
+      <tbody id="emReturnBody"></tbody>
     </table>
-    <p class="src">Source: weekly JPMorgan/Bloomberg EM benchmark export refreshed via the maintained EM data file. STW = spread to worst versus Treasuries.</p>
+    <p class="src">Source: weekly JPMorgan/Bloomberg EM benchmark export refreshed via the maintained EM data file. STW = spread to worst versus Treasuries. In the Total Return table, Current is a 1Y rebased index with a start value of 100.</p>
   </div>
 </div>
 
@@ -667,11 +649,11 @@ footer .fn-err{color:#ff8888}
 
 
 <footer>
-  <strong>Reference Date:</strong> 3 Jun 2026 &nbsp;|&nbsp; <strong>Data Vintage:</strong> Mar 19-Jun 3, 2026 (EM benchmarks cutoff 2 Jun 2026; market snapshot 3 Jun) (varies by category)<br>
+  <strong>Reference Date:</strong> 3 Jun 2026 &nbsp;|&nbsp; <strong>Update Cadence:</strong> Weekly update &nbsp;|&nbsp; <strong>Data Vintage:</strong> Mar 19-Jun 3, 2026 (EM benchmarks cutoff 2 Jun 2026; market snapshot 3 Jun) (varies by category)<br>
   <strong>Use Restriction:</strong> Internal pre-release version. Not approved for PM reports, client materials, external publication, or onward distribution until source and methodology governance is signed off.<br>
   <strong>Commodities:</strong> Investing.com, Reuters, CNBC — latest available snapshot &nbsp;|&nbsp; <strong>Rates:</strong> US Treasury, CNBC, TradingEconomics — latest available &nbsp;|&nbsp; <strong>FX:</strong> Investing.com, Morningstar, TradingEconomics, Internet FX feed (fallback) — latest available &nbsp;|&nbsp; <strong>Equities:</strong> MarketWatch, CNBC, Investing.com, Yahoo Finance — latest available<br>
   <strong>CDS:</strong> Source/date shown row-by-row in SOVEREIGN RISK. The table and chart display the latest numeric S&amp;P Capital IQ Pro conventional spread when available; countries with no numeric latest quote show —.<br>
-  <strong>EM Markets:</strong> Weekly JPMorgan/Bloomberg export of spread-to-worst and total-return series for EMBI Global, EMBI Global Diversified, CEMBI Broad Diversified, and JPM Institutional HY. &nbsp;|&nbsp; <strong>Definitions:</strong> STW = spread to worst versus Treasuries.<br>
+  <strong>EM Markets:</strong> Weekly JPMorgan/Bloomberg export of spread-to-worst and total-return series for EMBI Global, EMBI Global Diversified, and CEMBI Broad Diversified. &nbsp;|&nbsp; <strong>Definitions:</strong> STW = spread to worst versus Treasuries.<br>
   <span class="fn-err"><strong>NOT available without terminal:</strong></span> Real-time CDS, iTraxx, NDF/forward FX, OVX/MOVE real-time.<br>
   <span style="color:rgba(255,255,255,.28)">Not investment advice · Internal research use only · ILX Market Intelligence Terminal</span>
 </footer>
@@ -796,6 +778,24 @@ function mkRow(nm,last,unit,chg,trend,vs,lo,hi,xtra,badWhenUp=false){
   const sp=vs&&vs.length>1?spark(vs,trend,badWhenUp):'<span style="color:#999">—</span>';
   const rb=lo!==null&&lo!==undefined?rbar(last,lo,hi):'<span style="color:#999">—</span>';
   return `<tr><td style="padding:5px 6px">${nm}</td><td style="text-align:right;padding:5px 6px;font-family:DM Mono,monospace;font-weight:600">${unit}${lf}</td><td style="text-align:right;padding:5px 6px;font-family:DM Mono,monospace;color:${c}">${s}${Math.abs(chg).toFixed(2)}% ${chg<0?'▼':'▲'}</td><td style="padding:5px 6px">${sp}</td><td style="padding:5px 6px;min-width:135px">${rb}</td><td style="padding:5px 6px;font-size:10px;color:#888">${xtra||''}</td></tr>`;
+}
+
+function mkEmRow(d){
+  const badWhenUp=!!d.badUp;
+  const chg=Number(d.chg);
+  const ytdNum=Number(d.ytdNum);
+  const changeColor=badWhenUp ? (chg>=0?'#cc0000':'#09823a') : (chg>=0?'#09823a':'#cc0000');
+  const currentDisplay=d.kind==='stw'
+    ? `${Math.round(Number(d.last))}bp`
+    : Number(d.last).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const changeDisplay=d.kind==='stw'
+    ? `${chg>0?'+':''}${Math.round(chg)}bp ${chg<0?'▼':'▲'}`
+    : `${chg>0?'+':''}${Math.abs(chg).toFixed(2)}% ${chg<0?'▼':'▲'}`;
+  const ytdDisplay=d.ytd||'—';
+  const ytdColor=badWhenUp ? (ytdNum>=0?'#cc0000':'#09823a') : (ytdNum>=0?'#09823a':'#cc0000');
+  const sp=d.vs&&d.vs.length>1?spark(d.vs,d.trend,badWhenUp):'<span style="color:#999">—</span>';
+  const rb=d.lo!==null&&d.lo!==undefined?rbar(Number(d.last),Number(d.lo),Number(d.hi)):'<span style="color:#999">—</span>';
+  return `<tr><td style="padding:5px 6px">${d.n}</td><td class="r nm fw" data-sort="${d.last}" style="text-align:right;padding:5px 6px;font-family:DM Mono,monospace;font-weight:600">${currentDisplay}</td><td class="r nm" data-sort="${chg}" style="text-align:right;padding:5px 6px;font-family:DM Mono,monospace;color:${changeColor}">${changeDisplay}</td><td style="padding:5px 6px">${sp}</td><td class="r nm" data-sort="${ytdNum}" style="text-align:right;padding:5px 6px;font-family:DM Mono,monospace;color:${ytdColor}">${ytdDisplay}</td><td style="padding:5px 6px;min-width:135px">${rb}</td></tr>`;
 }
 
 function gprRow(d){
@@ -941,6 +941,20 @@ const EQ=[
   {n:"VIX",last:16.07,u:"",chg:-10.67,trend:38.85714285714286,vs:[17.5,14.8,19.2,16.5,14.2,15.8,19.0,27.08,24.46,22.29,25.41,27.62,24.3],lo:13.38,hi:60.13,x:"Cboe VIX \u00b7 Yahoo Finance 3 Jun 2026"}
 
 ];
+const EMSTW=[
+
+  {n:"EMBI Global Diversified STW",last:232.84099999999998,u:"",chg:-3.9509000000000185,trend:-26.29367747196378,vs:[315.9037,326.1225,321.8429,302.7704,308.9343,306.5779,296.1452,314.3376,297.5798,285.8751,292.7102,297.2017,297.549,288.7243,289.8302,280.9753,279.777,291.848,288.244,279.456,265.6756,269.7985,264.5545,269.113,273.8233,260.0562,259.3509,258.9392,256.3105,253.2094,252.8884,250.2791,248.2597,242.0836,239.9538,240.411,241.2483,245.4681,254.5014,253.0162,263.6208,269.0383,276.9791,262.1054,244.5818,240.9897,249.5818,240.2903,235.333,241.7844,241.3721,232.841],lo:232.84099999999998,hi:326.1225,ytd:"-20bp",ytdNum:-20.36840000000001,x:"Weekly JPMorgan/Bloomberg export \u00b7 STW vs Treasuries",badUp:true,kind:'stw'},
+  {n:"EMBI Global STW",last:214.11570000000003,u:"",chg:-3.84669999999997,trend:-25.734750640018216,vs:[288.3121,298.1727,294.3105,275.1768,281.7896,280.2587,270.6574,285.0476,269.9145,258.2533,265.3613,268.1342,269.2613,262.7741,264.7853,254.8788,254.3083,264.8032,262.6415,253.8943,239.3883,243.0395,237.9093,242.615,247.9226,235.1494,235.3941,235.8134,234.0163,230.9488,230.3057,228.8043,226.4427,221.8693,217.9538,218.9284,219.1026,223.1978,232.3354,229.348,239.5022,244.3185,250.7437,237.6226,221.6184,218.4973,226.4686,217.8771,213.7774,220.7779,221.0554,214.1157],lo:212.7252,hi:298.17269999999996,ytd:"-17bp",ytdNum:-16.833099999999973,x:"Weekly JPMorgan/Bloomberg export \u00b7 STW vs Treasuries",badUp:true,kind:'stw'},
+  {n:"CEMBI Broad Diversified STW",last:167.1834,u:"",chg:-1.1850000000000023,trend:-23.10221383662841,vs:[217.4099,223.8091,221.0183,207.2007,206.1551,204.7833,198.6778,211.8026,199.8671,190.7871,195.5512,196.0528,199.1248,191.3123,186.0298,182.0758,188.4654,201.0452,204.9463,200.5714,189.679,192.7362,190.6842,197.2905,203.1029,197.0892,192.6121,195.8832,191.3986,188.3459,184.6319,178.9854,178.3312,174.0101,173.456,179.1392,181.8726,181.7271,189.592,186.4953,189.6216,197.1934,201.7745,192.7588,181.002,175.3474,174.5371,169.1146,165.5872,164.7506,168.7323,167.1834],lo:162.5653,hi:224.35719999999998,ytd:"-21bp",ytdNum:-21.162499999999994,x:"Weekly JPMorgan/Bloomberg export \u00b7 STW vs Treasuries",badUp:true,kind:'stw'}
+
+];
+const EMTR=[
+
+  {n:"EMBI Global Diversified Return",last:113.82155815969129,u:"",chg:0.270999999999999,trend:13.737051530404209,vs:[100.0743,100.385942,101.535632,101.937701,101.639352,102.141878,102.705571,103.075952,103.792219,104.441029,104.553292,104.688138,105.650037,106.507887,106.214485,106.548763,107.059845,106.832141,107.289137,108.027021,108.502021,108.257959,108.643771,108.632525,109.270095,109.576059,109.473137,109.869208,110.086687,110.286613,110.31262,110.621864,110.357128,110.985978,111.12182,111.912421,112.872816,112.886236,112.13696,111.420469,110.532151,109.945293,109.825286,111.172122,112.579613,112.838884,112.139159,112.459756,112.70211,111.222389,112.670297,113.821558],lo:100.0743,hi:113.82155815969129,ytd:"+3.23%",ytdNum:3.2296948276720583,x:"Weekly JPMorgan/Bloomberg export \u00b7 1Y rebased total return index (100 = start)",badUp:false,kind:'return'},
+  {n:"EMBI Global Return",last:112.52966400856613,u:"",chg:0.2690000000000081,trend:12.471628648183675,vs:[100.0516,100.372715,101.432576,101.777234,101.475818,101.911758,102.453395,102.903487,103.526376,104.172476,104.253255,104.365466,105.287379,106.008674,105.654556,106.065041,106.55516,106.414646,106.821221,107.566346,108.087716,107.845569,108.183579,108.148671,108.706927,108.938967,108.769144,109.101817,109.260847,109.475258,109.515383,109.769458,109.496603,110.0421,110.139131,110.897473,111.914685,111.919712,111.146922,110.515999,109.667747,109.098374,109.074553,110.298853,111.595574,111.816659,111.146105,111.390646,111.580258,110.059869,111.462807,112.529664],lo:100.04489654279999,hi:112.52966400856613,ytd:"+2.82%",ytdNum:2.820468589216163,x:"Weekly JPMorgan/Bloomberg export \u00b7 1Y rebased total return index (100 = start)",badUp:false,kind:'return'},
+  {n:"CEMBI Broad Diversified Return",last:107.88710970703055,u:"",chg:0.07859999999999534,trend:7.92002531475155,vs:[99.9695,100.394574,100.948601,101.047015,101.105177,101.48821,101.682462,102.091235,102.425658,102.806605,103.012856,103.21993,103.689201,104.119074,104.271131,104.20124,104.343012,104.213441,104.388329,104.659707,104.733823,104.706038,104.786906,104.777948,105.039089,105.008898,105.101786,105.285148,105.507255,105.632653,105.839912,106.075279,106.022693,106.335146,106.421911,106.66673,107.181129,107.397658,106.982044,106.667534,106.397426,105.822458,105.789042,106.409777,107.08151,107.378038,107.30351,107.30398,107.410563,106.844701,107.470275,107.88711],lo:99.9695,hi:107.88710970703055,ytd:"+2.15%",ytdNum:2.146395937999901,x:"Weekly JPMorgan/Bloomberg export \u00b7 1Y rebased total return index (100 = start)",badUp:false,kind:'return'}
+
+];
 const GPRD=[
 
   {n:"Argentina",last:0.06,u:"",chg:20.0,trend:200.0,vs:[0.02,0.02,0.01,0.05,0.03,0.04,0.04,0.06,0.03,0.09,0.01,0.04,0.07,0.04,0.02,0.04,0.03,0.04,0.05,0.03,0.03,0.05,0.02,0.04,0.05,0.03,0.02,0.02,0.01,0.04,0.04,0.08,0.16,0.09,0.05,0.06],xs:["2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],lo:0.01,hi:0.16,x:"Caldara and Iacoviello GPR Index \u00b7 GPRC"},
@@ -973,6 +987,8 @@ const GPR_FULL=(window.ILX_GPR_DATA||{});
 document.getElementById('energyBody').innerHTML=EN.map(d=>mkRow(d.n,d.last,d.u,d.chg,d.trend,d.vs,d.lo,d.hi,d.x)).join('');
 document.getElementById('ratesBody').innerHTML=RT.map(d=>mkRow(d.n,d.last,d.u,d.chg,d.trend,d.vs,d.lo,d.hi,d.x)).join('');
 document.getElementById('equityBody').innerHTML=EQ.map(d=>mkRow(d.n,d.last,d.u,d.chg,d.trend,d.vs,d.lo,d.hi,d.x)).join('');
+document.getElementById('emStwBody').innerHTML=EMSTW.map(d=>mkEmRow(d)).join('');
+document.getElementById('emReturnBody').innerHTML=EMTR.map(d=>mkEmRow(d)).join('');
 let gprSeriesMode='recent';
 let gprWindowMode='36m';
 function _setBtnState(activeEl,inactiveEls){
